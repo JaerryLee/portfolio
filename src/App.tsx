@@ -33,19 +33,20 @@ const projects: Project[] = [
     role: 'Banner Generation Backend · AI Integration',
     summary:
       '사용자가 업로드한 상품 이미지와 대화형 요청을 바탕으로 다양한 규격의 마케팅 배너를 생성하는 AI SaaS 기능입니다.',
-    tech: ['Backend API', 'Async Pipeline', 'AI Chat Service', 'Image I/O', 'Generative AI'],
+    tech: ['Backend API', 'Redis', 'Celery', 'AI Chat Service', 'CI/CD', 'Generative AI'],
     contributions: [
       '배너 생성 기능의 전체 백엔드 API와 비즈니스 로직 설계·개발',
       '사용자가 업로드한 이미지를 AI 생성 서비스에 전달하고, 생성 응답을 서비스 결과로 반환하는 연동 흐름 구현',
       'AI Chat Service를 연동하여 대화형 배너 생성·수정 요청을 처리하는 백엔드 기능 개발',
-      '처리 시간이 긴 AI 생성 작업을 위한 비동기 파이프라인과 작업 결과 처리 흐름 구현',
+      'Redis와 Celery를 활용한 AI 생성 작업 비동기 파이프라인 및 결과 처리 흐름 구현',
+      'DEV·RC 환경까지 CI/CD 파이프라인 구축 및 배포 자동화 (Live 배포는 별도 운영 팀 담당)',
       '프론트엔드, 백엔드, AI 서비스 사이의 요청·응답 인터페이스 정의 및 연동',
     ],
     color: '#1772ff',
     ink: '#ffffff',
-    metric: '배너 생성 기능 전체 백엔드 개발',
+    metric: '배너 생성 전체 백엔드 · DEV/RC CI/CD',
     href: 'https://commerce.vaetki.ai/ko',
-    flow: ['Upload / Chat request', 'Banner Backend', 'Async Pipeline', 'AI Services', 'Generated Banner'],
+    flow: ['Upload / Chat', 'Banner API', 'Celery / Redis', 'AI Services', 'Generated Banner'],
   },
   {
     id: 'agentic',
@@ -151,11 +152,26 @@ const stackGroups = [
   },
   {
     title: 'Data & Messaging',
-    items: ['Firestore', 'AWS RDS', 'AWS DMS', 'RabbitMQ', 'Async I/O'],
+    items: ['Firestore', 'AWS RDS', 'AWS DMS', 'Redis', 'Celery', 'RabbitMQ', 'Async I/O'],
   },
   {
     title: 'AI Integration',
     items: ['GPT API', 'Stable Diffusion', 'STT', 'Agentic AI', 'AI Service Pipeline'],
+  },
+]
+
+const projectGroups = [
+  {
+    label: 'Company projects',
+    title: 'NC AI · Agent Platform Team',
+    description: '실제 사용자에게 제공되는 생성형 AI SaaS와 Agentic AI 플랫폼을 개발했습니다.',
+    projects: projects.slice(0, 2),
+  },
+  {
+    label: 'University & community projects',
+    title: 'GDGoC Korea University',
+    description: '학교와 개발자 커뮤니티에서 실시간 AI, 비동기 처리와 웹 플랫폼 프로젝트를 수행했습니다.',
+    projects: projects.slice(2),
   },
 ]
 
@@ -271,7 +287,7 @@ function App() {
     <>
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="이정재 포트폴리오 홈">
-          LJJ<span>/</span>PORTFOLIO
+          PORTFOLIO
         </a>
         <nav aria-label="주요 메뉴">
           <a href="#experience">Experience</a>
@@ -294,8 +310,9 @@ function App() {
           </h1>
           <div className="hero-bottom">
             <p>
-              생성형 AI SaaS, Agentic AI 플랫폼, 실시간 음성 파이프라인과 클라우드
-              인프라를 경험한 <strong>백엔드 엔지니어 이정재</strong>입니다.
+              AI 서비스 연동과 비동기 작업 처리, 실시간 통신, 클라우드 인프라 자동화를
+              아우르며 제품 요구사항을 운영 가능한 시스템으로 구현해 온
+              <strong> 백엔드 엔지니어 이정재</strong>입니다.
             </p>
             <a href="#projects">
               Selected projects <span aria-hidden="true">↓</span>
@@ -309,14 +326,16 @@ function App() {
           <div className="section-index">01 / PROFILE</div>
           <div className="intro-copy">
             <h2 id="intro-title">
-              빠르게 검증하고,
+              비즈니스 요구를
               <br />
-              안정적으로 연결합니다.
+              운영 가능한 시스템으로 구현합니다.
             </h2>
             <p>
-              새로운 기술을 PoC로 확인하는 것에서 멈추지 않고 실제 사용자가 이용할 수
-              있는 서비스와 플랫폼으로 발전시키는 과정에 집중합니다. 백엔드, AI 모델,
-              클라우드 인프라 사이의 경계를 이해하고 명확한 인터페이스로 연결합니다.
+              생성형 AI SaaS와 Agentic AI 플랫폼의 백엔드, Redis·Celery 기반 비동기
+              처리, WebSocket·gRPC 실시간 파이프라인, Terraform 기반 클라우드 인프라를
+              개발했습니다. 기능의 전체 흐름을 설계하고 시스템 간 인터페이스를 명확히
+              정의해, 검증 단계의 기술을 실제 사용자가 이용하는 서비스로 완성하는 데
+              강점이 있습니다.
             </p>
           </div>
         </section>
@@ -337,8 +356,8 @@ function App() {
                 <p>Agentic AI 국가 R&D 프로젝트 PoC 및 플랫폼 개발</p>
                 <div className="mini-tags">
                   <span>Backend</span>
-                  <span>AI Platform</span>
-                  <span>PoC → Product</span>
+                  <span>Redis · Celery</span>
+                  <span>AI Integration</span>
                 </div>
               </div>
             </article>
@@ -370,9 +389,22 @@ function App() {
             <h2 id="projects-title">From architecture<br />to experience.</h2>
             <p>프로젝트를 선택하면 시스템 흐름, 기여 내용과 기술 스택을 확인할 수 있습니다.</p>
           </div>
-          <div className="project-stack">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+          <div className="project-groups">
+            {projectGroups.map((group) => (
+              <section className="project-group" key={group.label} aria-label={group.label}>
+                <div className="project-group-head">
+                  <span>{group.label}</span>
+                  <div>
+                    <h3>{group.title}</h3>
+                    <p>{group.description}</p>
+                  </div>
+                </div>
+                <div className="project-stack">
+                  {group.projects.map((project) => (
+                    <ProjectCard key={project.id} project={project} />
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         </section>

@@ -25,11 +25,6 @@
   text-decoration: none;
 }
 
-.wordmark span {
-  margin-inline: 5px;
-  color: #55e6ff;
-}
-
 nav {
   display: flex;
   gap: 34px;
@@ -291,6 +286,46 @@ nav a:hover {
 .projects-head p {
   margin: 0;
   color: rgba(255, 255, 255, 0.58);
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+.project-groups {
+  display: grid;
+  gap: clamp(100px, 13vw, 180px);
+}
+
+.project-group + .project-group {
+  padding-top: clamp(80px, 10vw, 130px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.project-group-head {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 42px;
+}
+
+.project-group-head > span {
+  color: rgba(255, 255, 255, 0.46);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.project-group-head h3 {
+  margin: 0 0 14px;
+  font-size: clamp(1.7rem, 3vw, 3rem);
+  letter-spacing: -0.05em;
+}
+
+.project-group-head p {
+  max-width: 640px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.56);
   line-height: 1.7;
   word-break: keep-all;
 }
@@ -835,6 +870,7 @@ footer a {
 
   .intro-section,
   .projects-head,
+  .project-group-head,
   .timeline article,
   .project-cover,
   .project-detail-head,
@@ -860,6 +896,10 @@ footer a {
   .projects-head h2,
   .projects-head p {
     grid-column: 1;
+  }
+
+  .project-group-head {
+    gap: 18px;
   }
 
   .project-card {
