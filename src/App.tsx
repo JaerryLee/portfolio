@@ -21,9 +21,11 @@ type Project = {
   flow?: string[]
 }
 
+type Locale = 'ko' | 'en'
+
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
-const projects: Project[] = [
+const projectsKo: Project[] = [
   {
     id: 'vaetki',
     index: '01',
@@ -141,6 +143,124 @@ const projects: Project[] = [
   },
 ]
 
+const projectsEn: Project[] = [
+  {
+    id: 'vaetki',
+    index: '01',
+    title: 'VAETKI Commerce',
+    label: 'NC AI · AI Banner Generation SaaS',
+    period: '2026 — Present',
+    role: 'Banner Generation Backend · AI Service Integration',
+    summary:
+      'An AI SaaS feature that generates marketing banners in multiple formats from uploaded product images and conversational requests.',
+    tech: ['Backend API', 'Redis', 'Celery', 'AI Chat Service', 'CI/CD', 'Generative AI'],
+    contributions: [
+      'Designed and implemented the complete backend API and business logic for banner generation',
+      'Built the integration flow that sends user-uploaded images to AI services and returns generated results to the product',
+      'Integrated AI Chat Service to support conversational banner generation and revision requests',
+      'Implemented asynchronous AI workloads and result processing with Redis and Celery',
+      'Built CI/CD pipelines and deployment automation through DEV and RC; Live deployment is owned by a separate operations team',
+      'Defined request and response interfaces across the frontend, backend, and AI services',
+    ],
+    color: '#1772ff',
+    ink: '#ffffff',
+    metric: 'End-to-end banner backend · DEV/RC CI/CD',
+    href: 'https://commerce.vaetki.ai/ko',
+    flow: ['Upload / Chat', 'Banner API', 'Celery / Redis', 'AI Services', 'Generated Banner'],
+  },
+  {
+    id: 'agentic',
+    index: '02',
+    title: 'Agentic AI Platform',
+    label: 'NC AI · National R&D',
+    period: '2026 — Present',
+    role: 'PoC & Platform Development',
+    summary:
+      'A platform project that validates how AI agents accomplish complex goals and turns proven capabilities into reusable platform components.',
+    tech: ['Agentic AI', 'PoC', 'Backend', 'Platform'],
+    contributions: [
+      'Developed PoCs to validate Agentic AI use cases',
+      'Structured validated capabilities as reusable platform components',
+      'Built backend capabilities for agent execution and result processing',
+      'Collaborated with internal teams and project partners on technical requirements',
+    ],
+    color: '#6c24df',
+    ink: '#ffffff',
+    metric: 'Four-year national R&D program valued at KRW 49.375B',
+    flow: ['Goal', 'Plan', 'Tool execution', 'Result'],
+  },
+  {
+    id: 'rendi',
+    index: '03',
+    title: 'NE:XT Rendi',
+    label: 'GDGoC KU · Real-time AI Voice',
+    period: '2025.03 — 2025.05',
+    role: 'Backend Developer',
+    summary:
+      'A real-time AI dating coach that converts live speech to text and delivers LLM-powered conversational feedback.',
+    tech: ['FastAPI', 'WebSocket', 'gRPC', 'GPT API', 'Docker Compose'],
+    contributions: [
+      'Developed the FastAPI backend and integrated GPT-powered AI services',
+      'Built a real-time WebSocket STT API and gRPC pipeline',
+      'Designed an asynchronous pipeline spanning voice, transcription, and AI responses',
+      'Reduced response latency through asynchronous I/O optimization',
+      'Separated and modularized services with Docker Compose',
+    ],
+    color: '#86f5cf',
+    ink: '#071a18',
+    cover: asset('projects/rendi-cover.png'),
+    architecture: asset('projects/rendi-architecture.png'),
+    award: 'Gold Award · NE:XT CONTEST',
+    flow: ['Voice stream', 'WebSocket', 'FastAPI', 'gRPC / STT', 'LLM feedback'],
+  },
+  {
+    id: 'tiger',
+    index: '04',
+    title: 'Tiger Photo Studio',
+    label: 'GDGoC KU · AI Profile Generator',
+    period: '2024.03 — 2024.09',
+    role: 'Backend & Frontend Developer',
+    summary:
+      'An AI profile image service that transforms user photos into custom portraits with Stable Diffusion.',
+    tech: ['NestJS', 'Next.js', 'Firestore', 'RabbitMQ', 'Cloud Functions', 'CI/CD'],
+    contributions: [
+      'Developed the NestJS and Firestore backend, including authentication',
+      'Parallelized AI image generation with RabbitMQ-based asynchronous messaging',
+      'Implemented serverless social notification modules with Cloud Functions',
+      'Automated unit and integration tests through a CI/CD pipeline',
+      'Contributed to Next.js refactoring, API integration, authentication, and unified deployment',
+    ],
+    color: '#e01823',
+    ink: '#ffffff',
+    cover: asset('projects/tiger-cover.png'),
+    architecture: asset('projects/tiger-architecture.png'),
+    metric: 'Approximately 1,000 users',
+    flow: ['Image upload', 'NestJS', 'RabbitMQ', 'AI worker', 'Generated profile'],
+  },
+  {
+    id: 'gdg-website',
+    index: '05',
+    title: 'GDG KU Website',
+    label: 'GDGoC KU · Full-stack Community Platform',
+    period: 'University Project',
+    role: 'Full-stack Developer',
+    summary:
+      'A community platform that centralizes member activities, calendars, and administrative workflows for GDG KU.',
+    tech: ['React', 'Vite', 'TypeScript', 'FastAPI', 'MongoDB', 'PostgreSQL'],
+    contributions: [
+      'Developed the complete frontend with React, Vite, and TypeScript',
+      'Built backend APIs and service logic with FastAPI',
+      'Implemented data models and persistence using MongoDB and PostgreSQL',
+      'Integrated frontend and backend APIs, authentication, authorization, and admin features',
+      'Delivered full-stack features for member calendars, activity history, schedules, and member management',
+    ],
+    color: '#7662a7',
+    ink: '#ffffff',
+    cover: asset('projects/gdg-cover.png'),
+    flow: ['React / Vite', 'TypeScript', 'FastAPI', 'MongoDB / PostgreSQL'],
+  },
+]
+
 const stackGroups = [
   {
     title: 'Backend',
@@ -169,27 +289,100 @@ const stackGroups = [
   },
 ]
 
-const projectGroups = [
-  {
-    label: 'Company projects',
-    title: 'NC AI · Agent Platform Team',
-    description: '실제 사용자에게 제공되는 생성형 AI SaaS와 Agentic AI 플랫폼을 개발했습니다.',
-    projects: projects.slice(0, 2),
+const pageCopy = {
+  ko: {
+    homeLabel: '이정재 포트폴리오 홈',
+    navLabel: '주요 메뉴',
+    heroLead: '기술을 제품으로,',
+    heroEmphasis: '문제를 시스템으로.',
+    heroBody:
+      'AI 서비스 연동과 비동기 작업 처리, 실시간 통신, 클라우드 인프라 자동화를 아우르며 제품 요구사항을 운영 가능한 시스템으로 구현해 온 백엔드 엔지니어 이정재입니다.',
+    selectedProjects: 'Selected projects',
+    profileTitle: '비즈니스 요구를\n운영 가능한 시스템으로 구현합니다.',
+    profileBody:
+      '생성형 AI SaaS와 Agentic AI 플랫폼의 백엔드, Redis·Celery 기반 비동기 처리, WebSocket·gRPC 실시간 파이프라인, Terraform 기반 클라우드 인프라를 개발했습니다. 기능의 전체 흐름을 설계하고 시스템 간 인터페이스를 명확히 정의해, 검증 단계의 기술을 실제 사용자가 이용하는 서비스로 완성하는 데 강점이 있습니다.',
+    ncDetails: [
+      'VAETKI Commerce 배너 생성 기능 전체 백엔드 및 AI 서비스 연동',
+      'Agentic AI 국가 R&D 프로젝트 PoC 및 플랫폼 개발',
+    ],
+    lgRole: '클라우드 아키텍처 인턴',
+    lgDetails: [
+      'Terraform 기반 Dev/Test/Staging/Prod 멀티 환경 IaC 구축',
+      'AWS DMS 기반 온프레미스 → RDS 실시간 마이그레이션 PoC',
+      '고가용성·DR 구성 및 보안·관측 시스템 강화',
+    ],
+    projectsHelp: '프로젝트를 선택하면 시스템 흐름, 기여 내용과 기술 스택을 확인할 수 있습니다.',
+    companyDescription: '실제 사용자에게 제공되는 생성형 AI SaaS와 Agentic AI 플랫폼을 개발했습니다.',
+    universityDescription:
+      '학교와 개발자 커뮤니티에서 실시간 AI, 비동기 처리와 웹 플랫폼 프로젝트를 수행했습니다.',
+    flowLabel: '시스템 처리 흐름',
+    gdgRole: 'Backend & AI Core Member · 운영진',
+    gdgActivities: [
+      'AI 세미나 및 실습 프로젝트 기획·운영',
+      'AWS·GCP 기반 클라우드 인프라 실습 워크숍 기획·운영',
+      '학회 핵심 프로젝트 주도 개발 및 기술 리드 참여',
+    ],
+    activityAlt: 'GDGoC 클라우드 및 AI 세미나 자료',
+    algorithmTitle: '삼성SDS 알고리즘 특강',
+    algorithmBody: '자료구조와 알고리즘 문제 해결 역량을 집중적으로 훈련했습니다.',
+    contactTitle: '함께 더 나은\n시스템을 만들어요.',
+    backToTop: 'Back to top ↑',
   },
-  {
-    label: 'University & community projects',
-    title: 'GDGoC Korea University',
-    description: '학교와 개발자 커뮤니티에서 실시간 AI, 비동기 처리와 웹 플랫폼 프로젝트를 수행했습니다.',
-    projects: projects.slice(2),
+  en: {
+    homeLabel: 'Lee Jeongjae portfolio home',
+    navLabel: 'Primary navigation',
+    heroLead: 'Technology into products,',
+    heroEmphasis: 'problems into systems.',
+    heroBody:
+      'I am Lee Jeongjae, a backend engineer who turns product requirements into production-ready systems across AI service integration, asynchronous workloads, real-time communication, and cloud infrastructure automation.',
+    selectedProjects: 'Selected projects',
+    profileTitle: 'I turn business requirements\ninto production-ready systems.',
+    profileBody:
+      'I have built backends for generative AI SaaS and Agentic AI platforms, Redis and Celery-based asynchronous processing, WebSocket and gRPC real-time pipelines, and Terraform-based cloud infrastructure. My strength is owning end-to-end flows, defining clear interfaces between systems, and turning validated technology into services used by real customers.',
+    ncDetails: [
+      'Owned the complete backend and AI service integration for VAETKI Commerce banner generation',
+      'Developed PoCs and platform capabilities for a national Agentic AI R&D program',
+    ],
+    lgRole: 'Cloud Architecture Intern',
+    lgDetails: [
+      'Automated Dev, Test, Staging, and Prod infrastructure with Terraform',
+      'Built an AWS DMS PoC for real-time on-premises to RDS migration',
+      'Strengthened high availability, disaster recovery, security, and observability',
+    ],
+    projectsHelp: 'Select a project to explore its system flow, contributions, and technology stack.',
+    companyDescription: 'Built a generative AI SaaS product and an Agentic AI platform used in company projects.',
+    universityDescription:
+      'Developed real-time AI, asynchronous processing, and full-stack web projects at university and in the developer community.',
+    flowLabel: 'System processing flow',
+    gdgRole: 'Backend & AI Core Member · Organizer',
+    gdgActivities: [
+      'Planned and operated AI seminars and hands-on projects',
+      'Designed and led AWS and GCP cloud infrastructure workshops',
+      'Led core community projects and contributed as a technical lead',
+    ],
+    activityAlt: 'GDGoC cloud and AI seminar materials',
+    algorithmTitle: 'Samsung SDS Algorithm Intensive Course',
+    algorithmBody: 'Completed 80 hours of intensive data structures and algorithm problem-solving training.',
+    contactTitle: 'Let’s build better\nsystems together.',
+    backToTop: 'Back to top ↑',
   },
-]
+} as const
 
 function Arrow() {
   return <span aria-hidden="true">↗</span>
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function MultilineText({ text }: { text: string }) {
+  return text.split('\n').map((line) => (
+    <span className="text-line" key={line}>
+      {line}
+    </span>
+  ))
+}
+
+function ProjectCard({ project, locale }: { project: Project; locale: Locale }) {
   const [isOpen, setIsOpen] = useState(false)
+  const t = pageCopy[locale]
   const detailsId = `${project.id}-details`
   const style = {
     '--project-color': project.color,
@@ -246,7 +439,7 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
 
         {project.flow && (
-          <div className="flow" aria-label="시스템 처리 흐름">
+          <div className="flow" aria-label={t.flowLabel}>
             {project.flow.map((step, index) => (
               <span key={step}>
                 <b>{step}</b>
@@ -282,7 +475,14 @@ function ProjectCard({ project }: { project: Project }) {
 
         {project.architecture && (
           <figure className="architecture-figure">
-            <img src={project.architecture} alt={`${project.title} 시스템 아키텍처 자료`} />
+            <img
+              src={project.architecture}
+              alt={
+                locale === 'ko'
+                  ? `${project.title} 시스템 아키텍처 자료`
+                  : `${project.title} architecture overview`
+              }
+            />
             <figcaption>{project.title} · Architecture overview</figcaption>
           </figure>
         )}
@@ -292,17 +492,44 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 function App() {
+  const locale: Locale = window.location.pathname.split('/').includes('en') ? 'en' : 'ko'
+  const t = pageCopy[locale]
+  const projects = locale === 'ko' ? projectsKo : projectsEn
+  const languageHref = locale === 'ko' ? asset('en/') : asset('')
+  const projectGroups = [
+    {
+      label: 'Company projects',
+      title: 'NC AI · Agent Platform Team',
+      description: t.companyDescription,
+      projects: projects.slice(0, 2),
+    },
+    {
+      label: 'University & community projects',
+      title: 'GDGoC Korea University',
+      description: t.universityDescription,
+      projects: projects.slice(2),
+    },
+  ]
+
   return (
     <>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="이정재 포트폴리오 홈">
+        <a className="wordmark" href="#top" aria-label={t.homeLabel}>
           PORTFOLIO
         </a>
-        <nav aria-label="주요 메뉴">
+        <nav aria-label={t.navLabel}>
           <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
           <a href="#activities">Activities</a>
           <a href="#contact">Contact</a>
+          <a
+            className="language-switch"
+            href={languageHref}
+            lang={locale === 'ko' ? 'en' : 'ko'}
+            hrefLang={locale === 'ko' ? 'en' : 'ko'}
+          >
+            {locale === 'ko' ? 'EN' : 'KO'}
+          </a>
         </nav>
       </header>
 
@@ -313,18 +540,14 @@ function App() {
             <span>Seoul · 2026</span>
           </div>
           <h1 id="hero-title">
-            기술을 제품으로,
+            {t.heroLead}
             <br />
-            문제를 <em>시스템으로.</em>
+            <em>{t.heroEmphasis}</em>
           </h1>
           <div className="hero-bottom">
-            <p>
-              AI 서비스 연동과 비동기 작업 처리, 실시간 통신, 클라우드 인프라 자동화를
-              아우르며 제품 요구사항을 운영 가능한 시스템으로 구현해 온
-              <strong> 백엔드 엔지니어 이정재</strong>입니다.
-            </p>
+            <p>{t.heroBody}</p>
             <a href="#projects">
-              Selected projects <span aria-hidden="true">↓</span>
+              {t.selectedProjects} <span aria-hidden="true">↓</span>
             </a>
           </div>
           <div className="hero-orbit one" aria-hidden="true" />
@@ -334,18 +557,8 @@ function App() {
         <section className="intro-section section" aria-labelledby="intro-title">
           <div className="section-index">01 / PROFILE</div>
           <div className="intro-copy">
-            <h2 id="intro-title">
-              비즈니스 요구를
-              <br />
-              운영 가능한 시스템으로 구현합니다.
-            </h2>
-            <p>
-              생성형 AI SaaS와 Agentic AI 플랫폼의 백엔드, Redis·Celery 기반 비동기
-              처리, WebSocket·gRPC 실시간 파이프라인, Terraform 기반 클라우드 인프라를
-              개발했습니다. 기능의 전체 흐름을 설계하고 시스템 간 인터페이스를 명확히
-              정의해, 검증 단계의 기술을 실제 사용자가 이용하는 서비스로 완성하는 데
-              강점이 있습니다.
-            </p>
+            <h2 id="intro-title"><MultilineText text={t.profileTitle} /></h2>
+            <p>{t.profileBody}</p>
           </div>
         </section>
 
@@ -361,8 +574,7 @@ function App() {
                 <p>Agent Tech Center · Agent Platform Team</p>
               </div>
               <div className="timeline-detail">
-                <p>VAETKI Commerce 배너 생성 기능 전체 백엔드 및 AI 서비스 연동</p>
-                <p>Agentic AI 국가 R&D 프로젝트 PoC 및 플랫폼 개발</p>
+                {t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}
                 <div className="mini-tags">
                   <span>Backend</span>
                   <span>Redis · Celery</span>
@@ -376,12 +588,10 @@ function App() {
               <div className="timeline-company">
                 <span>LG CNS</span>
                 <h3>Cloud Architect Intern</h3>
-                <p>클라우드 아키텍처 인턴</p>
+                <p>{t.lgRole}</p>
               </div>
               <div className="timeline-detail">
-                <p>Terraform 기반 Dev/Test/Staging/Prod 멀티 환경 IaC 구축</p>
-                <p>AWS DMS 기반 온프레미스 → RDS 실시간 마이그레이션 PoC</p>
-                <p>고가용성·DR 구성 및 보안·관측 시스템 강화</p>
+                {t.lgDetails.map((detail) => <p key={detail}>{detail}</p>)}
                 <div className="mini-tags">
                   <span>AWS</span>
                   <span>Terraform</span>
@@ -396,7 +606,7 @@ function App() {
           <div className="projects-head">
             <div className="section-index">03 / SELECTED PROJECTS</div>
             <h2 id="projects-title">From architecture<br />to experience.</h2>
-            <p>프로젝트를 선택하면 시스템 흐름, 기여 내용과 기술 스택을 확인할 수 있습니다.</p>
+            <p>{t.projectsHelp}</p>
           </div>
           <div className="project-groups">
             {projectGroups.map((group) => (
@@ -410,7 +620,7 @@ function App() {
                 </div>
                 <div className="project-stack">
                   {group.projects.map((project) => (
-                    <ProjectCard key={project.id} project={project} />
+                    <ProjectCard key={project.id} project={project} locale={locale} />
                   ))}
                 </div>
               </section>
@@ -439,29 +649,27 @@ function App() {
             <article className="activity-main">
               <span className="activity-period">2022.08 — 2025.08</span>
               <h3>GDGoC Korea University</h3>
-              <strong>Backend & AI Core Member · 운영진</strong>
+              <strong>{t.gdgRole}</strong>
               <ul>
-                <li>AI 세미나 및 실습 프로젝트 기획·운영</li>
-                <li>AWS·GCP 기반 클라우드 인프라 실습 워크숍 기획·운영</li>
-                <li>학회 핵심 프로젝트 주도 개발 및 기술 리드 참여</li>
+                {t.gdgActivities.map((activity) => <li key={activity}>{activity}</li>)}
               </ul>
             </article>
             <img
               className="activity-image"
               src={asset('projects/seminar.png')}
-              alt="GDGoC 클라우드 및 AI 세미나 자료"
+              alt={t.activityAlt}
             />
             <article className="activity-award">
               <span>2025.02 · 80 hours</span>
-              <h3>삼성SDS 알고리즘 특강</h3>
-              <p>자료구조와 알고리즘 문제 해결 역량을 집중적으로 훈련했습니다.</p>
+              <h3>{t.algorithmTitle}</h3>
+              <p>{t.algorithmBody}</p>
             </article>
           </div>
         </section>
 
         <section className="contact-section" id="contact" aria-labelledby="contact-title">
           <span>LET’S BUILD SOMETHING RELIABLE.</span>
-          <h2 id="contact-title">함께 더 나은<br />시스템을 만들어요.</h2>
+          <h2 id="contact-title"><MultilineText text={t.contactTitle} /></h2>
           <div className="contact-links">
             <a href="mailto:jerrylee1516@gmail.com">Email <Arrow /></a>
             <a href="https://github.com/JaerryLee" target="_blank" rel="noreferrer">
@@ -474,7 +682,7 @@ function App() {
       <footer>
         <span>© 2026 Lee Jeongjae</span>
         <span>Backend Engineer · Seoul</span>
-        <a href="#top">Back to top ↑</a>
+        <a href="#top">{t.backToTop}</a>
       </footer>
     </>
   )
