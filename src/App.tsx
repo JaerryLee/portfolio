@@ -272,7 +272,17 @@ const stackGroups = [
   },
   {
     title: 'Data & Messaging',
-    items: ['Firestore', 'AWS RDS', 'AWS DMS', 'Redis', 'Celery', 'RabbitMQ', 'Async I/O'],
+    items: [
+      'Firestore',
+      'AWS RDS',
+      'AWS DMS',
+      'Amazon EMR',
+      'Apache Kafka',
+      'Redis',
+      'Celery',
+      'RabbitMQ',
+      'Async I/O',
+    ],
   },
   {
     title: 'AI Service Engineering',
