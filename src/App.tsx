@@ -28,22 +28,24 @@ const projects: Project[] = [
     id: 'vaetki',
     index: '01',
     title: 'VAETKI Commerce',
-    label: 'NC AI · Generative AI SaaS',
+    label: 'NC AI · AI Banner Generation SaaS',
     period: '2026 — Present',
-    role: 'Backend & Platform Development',
+    role: 'Banner Generation Backend · AI Integration',
     summary:
-      '상품 이미지 한 장으로 상세페이지, 배너, 영상 등의 커머스 콘텐츠를 생성하고 편집하는 AI SaaS입니다.',
-    tech: ['Backend', 'Platform', 'Generative AI', 'SaaS'],
+      '사용자가 업로드한 상품 이미지와 대화형 요청을 바탕으로 다양한 규격의 마케팅 배너를 생성하는 AI SaaS 기능입니다.',
+    tech: ['Backend API', 'Async Pipeline', 'AI Chat Service', 'Image I/O', 'Generative AI'],
     contributions: [
-      'VAETKI Commerce 백엔드 및 플랫폼 기능 개발',
-      '생성형 AI 기능을 실제 사용자가 이용할 수 있는 서비스로 구현',
-      'AI 모델, 프론트엔드, 서비스 백엔드 간 기능 연동',
-      '유관 직군과 요구사항을 조율하고 실행 가능한 기능으로 구체화',
+      '배너 생성 기능의 전체 백엔드 API와 비즈니스 로직 설계·개발',
+      '사용자가 업로드한 이미지를 AI 생성 서비스에 전달하고, 생성 응답을 서비스 결과로 반환하는 연동 흐름 구현',
+      'AI Chat Service를 연동하여 대화형 배너 생성·수정 요청을 처리하는 백엔드 기능 개발',
+      '처리 시간이 긴 AI 생성 작업을 위한 비동기 파이프라인과 작업 결과 처리 흐름 구현',
+      '프론트엔드, 백엔드, AI 서비스 사이의 요청·응답 인터페이스 정의 및 연동',
     ],
     color: '#1772ff',
     ink: '#ffffff',
+    metric: '배너 생성 기능 전체 백엔드 개발',
     href: 'https://commerce.vaetki.ai/ko',
-    flow: ['Product image', 'AI generation', 'Edit', 'Commerce content'],
+    flow: ['Upload / Chat request', 'Banner Backend', 'Async Pipeline', 'AI Services', 'Generated Banner'],
   },
   {
     id: 'agentic',
@@ -331,7 +333,7 @@ function App() {
                 <p>Agent Tech Center · Agent Platform Team</p>
               </div>
               <div className="timeline-detail">
-                <p>VAETKI Commerce SaaS 백엔드 및 플랫폼 개발</p>
+                <p>VAETKI Commerce 배너 생성 기능 전체 백엔드 및 AI 서비스 연동</p>
                 <p>Agentic AI 국가 R&D 프로젝트 PoC 및 플랫폼 개발</p>
                 <div className="mini-tags">
                   <span>Backend</span>
