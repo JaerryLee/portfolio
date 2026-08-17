@@ -30,7 +30,7 @@ const projects: Project[] = [
     title: 'VAETKI Commerce',
     label: 'NC AI · AI Banner Generation SaaS',
     period: '2026 — Present',
-    role: 'Banner Generation Backend · AI Integration',
+    role: 'Banner Generation Backend · AI Service Integration',
     summary:
       '사용자가 업로드한 상품 이미지와 대화형 요청을 바탕으로 다양한 규격의 마케팅 배너를 생성하는 AI SaaS 기능입니다.',
     tech: ['Backend API', 'Redis', 'Celery', 'AI Chat Service', 'CI/CD', 'Generative AI'],
@@ -121,23 +121,23 @@ const projects: Project[] = [
     id: 'gdg-website',
     index: '05',
     title: 'GDG KU Website',
-    label: 'GDGoC KU · Community Platform',
+    label: 'GDGoC KU · Full-stack Community Platform',
     period: 'University Project',
-    role: 'Frontend Developer',
+    role: 'Full-stack Developer',
     summary:
       '멤버 활동과 일정, 운영진 관리 기능을 하나의 공간에 모은 GDG KU 커뮤니티 웹사이트입니다.',
-    tech: ['Next.js', 'TypeScript', 'Redux Toolkit', 'Emotion', 'OAuth2'],
+    tech: ['React', 'Vite', 'TypeScript', 'FastAPI', 'MongoDB', 'PostgreSQL'],
     contributions: [
-      'Next.js와 TypeScript 기반 웹 애플리케이션 개발',
-      'Redux Toolkit을 활용한 클라이언트 상태 관리',
-      'OAuth2 기반 Google 로그인과 역할별 권한 흐름 구현',
-      '멤버 캘린더, 활동 조회, 관리자용 일정 및 멤버 관리 기능 개발',
+      'React, Vite, TypeScript 기반 프론트엔드 전체 개발',
+      'FastAPI 기반 백엔드 API와 서비스 로직 개발',
+      'MongoDB·PostgreSQL을 활용한 데이터 모델링 및 저장 계층 구현',
+      '프론트엔드와 백엔드 API 연동, 인증·권한 및 관리자 기능 구현',
+      '멤버 캘린더, 활동 조회, 일정·멤버 관리 기능의 풀스택 개발',
     ],
     color: '#7662a7',
     ink: '#ffffff',
     cover: asset('projects/gdg-cover.png'),
-    architecture: asset('projects/gdg-architecture.png'),
-    flow: ['Member / Admin', 'OAuth2', 'GDG KU Website', 'Activity management'],
+    flow: ['React / Vite', 'TypeScript', 'FastAPI', 'MongoDB / PostgreSQL'],
   },
 ]
 
@@ -155,8 +155,17 @@ const stackGroups = [
     items: ['Firestore', 'AWS RDS', 'AWS DMS', 'Redis', 'Celery', 'RabbitMQ', 'Async I/O'],
   },
   {
-    title: 'AI Integration',
-    items: ['GPT API', 'Stable Diffusion', 'STT', 'Agentic AI', 'AI Service Pipeline'],
+    title: 'AI Service Engineering',
+    items: [
+      'LLM API Integration',
+      'AI Chat Service',
+      'Agentic AI',
+      'AI Service Orchestration',
+      'Multimodal I/O',
+      'Image Generation Pipeline',
+      'Speech-to-Text Pipeline',
+      'Async AI Workloads',
+    ],
   },
 ]
 
@@ -357,7 +366,7 @@ function App() {
                 <div className="mini-tags">
                   <span>Backend</span>
                   <span>Redis · Celery</span>
-                  <span>AI Integration</span>
+                  <span>AI Service Engineering</span>
                 </div>
               </div>
             </article>
