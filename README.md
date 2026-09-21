@@ -1,4 +1,4 @@
-# 이정재 · Backend Engineer Portfolio
+# 이정재 · Applied AI Engineer Portfolio
 
 React, TypeScript, Vite로 만든 개인 포트폴리오입니다.
 

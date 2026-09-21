@@ -18,7 +18,7 @@
 }
 
 .wordmark {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -40,7 +40,7 @@ nav a,
 .activity-period,
 .contact-section > span,
 footer {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.7rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -99,6 +99,10 @@ nav .language-switch {
   word-break: keep-all;
 }
 
+.hero-section:lang(en) h1 {
+  font-size: clamp(3.1rem, 6.5vw, 6.5rem);
+}
+
 .hero-section h1 em {
   color: transparent;
   font-style: normal;
@@ -114,8 +118,11 @@ nav .language-switch {
   gap: 36px;
 }
 
-.hero-bottom p {
+.hero-intro {
   grid-column: 2;
+}
+
+.hero-bottom p {
   max-width: 640px;
   margin: 0;
   color: rgba(255, 255, 255, 0.76);
@@ -129,16 +136,48 @@ nav .language-switch {
   font-weight: 700;
 }
 
-.hero-bottom a {
+.hero-project-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 15px 0;
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.78rem;
   text-decoration: none;
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.hero-links a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 18px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: rgba(7, 23, 62, 0.2);
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.hero-links a:hover {
+  color: #07173e;
+  background: #fff;
+}
+
+.hero-section a:focus-visible {
+  outline-color: #fff;
 }
 
 .hero-orbit {
@@ -206,6 +245,103 @@ nav .language-switch {
   border-top: 1px solid #d9dce7;
 }
 
+.current-work {
+  margin-bottom: 64px;
+  padding: clamp(26px, 4vw, 52px);
+  border: 1px solid #d9dfeb;
+  border-radius: 20px;
+  background: #fff;
+  scroll-margin-top: 24px;
+}
+
+.current-work-heading {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: start;
+  gap: 40px;
+}
+
+.current-work-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #185dff;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.current-work-label::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  content: '';
+}
+
+.current-work h3 {
+  margin: 18px 0 0;
+  font-size: clamp(1.8rem, 3.3vw, 3.2rem);
+  line-height: 1.14;
+  letter-spacing: -0.05em;
+}
+
+.current-work p {
+  margin: 0;
+  color: #626a7d;
+  line-height: 1.8;
+  word-break: keep-all;
+}
+
+.current-work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid #e3e7ef;
+}
+
+.current-work h4 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.current-work-grid p {
+  font-size: 0.92rem;
+}
+
+.current-work-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.current-work-flow > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.current-work-flow b {
+  padding: 10px 14px;
+  border: 1px solid #dce4f4;
+  border-radius: 8px;
+  color: #244478;
+  background: #f4f7fd;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+.current-work-flow i {
+  color: #8a96ac;
+  font-style: normal;
+}
+
 .timeline {
   border-top: 2px solid #0d1430;
 }
@@ -219,14 +355,14 @@ nav .language-switch {
 }
 
 .timeline-date {
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.76rem;
   color: #697088;
 }
 
 .timeline-company > span {
   color: #185dff;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -265,7 +401,7 @@ nav .language-switch {
   padding: 7px 11px;
   border: 1px solid currentColor;
   border-radius: 999px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.66rem;
 }
 
@@ -322,7 +458,7 @@ nav .language-switch {
 
 .project-group-head > span {
   color: rgba(255, 255, 255, 0.46);
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.68rem;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -461,18 +597,23 @@ nav .language-switch {
 }
 
 .generated-visual > span:first-child {
+  max-width: calc(100% - 40px);
+  text-align: center;
   position: relative;
   z-index: 1;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: clamp(1.6rem, 3vw, 3.3rem);
   font-weight: 500;
   letter-spacing: -0.06em;
 }
 
 .generated-visual > span:last-child {
+  max-width: calc(100% - 40px);
+  line-height: 1.8;
+  text-align: center;
   position: relative;
   z-index: 1;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.62rem;
   opacity: 0.72;
 }
@@ -483,7 +624,7 @@ nav .language-switch {
   justify-content: space-between;
   padding-top: 20px;
   border-top: 1px solid currentColor;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.7rem;
   text-transform: uppercase;
   opacity: 0.72;
@@ -537,7 +678,7 @@ nav .language-switch {
   padding: 14px 18px;
   border: 1px solid currentColor;
   border-radius: 10px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.67rem;
   font-weight: 500;
   text-align: center;
@@ -553,6 +694,29 @@ nav .language-switch {
   grid-template-columns: 2fr 1fr;
   gap: clamp(48px, 8vw, 120px);
   padding-top: 24px;
+}
+
+.project-context {
+  margin-bottom: 30px;
+}
+
+.project-context h4 {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.72;
+}
+
+.project-context p {
+  margin: 0;
+  line-height: 1.75;
+  word-break: keep-all;
+}
+
+.project-outcome {
+  margin: 28px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid color-mix(in srgb, currentColor 25%, transparent);
 }
 
 .project-detail-body ul {
@@ -584,7 +748,7 @@ nav .language-switch {
   gap: 10px;
   margin-top: 38px;
   color: inherit;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.75rem;
   text-underline-offset: 5px;
 }
@@ -605,7 +769,7 @@ nav .language-switch {
 
 .architecture-figure figcaption {
   padding: 14px 8px 4px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.68rem;
   text-transform: uppercase;
 }
@@ -633,7 +797,7 @@ nav .language-switch {
 
 .stack-grid article > span {
   color: #697088;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.7rem;
 }
 
@@ -647,6 +811,10 @@ nav .language-switch {
   margin: 0;
   color: #626a7d;
   line-height: 1.85;
+}
+
+.stack-grid article:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
 }
 
 .activities-section {
@@ -717,7 +885,7 @@ nav .language-switch {
 
 .activity-award > span {
   color: #9fe5ff;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.72rem;
   text-transform: uppercase;
 }
@@ -763,7 +931,7 @@ nav .language-switch {
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.46);
   border-radius: 999px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'Noto Sans KR', monospace;
   font-size: 0.75rem;
   text-decoration: none;
 }
@@ -801,12 +969,12 @@ footer a {
     grid-template-columns: 1fr 1fr;
   }
 
-  .hero-bottom p,
+  .hero-intro,
   .projects-head h2 {
     grid-column: 1 / -1;
   }
 
-  .hero-bottom a {
+  .hero-project-link {
     grid-column: 2;
   }
 
@@ -870,7 +1038,7 @@ footer a {
     align-items: stretch;
   }
 
-  .hero-bottom a {
+  .hero-project-link {
     width: 70%;
     align-self: flex-end;
     margin-top: 30px;
@@ -881,6 +1049,8 @@ footer a {
   }
 
   .intro-section,
+  .current-work-heading,
+  .current-work-grid,
   .projects-head,
   .project-group-head,
   .timeline article,
