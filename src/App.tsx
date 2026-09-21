@@ -1,5 +1,6 @@
 import { useState, type CSSProperties } from 'react'
 import { projectsKo, projectsEn, type Project } from './projects'
+import { blogUrl, blogPostUrl } from './links'
 import './App.css'
 
 type Locale = 'ko' | 'en'
@@ -8,9 +9,8 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
 const profileLinks = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jerrylee1516/' },
+  { label: 'Tech Blog', href: `${blogUrl}/` },
 ]
-
-const observabilityFlow = ['LLM / Agent', 'OpenTelemetry', 'OTLP Collector', 'HyperDX / ClickHouse']
 
 const stackGroups = [
   {
@@ -80,11 +80,10 @@ const pageCopy = {
       'AWS DMS 기반 온프레미스 → RDS 실시간 마이그레이션 PoC',
       '고가용성·DR 구성 및 보안·관측 시스템 강화',
     ],
-    projectsHelp: '프로젝트를 선택하면 시스템 흐름, 기여 내용과 기술 스택을 확인할 수 있습니다.',
+    projectsHelp: '프로젝트의 목적과 담당 역할을 소개합니다. 자세한 설계와 구현 경험은 테크 블로그에서 읽을 수 있습니다.',
     companyDescription: '이전에 수행한 세 가지 프로젝트입니다. 팀 업무 AX 전환, 생성형 AI 서비스 백엔드, 에이전틱 AI 플랫폼 개발에서 맡은 범위를 정리했습니다.',
     universityDescription:
       '학교와 개발자 커뮤니티에서 실시간 AI, 비동기 처리와 웹 플랫폼 프로젝트를 수행했습니다.',
-    flowLabel: '시스템 처리 흐름',
     gdgRole: 'Backend & AI Core Member · 운영진',
     gdgActivities: [
       'AI 세미나 및 실습 프로젝트 기획·운영',
@@ -98,25 +97,10 @@ const pageCopy = {
     currentWork: {
       label: '현재 업무',
       title: 'LLM Ops & Observability',
-      summary: 'LLM과 에이전트의 실행을 관측하는 업무를 맡고 있습니다. 로그·트레이스·메트릭을 연결해 서비스 경계를 넘는 호출 흐름과 오류, 모델 사용량을 확인할 수 있는 관측 체계를 구축·운영합니다.',
-      areas: [
-        {
-          title: '분산 트레이싱',
-          description: 'FastAPI·httpx와 Pydantic AI를 계측하고, 요청·세션·사용자 문맥을 LLM 및 도구 호출까지 연결합니다.'
-        },
-        {
-          title: '로그·메트릭',
-          description: 'stdout·OTLP 로그와 토큰 사용량·비용·첫 응답 지연 메트릭을 수집하고, trace ID로 로그와 실행 스팬을 연결합니다.'
-        },
-        {
-          title: '수집·운영',
-          description: 'Collector와 HyperDX·ClickHouse 조회 경로를 연동하고, 콘텐츠 수집 옵션과 헬스체크 노이즈 등 환경별 관측 설정을 관리합니다.'
-        }
-      ]
+      summary: 'LLM과 에이전트의 실행 흐름, 오류와 사용량을 관측하는 체계를 구축·운영합니다. OpenTelemetry 기반 로그·트레이스·메트릭을 연결해 AI 서비스의 동작을 설명할 수 있도록 합니다.',
     },
-    challengeLabel: '해결할 문제',
-    outcomeLabel: '구현 결과',
-    telemetryFlowLabel: 'LLM 실행 관측 흐름',
+    blogLabel: '설계·구현 기록 읽기',
+    contributionLabel: '담당 역할',
     backToTop: 'Back to top ↑',
   },
   en: {
@@ -138,11 +122,10 @@ const pageCopy = {
       'Built an AWS DMS PoC for real-time on-premises to RDS migration',
       'Strengthened high availability, disaster recovery, security, and observability',
     ],
-    projectsHelp: 'Select a project to explore its system flow, contributions, and technology stack.',
+    projectsHelp: 'Explore each project’s purpose and my role. Detailed design and implementation notes are available on my tech blog.',
     companyDescription: 'Three previous projects spanning team workflow transformation, a generative AI service backend, and an agentic AI platform, with my implementation scope detailed below.',
     universityDescription:
       'Developed real-time AI, asynchronous processing, and full-stack web projects at university and in the developer community.',
-    flowLabel: 'System processing flow',
     gdgRole: 'Backend & AI Core Member · Organizer',
     gdgActivities: [
       'Planned and operated AI seminars and hands-on projects',
@@ -156,25 +139,10 @@ const pageCopy = {
     currentWork: {
       label: 'Current work',
       title: 'LLM Ops & Observability',
-      summary: 'I currently build and operate observability for LLM and agent execution. I connect logs, traces, and metrics to follow calls across service boundaries and inspect errors and model usage.',
-      areas: [
-        {
-          title: 'Distributed tracing',
-          description: 'Instrument FastAPI, httpx, and Pydantic AI and propagate request, session, and user context into model and tool calls.'
-        },
-        {
-          title: 'Logs & metrics',
-          description: 'Collect stdout and OTLP logs alongside token, cost, and first-response latency metrics, correlating logs with execution spans through trace IDs.'
-        },
-        {
-          title: 'Collection & operations',
-          description: 'Integrate the Collector with HyperDX and ClickHouse and manage environment-specific content capture and health-check noise filtering.'
-        }
-      ]
+      summary: 'I build and operate observability for LLM and agent services, connecting OpenTelemetry logs, traces, and metrics to understand execution, errors, and model usage.',
     },
-    challengeLabel: 'Challenge',
-    outcomeLabel: 'Delivered',
-    telemetryFlowLabel: 'LLM observability flow',
+    blogLabel: 'Read the engineering notes (Korean)',
+    contributionLabel: 'Role overview',
     backToTop: 'Back to top ↑',
   },
 } as const
@@ -222,7 +190,7 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
           ) : (
             <span className={`generated-visual ${project.id}`}>
               <span>{project.title}</span>
-              <span>{project.flow?.join('  →  ')}</span>
+              <span>{project.metric ?? project.label}</span>
             </span>
           )}
         </span>
@@ -249,37 +217,14 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
           )}
         </div>
 
-        {project.flow && (
-          <div className="flow" aria-label={t.flowLabel}>
-            {project.flow.map((step, index) => (
-              <span key={step}>
-                <b>{step}</b>
-                {index < project.flow!.length - 1 && <i aria-hidden="true">→</i>}
-              </span>
-            ))}
-          </div>
-        )}
-
         <div className="project-detail-body">
           <div>
-            {project.challenge && (
-              <div className="project-context">
-                <h4>{t.challengeLabel}</h4>
-                <p>{project.challenge}</p>
-              </div>
-            )}
-            <span className="detail-label">Contribution</span>
+            <span className="detail-label">{t.contributionLabel}</span>
             <ul>
               {project.contributions.map((contribution) => (
                 <li key={contribution}>{contribution}</li>
               ))}
             </ul>
-            {project.outcome && (
-              <div className="project-context project-outcome">
-                <h4>{t.outcomeLabel}</h4>
-                <p>{project.outcome}</p>
-              </div>
-            )}
           </div>
           <div>
             <span className="detail-label">Tech stack</span>
@@ -288,6 +233,11 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
                 <span key={tech}>{tech}</span>
               ))}
             </div>
+            {project.blogPost && (
+              <a className="project-link project-blog-link" href={blogPostUrl(project.blogPost)} target="_blank" rel="noopener noreferrer">
+                {t.blogLabel} <Arrow />
+              </a>
+            )}
             {project.href && (
               <a className="project-link" href={project.href} target="_blank" rel="noreferrer">
                 Live service <Arrow />
@@ -296,19 +246,6 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
           </div>
         </div>
 
-        {project.architecture && (
-          <figure className="architecture-figure">
-            <img
-              src={project.architecture}
-              alt={
-                locale === 'ko'
-                  ? `${project.title} 시스템 아키텍처 자료`
-                  : `${project.title} architecture overview`
-              }
-            />
-            <figcaption>{project.title} · Architecture overview</figcaption>
-          </figure>
-        )}
       </div>
     </article>
   )
@@ -405,21 +342,14 @@ function App() {
               </div>
               <p>{t.currentWork.summary}</p>
             </div>
-            <div className="current-work-grid">
-              {t.currentWork.areas.map((area) => (
-                <div key={area.title}>
-                  <h4>{area.title}</h4>
-                  <p>{area.description}</p>
-                </div>
-              ))}
-            </div>
-            <div className="current-work-flow" aria-label={t.telemetryFlowLabel}>
-              {observabilityFlow.map((step, index) => (
-                <span key={step}>
-                  {index > 0 && <i aria-hidden="true">→</i>}
-                  <b>{step}</b>
-                </span>
-              ))}
+            <div className="current-work-footer">
+              <div className="mini-tags">
+                <span>OpenTelemetry</span>
+                <span>Logs · Traces · Metrics</span>
+              </div>
+              <a className="current-work-blog" href={blogPostUrl('llm-ops-opentelemetry')} target="_blank" rel="noopener noreferrer">
+                {t.blogLabel} <Arrow />
+              </a>
             </div>
           </section>
           <div className="timeline">

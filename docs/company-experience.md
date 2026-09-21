@@ -1,7 +1,8 @@
 # 회사 업무 정리와 포트폴리오 작성 근거
 
 기준일: 2026-09-21. 본인의 설명과 WSL의 코드·문서·Git 작성자 이력을 대조해 정리했다.
-사이트의 한·영 프로젝트 원고는 `src/projects.ts`, 현재 업무와 경력 소개는 `src/App.tsx`에서 관리한다.
+포트폴리오의 한·영 프로젝트 요약은 `src/projects.ts`, 현재 업무와 경력 소개는 `src/App.tsx`에서 관리한다.
+자세한 구현 설명은 별도 블로그 `../jaerrylee.github.io/src/content/posts/`에 작성한다.
 
 ## 경력의 구분
 
@@ -92,3 +93,19 @@ LLM과 에이전트의 실행을 관측하는 업무를 맡고 있다. OpenTelem
 본인 담당 범위와 구현 결과를 중심으로 작성한다. 내부 주소, 인증 정보, 실제 메일·회의 자료와
 동료의 개인정보는 사이트 원고에 포함하지 않는다. 사업 전체 예산은 개인 성과 하이라이트에서 제외한다.
 사이트 구현 검증과 회사 서비스의 실운영 검증은 별개다.
+
+## 포트폴리오와 블로그의 역할
+
+포트폴리오는 프로젝트별 목적, 담당 역할 두 항목과 대표 기술만 소개한다.
+기존 구현 세부 목록과 시스템 흐름·아키텍처 도식은 포트폴리오에서 덜어내고,
+다음 글에서 설계 이유와 실패·복구 경계를 설명한다.
+
+| 포트폴리오 영역 | 블로그 Markdown | 글 경로 |
+| --- | --- | --- |
+| 현재 LLM Ops | `llm-ops-opentelemetry.md` | `/posts/llm-ops-opentelemetry/` |
+| AGP Note | `agp-note-workflow.md` | `/posts/agp-note-workflow/` |
+| VAETKI Commerce | `vaetki-banner-backend.md` | `/posts/vaetki-banner-backend/` |
+| Dainos | `dainos-agentic-platform.md` | `/posts/dainos-agentic-platform/` |
+
+글의 2026-09-21은 작성일이다. 한·영 포트폴리오 모두 같은 한국어 글로 연결하며,
+영문 링크에는 한국어 글임을 표시한다. 첫 화면의 Tech Blog 링크는 블로그 목록으로 연결한다.
