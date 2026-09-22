@@ -104,11 +104,11 @@ const pageCopy = {
     backToTop: 'Back to top ↑',
   },
   en: {
-    homeLabel: 'Lee Jeongjae portfolio home',
+    homeLabel: 'Jungjae Lee portfolio home',
     navLabel: 'Primary navigation',
     heroLead: 'Technology into products,',
     heroEmphasis: 'problems into systems.',
-    heroBody: 'I am Lee Jeongjae, an Applied AI Engineer turning AI into products and workflows. I currently focus on LLM Ops, building and operating OpenTelemetry-based logging, tracing, and execution observability.',
+    heroBody: 'I am Jungjae Lee, an Applied AI Engineer turning AI into products and workflows. I currently focus on LLM Ops, building and operating OpenTelemetry-based logging, tracing, and execution observability.',
     selectedProjects: 'Selected projects',
     profileTitle: 'I build AI products\nand make their execution observable.',
     profileBody: 'I supported team workflow transformation with AGP Note, built the banner-generation backend for VAETKI Commerce, and developed agentic AI capabilities for Dainos. I now focus on LLM Ops, applying that experience to tracing calls, diagnosing errors, and observing model usage across LLM and agent services.',
@@ -467,7 +467,7 @@ function App() {
       </main>
 
       <footer>
-        <span>© 2026 Lee Jeongjae</span>
+        <span>© 2026 Jungjae Lee</span>
         <span>Applied AI Engineer · Seoul</span>
         <a href="#top">{t.backToTop}</a>
       </footer>
