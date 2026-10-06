@@ -14,8 +14,12 @@ const profileLinks = [
 
 const stackGroups = [
   {
+    title: 'Python Testing',
+    items: ['pytest', 'unittest · mock', 'pytest-asyncio', 'FastAPI TestClient', 'HTTPX'],
+  },
+  {
     title: 'LLM Ops & Observability',
-    items: ['OpenTelemetry', 'OTLP', 'Distributed Tracing', 'Logs & Metrics', 'HyperDX', 'ClickHouse'],
+    items: ['OpenTelemetry', 'OTLP', 'Distributed Tracing', 'Logs & Metrics', 'HyperDX', 'ClickHouse', 'Logfire', 'Opik'],
   },
   {
     title: 'Applied AI',
@@ -43,7 +47,7 @@ const stackGroups = [
   {
     title: 'Data & Messaging',
     items: [
-      'PostgreSQL',
+      'PostgreSQL · pgvector',
       'MongoDB',
       'NATS',
       'SQLite',
@@ -66,13 +70,13 @@ const pageCopy = {
     navLabel: '주요 메뉴',
     heroLead: '기술을 제품으로,',
     heroEmphasis: '문제를 시스템으로.',
-    heroBody: 'AI를 실제 제품과 업무에 적용하는 Applied AI Engineer 이정재입니다. 현재는 LLM Ops를 맡아 OpenTelemetry 기반 로깅·트레이싱과 실행 관측 체계를 구축·운영합니다.',
+    heroBody: 'AI를 실제 제품과 업무에 적용하는 AI / Backend Engineer 이정재입니다. 현재는 로컬 문서를 정리하고 원문 근거로 답하는 AGP Wiki를 개발하며, 에이전트 실행 기반과 관측 체계의 구현 경험을 제품에 연결합니다.',
     selectedProjects: 'Selected projects',
     profileTitle: 'AI를 제품으로 만들고,\n실행을 관측합니다.',
-    profileBody: 'AGP Note로 팀 업무의 AX 전환을 지원하고, VAETKI Commerce의 배너 생성 백엔드와 Dainos의 에이전틱 AI 플랫폼을 개발했습니다. 현재는 이 개발 경험을 바탕으로 LLM과 에이전트의 호출 흐름, 오류, 사용량을 추적하는 LLM Ops 업무에 집중하고 있습니다.',
+    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 Dainos·메일 에이전트·Pydantic AI 실행 기반 PoC에 기여했습니다. OpenTelemetry 기반 관측 체계 구현 경험을 바탕으로, 현재 AGP Wiki에서 문서 수집·복구와 근거 검증을 개발하고 있습니다.',
     ncDetails: [
-      '현재 · OpenTelemetry 기반 로깅·트레이싱·메트릭 수집과 LLM 실행 관측',
-      '이전 · AGP Note 팀 업무 AX 전환, VAETKI Commerce 백엔드, Dainos 에이전틱 AI 개발'
+      '현재 · AGP Wiki 팀 개발 — 문서 수집·복구, 상태·로그와 인용·날짜 근거 검증',
+      '수행 경험 · LLM 실행 관측, AGP Note 단독 개발, VAETKI Commerce 배너 백엔드, Agent PoC·LLM Ops 통합'
     ],
     lgRole: '클라우드 아키텍처 인턴',
     lgDetails: [
@@ -81,7 +85,7 @@ const pageCopy = {
       '고가용성·DR 구성 및 보안·관측 시스템 강화',
     ],
     projectsHelp: '프로젝트의 목적과 담당 역할을 소개합니다. 자세한 설계와 구현 경험은 테크 블로그에서 읽을 수 있습니다.',
-    companyDescription: '이전에 수행한 세 가지 프로젝트입니다. 팀 업무 AX 전환, 생성형 AI 서비스 백엔드, 에이전틱 AI 플랫폼 개발에서 맡은 범위를 정리했습니다.',
+    companyDescription: '현재 진행 중인 AGP Wiki와 이전 프로젝트입니다. 팀 개발에서 맡은 구현 범위와 사내 사이드 프로젝트의 단독 개발을 구분했습니다.',
     universityDescription:
       '학교와 개발자 커뮤니티에서 실시간 AI, 비동기 처리와 웹 플랫폼 프로젝트를 수행했습니다.',
     gdgRole: 'Backend & AI Core Member · 운영진',
@@ -96,8 +100,8 @@ const pageCopy = {
     contactTitle: '함께 더 나은\n시스템을 만들어요.',
     currentWork: {
       label: '현재 업무',
-      title: 'LLM Ops & Observability',
-      summary: 'LLM과 에이전트의 실행 흐름, 오류와 사용량을 관측하는 체계를 구축·운영합니다. OpenTelemetry 기반 로그·트레이스·메트릭을 연결해 AI 서비스의 동작을 설명할 수 있도록 합니다.',
+      title: 'AGP Wiki · 근거 기반 지식 도구',
+      summary: 'Agent PoC의 후속으로 LLM Wiki의 문서 정리와 검색 근거 기반 RAG 응답을 결합한 도구를 팀과 개발합니다. 분류 제안 검증, 중단 후 복구, 상태·로그와 검증된 파일 링크를 구현하며, FTS5·BM25 어휘 검색과 host LLM 응답을 연결하고 실제 호스트의 미확인 범위를 구분합니다.',
     },
     blogLabel: '설계·구현 기록 읽기',
     contributionLabel: '담당 역할',
@@ -108,13 +112,13 @@ const pageCopy = {
     navLabel: 'Primary navigation',
     heroLead: 'Technology into products,',
     heroEmphasis: 'problems into systems.',
-    heroBody: 'I am Jungjae Lee, an Applied AI Engineer turning AI into products and workflows. I currently focus on LLM Ops, building and operating OpenTelemetry-based logging, tracing, and execution observability.',
+    heroBody: 'I am Jungjae Lee, an AI / Backend Engineer turning AI into products and workflows. I currently develop AGP Wiki, a local document tool with source-grounded answers, building on experience in agent execution and observability.',
     selectedProjects: 'Selected projects',
     profileTitle: 'I build AI products\nand make their execution observable.',
-    profileBody: 'I supported team workflow transformation with AGP Note, built the banner-generation backend for VAETKI Commerce, and developed agentic AI capabilities for Dainos. I now focus on LLM Ops, applying that experience to tracing calls, diagnosing errors, and observing model usage across LLM and agent services.',
+    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to Dainos, mail agent, and Pydantic AI execution PoCs. Drawing on OpenTelemetry integration experience, I now work on document ingestion, recovery, and evidence verification in AGP Wiki.',
     ncDetails: [
-      'Current · LLM Ops with OpenTelemetry logging, tracing, metrics, and execution observability',
-      'Previous · AGP Note team workflow transformation, VAETKI Commerce backend, and Dainos agentic AI development'
+      'Current · AGP Wiki team development: ingestion, recovery, status, logs, and source evidence verification',
+      'Experience · LLM observability, AGP Note sole development, VAETKI Commerce banner backend, and agent PoCs with LLM Ops integration'
     ],
     lgRole: 'Cloud Architecture Intern',
     lgDetails: [
@@ -123,7 +127,7 @@ const pageCopy = {
       'Strengthened high availability, disaster recovery, security, and observability',
     ],
     projectsHelp: 'Explore each project’s purpose and my role. Detailed design and implementation notes are available on my tech blog.',
-    companyDescription: 'Three previous projects spanning team workflow transformation, a generative AI service backend, and an agentic AI platform, with my implementation scope detailed below.',
+    companyDescription: 'AGP Wiki is in progress alongside previous projects. Each entry distinguishes my team contribution from the internal side project I developed independently.',
     universityDescription:
       'Developed real-time AI, asynchronous processing, and full-stack web projects at university and in the developer community.',
     gdgRole: 'Backend & AI Core Member · Organizer',
@@ -138,8 +142,8 @@ const pageCopy = {
     contactTitle: 'Let’s build better\nsystems together.',
     currentWork: {
       label: 'Current work',
-      title: 'LLM Ops & Observability',
-      summary: 'I build and operate observability for LLM and agent services, connecting OpenTelemetry logs, traces, and metrics to understand execution, errors, and model usage.',
+      title: 'AGP Wiki · Source-grounded Knowledge',
+      summary: 'Building on agent PoCs, I contribute to a local LLM Wiki and RAG workflow with FTS5/BM25 lexical retrieval and host LLM answers. My work covers classification validation, recovery, status and logs, and verified file links, with remaining host checks recorded separately.',
     },
     blogLabel: 'Read the engineering notes (Korean)',
     contributionLabel: 'Role overview',
@@ -258,7 +262,7 @@ function App() {
   const languageHref = locale === 'ko' ? asset('en/') : asset('')
   const projectGroups = [
     {
-      label: 'Previous company projects',
+      label: 'Company projects',
       title: 'NC AI · Agent Platform Team',
       description: t.companyDescription,
       projects: projects.filter((project) => project.category === 'company'),
@@ -296,7 +300,7 @@ function App() {
       <main id="top">
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-kicker">
-            <span>Applied AI Engineer</span>
+            <span>AI / Backend Engineer</span>
             <span>Seoul · 2026</span>
           </div>
           <h1 id="hero-title">
@@ -344,12 +348,9 @@ function App() {
             </div>
             <div className="current-work-footer">
               <div className="mini-tags">
-                <span>OpenTelemetry</span>
-                <span>Logs · Traces · Metrics</span>
+                <span>Python · SQLite</span>
+                <span>Evidence · Recovery</span>
               </div>
-              <a className="current-work-blog" href={blogPostUrl('llm-ops-opentelemetry')} target="_blank" rel="noopener noreferrer">
-                {t.blogLabel} <Arrow />
-              </a>
             </div>
           </section>
           <div className="timeline">
@@ -357,13 +358,13 @@ function App() {
               <div className="timeline-date">2026.02 — Present</div>
               <div className="timeline-company">
                 <span>NC AI</span>
-                <h3>Applied AI Engineer</h3>
+                <h3>AI / Backend Engineer</h3>
                 <p>Agent Tech Center · Agent Platform Team</p>
               </div>
               <div className="timeline-detail">
                 {t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}
                 <div className="mini-tags">
-                  <span>LLM Ops</span>
+                  <span>AGP Wiki</span>
                   <span>OpenTelemetry</span>
                   <span>Logs · Traces · Metrics</span>
                 </div>
@@ -468,7 +469,7 @@ function App() {
 
       <footer>
         <span>© 2026 Jungjae Lee</span>
-        <span>Applied AI Engineer · Seoul</span>
+        <span>AI / Backend Engineer · Seoul</span>
         <a href="#top">{t.backToTop}</a>
       </footer>
     </>
