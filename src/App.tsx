@@ -73,7 +73,7 @@ const pageCopy = {
     heroBody: 'AI를 실제 제품과 업무에 적용하는 AI / Backend Engineer 이정재입니다. 현재는 로컬 문서를 정리하고 원문 근거로 답하는 AGP Wiki를 개발하며, 에이전트 실행 기반과 관측 체계의 구현 경험을 제품에 연결합니다.',
     selectedProjects: 'Selected projects',
     profileTitle: 'AI를 제품으로 만들고,\n실행을 관측합니다.',
-    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 Dainos·메일 에이전트·Pydantic AI 실행 기반 PoC에 기여했습니다. OpenTelemetry 기반 관측 체계 구현 경험을 바탕으로, 현재 AGP Wiki에서 문서 수집·복구와 근거 검증을 개발하고 있습니다.',
+    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 정부 과제의 목표지향 업무 에이전트 PoC에 기여했습니다. 해당 PoC를 개발·인계한 뒤 후속 AGP Wiki를 진행하고 있습니다. OpenTelemetry 기반 관측 체계 구현 경험을 바탕으로, AGP Wiki의 문서 수집·복구와 근거 검증을 개발하고 있습니다.',
     ncDetails: [
       '현재 · AGP Wiki 팀 개발 — 문서 수집·복구, 상태·로그와 인용·날짜 근거 검증',
       '수행 경험 · LLM 실행 관측, AGP Note 단독 개발, VAETKI Commerce 배너 백엔드, Agent PoC·LLM Ops 통합'
@@ -101,7 +101,7 @@ const pageCopy = {
     currentWork: {
       label: '현재 업무',
       title: 'AGP Wiki · 근거 기반 지식 도구',
-      summary: 'Agent PoC의 후속으로 LLM Wiki의 문서 정리와 검색 근거 기반 RAG 응답을 결합한 도구를 팀과 개발합니다. 분류 제안 검증, 중단 후 복구, 상태·로그와 검증된 파일 링크를 구현하며, FTS5·BM25 어휘 검색과 host LLM 응답을 연결하고 실제 호스트의 미확인 범위를 구분합니다.',
+      summary: '정부 과제의 목표지향 업무 에이전트 PoC를 개발·인계한 뒤, 후속으로 LLM Wiki 문서 정리와 검색 근거 기반 RAG 응답을 결합한 도구를 팀과 개발합니다. 분류 제안 검증, 중단 후 복구, 상태·로그와 검증된 파일 링크를 구현하며, FTS5·BM25 어휘 검색과 host LLM 응답을 연결하고 실제 호스트의 미확인 범위를 구분합니다.',
     },
     blogLabel: '설계·구현 기록 읽기',
     contributionLabel: '담당 역할',
@@ -115,7 +115,7 @@ const pageCopy = {
     heroBody: 'I am Jungjae Lee, an AI / Backend Engineer turning AI into products and workflows. I currently develop AGP Wiki, a local document tool with source-grounded answers, building on experience in agent execution and observability.',
     selectedProjects: 'Selected projects',
     profileTitle: 'I build AI products\nand make their execution observable.',
-    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to Dainos, mail agent, and Pydantic AI execution PoCs. Drawing on OpenTelemetry integration experience, I now work on document ingestion, recovery, and evidence verification in AGP Wiki.',
+    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to a goal-oriented work agent PoC for a government project. After developing and handing over that PoC, I moved on to AGP Wiki. Drawing on OpenTelemetry integration experience, I now work on document ingestion, recovery, and evidence verification in AGP Wiki.',
     ncDetails: [
       'Current · AGP Wiki team development: ingestion, recovery, status, logs, and source evidence verification',
       'Experience · LLM observability, AGP Note sole development, VAETKI Commerce banner backend, and agent PoCs with LLM Ops integration'
@@ -143,7 +143,7 @@ const pageCopy = {
     currentWork: {
       label: 'Current work',
       title: 'AGP Wiki · Source-grounded Knowledge',
-      summary: 'Building on agent PoCs, I contribute to a local LLM Wiki and RAG workflow with FTS5/BM25 lexical retrieval and host LLM answers. My work covers classification validation, recovery, status and logs, and verified file links, with remaining host checks recorded separately.',
+      summary: 'Following the handover of a goal-oriented work agent PoC for a government project, I contribute to a local LLM Wiki and RAG workflow with FTS5/BM25 lexical retrieval and host LLM answers. My work covers classification validation, recovery, status and logs, and verified file links, with remaining host checks recorded separately.',
     },
     blogLabel: 'Read the engineering notes (Korean)',
     contributionLabel: 'Role overview',
