@@ -1,7 +1,9 @@
-import { useState, type CSSProperties } from 'react'
-import { projectsKo, projectsEn, type Project } from './projects'
-import { blogUrl, blogPostUrl } from './links'
+import { lazy, Suspense, useEffect, useState } from 'react'
+import { projectsKo, projectsEn, seminarKo, seminarEn, type Project } from './projects'
+import { blogUrl } from './links'
 import './App.css'
+
+const ProjectCaseStudy = lazy(() => import('./ProjectCaseStudy'))
 
 type Locale = 'ko' | 'en'
 
@@ -95,8 +97,6 @@ const pageCopy = {
       '학회 핵심 프로젝트 주도 개발 및 기술 리드 참여',
     ],
     activityAlt: 'GDGoC 클라우드 및 AI 세미나 자료',
-    algorithmTitle: '삼성SDS 알고리즘 특강',
-    algorithmBody: '자료구조와 알고리즘 문제 해결 역량을 집중적으로 훈련했습니다.',
     contactTitle: '함께 더 나은\n시스템을 만들어요.',
     currentWork: {
       label: '현재 업무',
@@ -137,8 +137,6 @@ const pageCopy = {
       'Led core community projects and contributed as a technical lead',
     ],
     activityAlt: 'GDGoC cloud and AI seminar materials',
-    algorithmTitle: 'Samsung SDS Algorithm Intensive Course',
-    algorithmBody: 'Completed 80 hours of intensive data structures and algorithm problem-solving training.',
     contactTitle: 'Let’s build better\nsystems together.',
     currentWork: {
       label: 'Current work',
@@ -151,327 +149,101 @@ const pageCopy = {
   },
 } as const
 
-function Arrow() {
-  return <span aria-hidden="true">↗</span>
-}
-
-function MultilineText({ text }: { text: string }) {
-  return text.split('\n').map((line) => (
-    <span className="text-line" key={line}>
-      {line}
-    </span>
-  ))
+const projectFocus: Record<string, { ko: string[]; en: string[] }> = {
+  'agp-wiki': { ko: ['중단 후 복구 가능한 문서 수집과 분류 검증', '파일·인용·날짜 근거 확인 및 Linux·Windows 회귀 검증'], en: ['Recoverable ingestion and classification validation', 'Source, quotation and date checks; Linux / Windows regression validation'] },
+  vaetki: { ko: ['배너 생성·편집 API와 AI 서비스 연동', '시안별 잠금·버전 갱신·크레딧 처리와 부분 실패 복구'], en: ['Banner generation / editing APIs and AI integration', 'Variation locks, version updates, credits and partial-failure recovery'] },
+  'agp-note': { ko: ['전사 근거·회의 문맥 연결, 게시 전 검토와 로컬 기록 보존', 'MCP 권한, 외부 AI 전송 경계와 설치·업데이트 흐름'], en: ['Source-linked summaries, publishing review and local record preservation', 'MCP permissions, AI transfer boundaries, installation and updates'] },
+  dainos: { ko: ['에이전트 실행·승인·DBOS 세션과 사용자별 접근 격리', '메모리·벡터 검색과 OpenTelemetry 관측 연결'], en: ['Agent execution, approval, DBOS sessions and user-scoped isolation', 'Memory, vector retrieval and OpenTelemetry integration'] },
+  rendi: { ko: ['실시간 음성 입력에서 AI 코칭까지의 백엔드', '음성·AI 서비스 연동과 비동기 처리'], en: ['Real-time backend from voice input to AI coaching', 'Speech / AI integration and asynchronous processing'] },
+  tiger: { ko: ['AI 프로필 생성과 비동기 이미지 처리', '프론트엔드 연동·인증·배포에 기여'], en: ['AI profile generation and asynchronous image processing', 'Frontend integration, authentication and deployment'] },
 }
 
 function ProjectCard({ project, locale }: { project: Project; locale: Locale }) {
-  const [isOpen, setIsOpen] = useState(false)
-  const t = pageCopy[locale]
-  const detailsId = `${project.id}-details`
-  const style = {
-    '--project-color': project.color,
-    '--project-ink': project.ink,
-  } as CSSProperties
-
+  const community = project.category === 'community'
   return (
-    <article className={`project-card${isOpen ? ' is-open' : ''}`} style={style}>
-      <button
-        className="project-cover"
-        type="button"
-        aria-expanded={isOpen}
-        aria-controls={detailsId}
-        onClick={() => setIsOpen((value) => !value)}
-      >
-        <span className="project-number">PROJECT / {project.index}</span>
-        <span className="project-cover-copy">
-          <span className="project-label">{project.label}</span>
-          <span className="project-title">{project.title}</span>
-          <span className="project-summary">{project.summary}</span>
-          <span className="project-role">{project.role}</span>
-        </span>
-        <span className="project-media" aria-hidden="true">
-          {project.cover ? (
-            <img src={project.cover} alt="" />
-          ) : (
-            <span className={`generated-visual ${project.id}`}>
-              <span>{project.title}</span>
-              <span>{project.metric ?? project.label}</span>
-            </span>
-          )}
-        </span>
-        <span className="project-action" aria-hidden="true">
-          {isOpen ? 'Close −' : 'Explore +'}
-        </span>
-      </button>
-
-      <div className="project-details" id={detailsId} hidden={!isOpen}>
-        <div className="project-detail-head">
-          <div>
-            <span className="detail-label">Period</span>
-            <strong>{project.period}</strong>
-          </div>
-          <div>
-            <span className="detail-label">Role</span>
-            <strong>{project.role}</strong>
-          </div>
-          {(project.metric || project.award) && (
-            <div>
-              <span className="detail-label">Highlight</span>
-              <strong>{project.award ?? project.metric}</strong>
-            </div>
-          )}
+    <article className={`project-card${community ? ' community-project' : ''}`}>
+      <a className="project-cover" href={`#project/${project.id}`} aria-haspopup="dialog" onClick={(event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+        event.preventDefault()
+        history.pushState({ portfolioProject: true }, '', `#project/${project.id}`)
+        window.dispatchEvent(new HashChangeEvent('hashchange'))
+      }}>
+        <div className="project-heading">
+          <h3 className="project-title">{project.title}</h3>
+          <p className="project-role">{project.role}</p>
+          {!community && <p className="project-period">{project.period}</p>}
         </div>
-
-        <div className="project-detail-body">
-          <div>
-            <span className="detail-label">{t.contributionLabel}</span>
-            <ul>
-              {project.contributions.map((contribution) => (
-                <li key={contribution}>{contribution}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <span className="detail-label">Tech stack</span>
-            <div className="tag-list">
-              {project.tech.map((tech) => (
-                <span key={tech}>{tech}</span>
-              ))}
-            </div>
-            {project.blogPost && (
-              <a className="project-link project-blog-link" href={blogPostUrl(project.blogPost)} target="_blank" rel="noopener noreferrer">
-                {t.blogLabel} <Arrow />
-              </a>
-            )}
-            {project.href && (
-              <a className="project-link" href={project.href} target="_blank" rel="noreferrer">
-                Live service <Arrow />
-              </a>
-            )}
-          </div>
+        <div className="project-cover-copy">
+          <p className="project-summary">{project.id === 'agp-wiki' ? (locale === 'ko' ? '로컬 문서를 정리하고 검색 근거로 답하는 LLM Wiki 도구를 팀과 개발하고 있습니다.' : 'Working with the team on a local LLM Wiki that organizes documents and answers with retrieved evidence.') : project.summary}</p>
+          <ul className="project-focus">{projectFocus[project.id]?.[locale].map((item) => <li key={item}>{item}</li>)}</ul>
+          <div className="project-bottom"><span className="project-tech">{project.tech.join(' / ')}</span><span className="project-action">{locale === 'ko' ? '상세 보기' : 'Read more'}</span></div>
         </div>
-
-      </div>
+        {community && project.cover && <img className="project-thumbnail" src={project.cardCover ?? project.cover} alt={project.cardCover ? (locale === 'ko' ? `${project.title} AI 생성 개념 미리보기` : `${project.title} AI-generated concept preview`) : ''} loading="lazy" />}
+      </a>
     </article>
   )
 }
 
 function App() {
   const locale: Locale = window.location.pathname.split('/').includes('en') ? 'en' : 'ko'
+  const ko = locale === 'ko'
+  const [projectId, setProjectId] = useState(() => window.location.hash.startsWith('#project/') ? window.location.hash.slice(9) : '')
+  useEffect(() => {
+    const sync = () => setProjectId(window.location.hash.startsWith('#project/') ? window.location.hash.slice(9) : '')
+    window.addEventListener('hashchange', sync)
+    window.addEventListener('popstate', sync)
+    return () => { window.removeEventListener('hashchange', sync); window.removeEventListener('popstate', sync) }
+  }, [])
   const t = pageCopy[locale]
-  const projects = locale === 'ko' ? projectsKo : projectsEn
-  const languageHref = locale === 'ko' ? asset('en/') : asset('')
-  const projectGroups = [
-    {
-      label: 'Company projects',
-      title: 'NC AI · Agent Platform Team',
-      description: t.companyDescription,
-      projects: projects.filter((project) => project.category === 'company'),
-    },
-    {
-      label: 'University & community projects',
-      title: 'GDGoC Korea University',
-      description: t.universityDescription,
-      projects: projects.filter((project) => project.category === 'community'),
-    },
-  ]
-
+  const projects = ko ? projectsKo : projectsEn
+  const selectedProject = projectId === 'seminars' ? (ko ? seminarKo : seminarEn) : projects.find((project) => project.id === projectId)
+  const openSeminars = () => { history.pushState({ portfolioProject: true }, '', '#project/seminars'); window.dispatchEvent(new HashChangeEvent('hashchange')) }
+  const closeProject = () => {
+    if (history.state?.portfolioProject) history.back()
+    else { history.replaceState(null, '', selectedProject?.category === 'community' ? '#activities' : '#projects'); setProjectId('') }
+  }
+  const languageHref = ko ? asset('en/') : asset('')
+  const companyProjects = ['agp-wiki', 'vaetki', 'agp-note', 'dainos'].map((id) => projects.find((project) => project.id === id)!).filter(Boolean)
   return (
     <>
+      <a className="skip-link" href="#top">{ko ? '본문으로 이동' : 'Skip to content'}</a>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label={t.homeLabel}>
-          PORTFOLIO
-        </a>
-        <nav aria-label={t.navLabel}>
-          <a href="#experience">Experience</a>
-          <a href="#projects">Projects</a>
-          <a href="#activities">Activities</a>
-          <a href="#contact">Contact</a>
-          <a
-            className="language-switch"
-            href={languageHref}
-            lang={locale === 'ko' ? 'en' : 'ko'}
-            hrefLang={locale === 'ko' ? 'en' : 'ko'}
-          >
-            {locale === 'ko' ? 'EN' : 'KO'}
-          </a>
-        </nav>
+        <a className="wordmark" href="#top" aria-label={t.homeLabel}>{ko ? '포트폴리오' : 'Portfolio'}</a>
+        <nav aria-label={t.navLabel}><a href="#projects">{ko ? '프로젝트' : 'Projects'}</a><a href="#experience">{ko ? '경력' : 'Experience'}</a><a href="#activities">{ko ? '커뮤니티' : 'Community'}</a><a className="language-switch" href={languageHref} lang={ko ? 'en' : 'ko'} hrefLang={ko ? 'en' : 'ko'}>{ko ? 'EN' : 'KO'}</a></nav>
       </header>
-
-      <main id="top">
+      <main id="top" tabIndex={-1}>
         <section className="hero-section" aria-labelledby="hero-title">
-          <div className="hero-kicker">
-            <span>AI / Backend Engineer</span>
-            <span>Seoul · 2026</span>
-          </div>
-          <h1 id="hero-title">
-            {t.heroLead}
-            <br />
-            <em>{t.heroEmphasis}</em>
-          </h1>
-          <div className="hero-bottom">
-            <div className="hero-intro">
-              <p>{t.heroBody}</p>
-              <div className="hero-links">
-                {profileLinks.map((link) => (
-                  <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">
-                    {link.label} <Arrow />
-                  </a>
-                ))}
-              </div>
-            </div>
-            <a className="hero-project-link" href="#projects">
-              {t.selectedProjects} <span aria-hidden="true">↓</span>
-            </a>
-          </div>
-          <div className="hero-orbit one" aria-hidden="true" />
-          <div className="hero-orbit two" aria-hidden="true" />
-        </section>
-
-        <section className="intro-section section" aria-labelledby="intro-title">
-          <div className="section-index">01 / PROFILE</div>
-          <div className="intro-copy">
-            <h2 id="intro-title"><MultilineText text={t.profileTitle} /></h2>
-            <p>{t.profileBody}</p>
-          </div>
-        </section>
-
-        <section className="experience-section section" id="experience" aria-labelledby="experience-title">
-          <div className="section-index">02 / EXPERIENCE</div>
-          <h2 id="experience-title" className="section-title">Experience</h2>
-          <section className="current-work" id="current-work" aria-labelledby="current-work-title">
-            <div className="current-work-heading">
-              <div>
-                <span className="current-work-label">{t.currentWork.label}</span>
-                <h3 id="current-work-title">{t.currentWork.title}</h3>
-              </div>
-              <p>{t.currentWork.summary}</p>
-            </div>
-            <div className="current-work-footer">
-              <div className="mini-tags">
-                <span>Python · SQLite</span>
-                <span>Evidence · Recovery</span>
-              </div>
-            </div>
-          </section>
-          <div className="timeline">
-            <article>
-              <div className="timeline-date">2026.02 — Present</div>
-              <div className="timeline-company">
-                <span>NC AI</span>
-                <h3>AI / Backend Engineer</h3>
-                <p>Agent Tech Center · Agent Platform Team</p>
-              </div>
-              <div className="timeline-detail">
-                {t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}
-                <div className="mini-tags">
-                  <span>AGP Wiki</span>
-                  <span>OpenTelemetry</span>
-                  <span>Logs · Traces · Metrics</span>
-                </div>
-              </div>
-            </article>
-
-            <article>
-              <div className="timeline-date">2023.06 — 2023.08</div>
-              <div className="timeline-company">
-                <span>LG CNS</span>
-                <h3>Cloud Architect Intern</h3>
-                <p>{t.lgRole}</p>
-              </div>
-              <div className="timeline-detail">
-                {t.lgDetails.map((detail) => <p key={detail}>{detail}</p>)}
-                <div className="mini-tags">
-                  <span>AWS</span>
-                  <span>Terraform</span>
-                  <span>GitLab CI/CD</span>
-                </div>
-              </div>
-            </article>
-          </div>
+          <div className="hero-identity"><h1 id="hero-title">{ko ? '이정재' : 'Jungjae Lee'}</h1><p className="hero-role">AI / Backend Engineer</p></div>
+          <p className="print-contact">jerrylee1516@gmail.com / github.com/JaerryLee</p>
+          <div className="hero-intro"><p>{ko ? 'NC AI에서 AI 제품의 백엔드를 개발합니다. 현재 AGP Wiki의 문서 수집·복구와 근거 검증을 담당하고 있습니다.' : 'I develop AI product backends at NC AI. My current work on AGP Wiki covers document ingestion, recovery and source evidence checks.'}</p><p className="hero-scope">{ko ? '에이전트 실행, 비동기 작업, 관측 체계를 실제 업무 흐름에 연결해 왔습니다.' : 'My experience connects agent execution, asynchronous workloads and observability to working products.'}</p><div className="hero-links"><a href="mailto:jerrylee1516@gmail.com">Email</a><a href="https://github.com/JaerryLee" target="_blank" rel="noopener noreferrer">GitHub</a>{profileLinks.map((link) => <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">{link.label === 'Tech Blog' && ko ? '기술 블로그' : link.label}</a>)}</div></div>
         </section>
 
         <section className="projects-section" id="projects" aria-labelledby="projects-title">
-          <div className="projects-head">
-            <div className="section-index">03 / SELECTED PROJECTS</div>
-            <h2 id="projects-title">From architecture<br />to experience.</h2>
-            <p>{t.projectsHelp}</p>
-          </div>
-          <div className="project-groups">
-            {projectGroups.map((group) => (
-              <section className="project-group" key={group.label} aria-label={group.label}>
-                <div className="project-group-head">
-                  <span>{group.label}</span>
-                  <div>
-                    <h3>{group.title}</h3>
-                    <p>{group.description}</p>
-                  </div>
-                </div>
-                <div className="project-stack">
-                  {group.projects.map((project) => (
-                    <ProjectCard key={project.id} project={project} locale={locale} />
-                  ))}
-                </div>
-              </section>
-            ))}
-          </div>
+          <div className="section-heading"><h2 id="projects-title">{ko ? '실무 프로젝트' : 'Selected work'}</h2><p>NC AI / Agent Platform Team</p></div>
+          <div className="project-stack">{companyProjects.map((project) => <ProjectCard key={project.id} project={project} locale={locale} />)}</div>
         </section>
 
-        <section className="stack-section section" aria-labelledby="stack-title">
-          <div className="section-index">04 / TOOLKIT</div>
-          <h2 id="stack-title" className="section-title">Technical toolkit</h2>
-          <div className="stack-grid">
-            {stackGroups.map((group, index) => (
-              <article key={group.title}>
-                <span>0{index + 1}</span>
-                <h3>{group.title}</h3>
-                <p>{group.items.join(' · ')}</p>
-              </article>
-            ))}
+        <section className="experience-section section" id="experience" aria-labelledby="experience-title">
+          <div className="section-heading"><h2 id="experience-title">{ko ? '경력' : 'Experience'}</h2></div>
+          <div className="timeline">
+            <article><div className="timeline-company"><h3>NC AI</h3><p>AI / Backend Engineer</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — {ko ? '현재' : 'Present'}</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '현재 업무와 이전 프로젝트' : 'Current work and previous projects'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
+            <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
           </div>
+          <details className="toolkit-disclosure"><summary>{ko ? '사용한 기술과 도구 전체 보기' : 'Full technical toolkit'}</summary><div className="stack-grid">{stackGroups.map((group) => <article key={group.title}><h3>{group.title}</h3><p>{group.items.join(' / ')}</p></article>)}</div></details>
         </section>
 
         <section className="activities-section section" id="activities" aria-labelledby="activities-title">
-          <div className="section-index">05 / ACTIVITIES</div>
-          <h2 id="activities-title" className="section-title">Activities & learning</h2>
-          <div className="activity-layout">
-            <article className="activity-main">
-              <span className="activity-period">2022.08 — 2025.08</span>
-              <h3>GDGoC Korea University</h3>
-              <strong>{t.gdgRole}</strong>
-              <ul>
-                {t.gdgActivities.map((activity) => <li key={activity}>{activity}</li>)}
-              </ul>
-            </article>
-            <img
-              className="activity-image"
-              src={asset('projects/seminar.png')}
-              alt={t.activityAlt}
-            />
-            <article className="activity-award">
-              <span>2025.02 · 80 hours</span>
-              <h3>{t.algorithmTitle}</h3>
-              <p>{t.algorithmBody}</p>
-            </article>
+          <div className="section-heading"><h2 id="activities-title">GDGoC Korea University</h2><p>{ko ? '커뮤니티 활동' : 'Community'}</p></div>
+          <div className="activity-layout"><article className="activity-main"><strong>{t.gdgRole}</strong><p className="activity-period">2022.08 — 2025.08</p><ul>{t.gdgActivities.map((activity) => <li key={activity}>{activity}</li>)}</ul></article>
+            <button className="seminar-trigger" type="button" data-case-id="seminars" aria-haspopup="dialog" onClick={openSeminars}><img className="activity-image" src={asset('projects/seminar-generated.png')} alt={ko ? '클라우드·AI 학습을 표현한 AI 생성 개념 미리보기' : 'AI-generated concept preview of cloud and AI learning'} loading="lazy" /><span><strong>{ko ? '클라우드 · AI 세미나' : 'Cloud & AI seminars'}</strong><span>{ko ? 'AWS·GCP 인프라 실습, AI Week' : 'AWS / GCP workshops and AI Week'}</span><span className="project-action">{ko ? '주제와 역할 보기' : 'Topics and role'}</span></span></button>
           </div>
-        </section>
-
-        <section className="contact-section" id="contact" aria-labelledby="contact-title">
-          <span>LET’S BUILD SOMETHING RELIABLE.</span>
-          <h2 id="contact-title"><MultilineText text={t.contactTitle} /></h2>
-          <div className="contact-links">
-            <a href="mailto:jerrylee1516@gmail.com">Email <Arrow /></a>
-            <a href="https://github.com/JaerryLee" target="_blank" rel="noreferrer">
-              GitHub <Arrow />
-            </a>
-          </div>
+          <div className="community-projects"><div className="project-stack">{projects.filter((project) => project.category === 'community' && project.id !== 'gdg-website').map((project) => <ProjectCard key={project.id} project={project} locale={locale} />)}</div></div>
+          <aside className="community-appendix"><a className="community-website-link" href="#project/gdg-website" aria-haspopup="dialog">GDG KU Website</a><p>{ko ? '회원 활동·일정·운영자 관리를 위한 풀스택 웹사이트. 기술과 구현 내용 보기.' : 'A full-stack website for activities, schedules and administration. View technologies and implementation.'}</p></aside>
         </section>
       </main>
 
-      <footer>
-        <span>© 2026 Jungjae Lee</span>
-        <span>AI / Backend Engineer · Seoul</span>
-        <a href="#top">{t.backToTop}</a>
-      </footer>
+      <footer id="contact"><span>{ko ? '이정재' : 'Jungjae Lee'} / Seoul</span><a href="mailto:jerrylee1516@gmail.com">jerrylee1516@gmail.com</a><a href="#top">{ko ? '맨 위로' : 'Back to top'}</a></footer>
+      {selectedProject && <Suspense fallback={<div className="case-loading" role="status">{ko ? '상세를 여는 중…' : 'Opening details…'}<button onClick={closeProject}>{ko ? '취소' : 'Cancel'}</button></div>}><ProjectCaseStudy key={selectedProject.id} project={selectedProject} locale={locale} onClose={closeProject} /></Suspense>}
     </>
   )
 }

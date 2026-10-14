@@ -11,6 +11,8 @@ export type Project = {
   contributions: string[]
   color: string
   ink: string
+  cardCover?: string
+  architectureImage?: string
   cover?: string
   metric?: string
   award?: string
@@ -115,6 +117,8 @@ export const projectsKo: Project[] = [
     color: '#86f5cf',
     ink: '#071a18',
     cover: asset('projects/rendi-cover.png'),
+    architectureImage: asset('projects/rendi-architecture.png'),
+    cardCover: asset('projects/rendi-generated.png'),
     award: '금상 · NE:XT CONTEST',
   },
   {
@@ -134,6 +138,8 @@ export const projectsKo: Project[] = [
     color: '#e01823',
     ink: '#ffffff',
     cover: asset('projects/tiger-cover.png'),
+    architectureImage: asset('projects/tiger-architecture.png'),
+    cardCover: asset('projects/tiger-generated.png'),
     metric: '약 1,000명 사용자',
   },
   {
@@ -251,6 +257,8 @@ export const projectsEn: Project[] = [
     color: '#86f5cf',
     ink: '#071a18',
     cover: asset('projects/rendi-cover.png'),
+    architectureImage: asset('projects/rendi-architecture.png'),
+    cardCover: asset('projects/rendi-generated.png'),
     award: 'Gold Award · NE:XT CONTEST',
   },
   {
@@ -270,6 +278,8 @@ export const projectsEn: Project[] = [
     color: '#e01823',
     ink: '#ffffff',
     cover: asset('projects/tiger-cover.png'),
+    architectureImage: asset('projects/tiger-architecture.png'),
+    cardCover: asset('projects/tiger-generated.png'),
     metric: 'Approximately 1,000 users',
   },
   {
@@ -291,3 +301,31 @@ export const projectsEn: Project[] = [
     cover: asset('projects/gdg-cover.png'),
   },
 ]
+
+
+export const seminarKo: Project = {
+  id: 'seminars', category: 'community', index: '', title: '클라우드 · AI 세미나',
+  label: 'GDGoC Korea University · 학습과 지식 공유',
+  period: '개별 행사 날짜는 원본 자료에 미기재',
+  role: 'Backend & AI Core Member · 세미나 및 워크숍 기획·운영',
+  summary: '클라우드 인프라 실습과 AI 학습 세션을 기획·운영했습니다. 아래 주제는 보존된 세미나 자료를 기준으로 정리했습니다.',
+  tech: ['AWS', 'GCP', 'Terraform', 'CI/CD', 'RNN / LSTM', 'Transformer'],
+  contributions: [
+    '기존 활동 기록에서 확인되는 역할: AI 세미나·실습 프로젝트 및 AWS·GCP 클라우드 인프라 워크숍 기획·운영.',
+    '클라우드 서비스 자료에는 이정재 이름이 표기되어 있습니다. 자료 작성자 표기와 실제 발표 여부는 구분하며, 개별 세션 발표 여부는 별도 기록으로 확인되지 않았습니다.',
+    'AI Week 자료에는 전병우·이정재 이름이 함께 표기되어 있습니다. 공동 자료 표기를 보존하며 모든 세션을 단독 발표했다고 설명하지 않습니다.',
+  ],
+  color: '#e5effa', ink: '#142b49', cardCover: asset('projects/seminar-generated.png'), cover: asset('projects/seminar.png'), href: asset('projects/seminar.png'),
+}
+
+export const seminarEn: Project = {
+  ...seminarKo, title: 'Cloud & AI seminars', label: 'GDGoC Korea University · Learning and knowledge sharing',
+  period: 'Individual event dates are not recorded in the source',
+  role: 'Backend & AI Core Member · Seminar and workshop planning / operations',
+  summary: 'Planned and operated cloud infrastructure workshops and AI learning sessions. Topics below are grounded in the preserved seminar materials.',
+  contributions: [
+    'Existing activity records confirm planning and operations for AI seminars, hands-on projects and AWS / GCP infrastructure workshops.',
+    'The cloud material names Jungjae Lee. Authorship credit is distinguished from confirmed presentation; individual presenter records are unavailable.',
+    'The AI Week material jointly names Byeongwoo Jeon and Jungjae Lee. Joint authorship is preserved without claiming sole presentation of every session.',
+  ],
+}
