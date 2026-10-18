@@ -209,12 +209,20 @@ function App() {
       <a className="skip-link" href="#top">{ko ? '본문으로 이동' : 'Skip to content'}</a>
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label={t.homeLabel}>{ko ? '포트폴리오' : 'Portfolio'}</a>
-        <nav aria-label={t.navLabel}><a href="#projects">{ko ? '프로젝트' : 'Projects'}</a><a href="#experience">{ko ? '경력' : 'Experience'}</a><a href="#activities">{ko ? '커뮤니티' : 'Community'}</a><a className="language-switch" href={languageHref} lang={ko ? 'en' : 'ko'} hrefLang={ko ? 'en' : 'ko'}>{ko ? 'EN' : 'KO'}</a></nav>
+        <nav aria-label={t.navLabel}><a href="#experience">{ko ? '경력' : 'Experience'}</a><a href="#projects">{ko ? '프로젝트' : 'Projects'}</a><a href="#activities">{ko ? '커뮤니티' : 'Community'}</a><a className="language-switch" href={languageHref} lang={ko ? 'en' : 'ko'} hrefLang={ko ? 'en' : 'ko'}>{ko ? 'EN' : 'KO'}</a></nav>
       </header>
       <main id="top" tabIndex={-1}>
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-identity"><p className="hero-eyebrow">{ko ? '기술을 제품으로, 문제를 시스템으로.' : 'Technology into products.'}</p><h1 id="hero-title">{ko ? '이정재' : 'Jungjae Lee'}</h1><p className="hero-role">AI / Backend Engineer</p></div>
           <div className="hero-intro"><p>{ko ? 'AI 기술을 제품과 서비스에 연결하는 AI / Backend 개발자입니다.' : 'I am an AI / Backend developer connecting AI technology to products and services.'}</p><p className="hero-scope">{ko ? '에이전트 실행과 비동기 처리, 관측 체계를 설계·구현하며 안정적으로 운영할 수 있는 백엔드를 개발합니다.' : 'I design and implement agent execution, asynchronous processing and observability to build backends that support reliable operations.'}</p><div className="hero-links"><a href="mailto:jerrylee1516@gmail.com">Email</a><a href="https://github.com/JaerryLee" target="_blank" rel="noopener noreferrer">GitHub</a>{profileLinks.map((link) => <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">{link.label === 'Tech Blog' && ko ? '기술 블로그' : link.label}</a>)}</div><a className="hero-work-link" href="#projects">{ko ? '프로젝트 살펴보기' : 'Explore selected work'} <span aria-hidden="true">↓</span></a></div>
+        </section>
+
+        <section className="experience-section section" id="experience" aria-labelledby="experience-title">
+          <div className="section-heading"><h2 id="experience-title">{ko ? '경력' : 'Experience'}</h2></div>
+          <div className="timeline">
+            <article><div className="timeline-company"><h3>NC AI</h3><p>AI / Backend Engineer</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — {ko ? '현재' : 'Present'}</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '현재 업무와 이전 프로젝트' : 'Current work and previous projects'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
+            <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
+          </div>
         </section>
 
         <section className="projects-section" id="projects" aria-labelledby="projects-title">
@@ -230,15 +238,6 @@ function App() {
             <article><h3>Infra &amp; Observability</h3><p>AWS · Kubernetes</p><p>OpenTelemetry</p></article>
           </div>
           <details className="toolkit-disclosure"><summary>{ko ? '전체 기술·도구 보기' : 'View all technologies and tools'}</summary><div className="stack-grid">{stackGroups.map((group) => <article key={group.title}><h3>{group.title}</h3><p>{group.items.join(' / ')}</p></article>)}</div></details>
-        </section>
-
-        <section className="experience-section section" id="experience" aria-labelledby="experience-title">
-          <div className="section-heading"><h2 id="experience-title">{ko ? '경력' : 'Experience'}</h2></div>
-          <div className="timeline">
-            <article><div className="timeline-company"><h3>NC AI</h3><p>AI / Backend Engineer</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — {ko ? '현재' : 'Present'}</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '현재 업무와 이전 프로젝트' : 'Current work and previous projects'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
-            <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
-          </div>
-
         </section>
 
         <section className="activities-section section" id="activities" aria-labelledby="activities-title">
