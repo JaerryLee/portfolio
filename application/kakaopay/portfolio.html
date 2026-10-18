@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>이정재_포트폴리오_카카오페이</title>
+    <style>
+      /* 공통 디자인: 색상·글자·간격은 여기서 수정하세요. 외부 파일/폰트 없이 동작합니다. */
+      :root {
+        --ink: #14243b;
+        --muted: #526175;
+        --line: #dce2e9;
+        --soft: #f2f5f8;
+        --accent: #ffdf42;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #e8ecf0;
+        font-family:
+          "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+        font-size: 10pt;
+        line-height: 1.5;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+      }
+      a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .toolbar {
+        max-width: 210mm;
+        margin: 20px auto;
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        font-size: 13px;
+      }
+      .toolbar p {
+        margin: 0;
+      }
+      button {
+        border: 0;
+        border-radius: 6px;
+        background: var(--ink);
+        color: white;
+        padding: 12px 18px;
+        font: inherit;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .page {
+        width: 210mm;
+        min-height: 296mm;
+        margin: 0 auto 24px;
+        padding: 13mm 17mm 10mm;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 3px 20px #14243b12;
+      }
+      .page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 5mm;
+        border-bottom: 1px solid var(--line);
+        font-size: 8pt;
+        color: var(--muted);
+        letter-spacing: 0.06em;
+      }
+      .page-header b {
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .page-body {
+        flex: 1;
+      }
+      .eyebrow {
+        margin: 4mm 0 3mm;
+        font-size: 9pt;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-size: 29pt;
+        line-height: 1.22;
+        letter-spacing: -0.045em;
+      }
+      h2 {
+        margin: 5mm 0 3mm;
+        font-size: 18pt;
+        line-height: 1.35;
+        letter-spacing: -0.025em;
+      }
+      h3 {
+        margin: 4mm 0 2mm;
+        font-size: 12pt;
+        line-height: 1.45;
+      }
+      p + p {
+        margin-top: 2.5mm;
+      }
+      .lead {
+        margin: 3mm 0 4mm;
+        color: var(--muted);
+        font-size: 11.5pt;
+        line-height: 1.5;
+      }
+      .meta {
+        color: var(--muted);
+        font-size: 9pt;
+        margin: 2mm 0 4mm;
+      }
+      .rule {
+        margin: 4mm 0;
+        border: 0;
+        border-top: 1px solid var(--line);
+      }
+      .section-label {
+        display: inline-block;
+        margin-top: 5mm;
+        padding: 1mm 3mm;
+        background: var(--accent);
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2mm;
+        margin: 3mm 0 4mm;
+      }
+      .tags span {
+        font-size: 8pt;
+        padding: 1mm 2.5mm;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+      }
+      ul {
+        margin: 2mm 0 4mm;
+        padding-left: 5mm;
+      }
+      li {
+        margin: 1mm 0;
+      }
+      .box {
+        background: var(--soft);
+        border-left: 3px solid var(--ink);
+        padding: 3mm 4mm;
+        margin: 4mm 0;
+        break-inside: avoid;
+      }
+      .box h3 {
+        margin: 0 0 2mm;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5mm;
+        margin: 4mm 0;
+      }
+      .two .box {
+        margin: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 3mm 0 4mm;
+        font-size: 9.5pt;
+      }
+      th {
+        text-align: left;
+        background: var(--soft);
+        font-weight: 700;
+      }
+      th,
+      td {
+        padding: 2mm;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th:first-child,
+      td:first-child {
+        width: 27%;
+      }
+      tr {
+        break-inside: avoid;
+      }
+      .flow {
+        display: flex;
+        align-items: stretch;
+        gap: 2mm;
+        margin: 4mm 0 2mm;
+      }
+      .flow > div {
+        flex: 1;
+        padding: 3mm 2mm;
+        border: 1px solid var(--line);
+        background: var(--soft);
+        text-align: center;
+        font-size: 9.5pt;
+        font-weight: 700;
+      }
+      .flow > span {
+        align-self: center;
+        color: var(--muted);
+      }
+      .flow small {
+        display: block;
+        margin-top: 1mm;
+        font-size: 8pt;
+        font-weight: 400;
+        color: var(--muted);
+      }
+      .caption {
+        font-size: 8pt;
+        color: var(--muted);
+        margin: 2mm 0 5mm;
+      }
+      .result {
+        margin-top: 5mm;
+        padding-top: 4mm;
+        border-top: 2px solid var(--ink);
+      }
+      .result strong {
+        display: block;
+        margin-bottom: 2mm;
+        font-size: 11pt;
+      }
+      .page-footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 3mm;
+        padding-top: 3mm;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 8pt;
+      }
+      .small {
+        font-size: 9pt;
+        color: var(--muted);
+      }
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2mm 5mm;
+        font-size: 9pt;
+        margin: 4mm 0;
+      }
+      .role {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 4mm;
+        margin-top: 6mm;
+      }
+      .role h2 {
+        margin: 0;
+      }
+      .role span {
+        color: var(--muted);
+        font-size: 9pt;
+      }
+      .keep {
+        break-inside: avoid;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      @media print {
+        body {
+          background: white;
+        }
+        .toolbar {
+          display: none;
+        }
+        .page {
+          margin: 0;
+          box-shadow: none;
+          break-after: page;
+          min-height: 296mm;
+          width: 210mm;
+        }
+        .page:last-child {
+          break-after: auto;
+        }
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+      @media screen and (max-width: 800px) {
+        .page {
+          width: 100%;
+          padding: 24px;
+          min-height: auto;
+        }
+        .toolbar {
+          margin: 10px;
+          flex-wrap: wrap;
+        }
+        .two {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 28pt;
+        }
+        .flow {
+          flex-wrap: wrap;
+        }
+        .role {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 문구 수정: 아래 각 PAGE 주석에서 찾으세요. 화면 상단 안내는 PDF에 인쇄되지 않습니다. -->
+    <div class="toolbar">
+      <p>
+        A4 · 배율 100% · 여백 없음 · 머리글/바닥글 끄기<br />본문 수정 후 인쇄
+        미리보기에서 페이지 수를 확인하세요.
+      </p>
+      <button onclick="window.print()">인쇄 / PDF로 저장</button>
+    </div>
+    <!-- PAGE 1: 이 section 안의 제목과 본문을 직접 수정하세요. -->
+    <section class="page">
+      <header class="page-header">
+        <b>이정재 · 포트폴리오</b
+        ><span>카카오페이 / 데이터 엔지니어 - 데이터 플랫폼</span>
+      </header>
+      <main class="page-body">
+        <p class="eyebrow">01 / DURABLE PROCESSING</p>
+        <h1>Dainos</h1>
+        <p class="lead">
+          온톨로지 기반 Knowledge Base에서<br />AI Agent의 업무 아이템 생성까지
+          연결합니다.
+        </p>
+        <p class="meta">
+          NC AI · 2026 · PoC / KB Service 제품 API·권한·작업 처리 및 제품 통합
+        </p>
+        <p>
+          Dainos는 메일·문서의 업무 지식을 온톨로지 기반 Knowledge Base(KB, 지식
+          기반)로 구축하고, AI Agent가 이를 활용해 업무 아이템을 생성하는
+          플랫폼입니다. KB는 업무에 등장하는 개념과 관계를 구조화해 관련 정보를
+          연결합니다. 이를 바탕으로 업무·문서 탐색과 근거 기반 질의응답을
+          지원하며, 프로젝트는 PoC(개념 검증) 단계까지만 진행됐습니다.
+        </p>
+        <div class="tags">
+          <span>FastAPI</span><span>PostgreSQL</span><span>영속 상태</span
+          ><span>멱등 재시도</span><span>API 계약</span>
+        </div>
+        <h3>처리 대상과 담당 역할</h3>
+        <p>
+          KB Service는 온톨로지 기반 지식 저장·질의를 담당하는 KB Core를
+          제품에서 활용하도록 API·접근 권한·지식화 작업 상태를 관리합니다. 이
+          서비스의 요청 접수·영속 상태·재시도·결과 조회와 FE·BFF 연동을
+          담당했습니다. 지식 추출·그래프 알고리즘은 KB Core의 기능을 연결했으며,
+          별도로 에이전트 실행 기반의 AI API 비동기 호출과 세션·SSE 이벤트
+          전달을 구현했습니다.
+        </p>
+        <div class="flow">
+          <div>메일·문서<small>입력 선택</small></div>
+          <span>→</span>
+          <div>Knowledge Base<small>온톨로지 기반 지식화</small></div>
+          <span>→</span>
+          <div>AI Agent<small>업무 아이템 생성</small></div>
+          <span>→</span>
+          <div>질문·근거 확인<small>권한 내 접근</small></div>
+        </div>
+        <p class="caption">
+          사용자 관점의 제품 흐름입니다. 내부 호출 순서나 전체 배포 구성을
+          나타내지는 않습니다.
+        </p>
+        <h3>중단·재전달·상태 불일치에 대응한 설계</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>문제와 원인</th>
+              <th>해결 과정과 구현 결과</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>처리 중단 후 진행 상태 유실 위험</td>
+              <td>
+                작업·실행 상태를 영속화하고, Lease로 실행 주체를 확인해 중단된
+                작업을 재개할 판단 근거를 남겼습니다.
+              </td>
+            </tr>
+            <tr>
+              <td>메시지 재전달 시 이미 반영한 단계의 중복 처리 위험</td>
+              <td>
+                적용 Journal과 멱등 처리를 구현해 반영 이력을 판단하고,
+                Redrive로 작업을 재개하는 경로를 구성했습니다.
+              </td>
+            </tr>
+            <tr>
+              <td>상태 저장과 이벤트 전달의 분리, 마지막 이벤트 누락 가능성</td>
+              <td>
+                상태 Outbox로 저장 상태와 전달 이벤트를 연결하고, 화면에서 최종
+                상태를 다시 확인하는 경로를 구현했습니다.
+              </td>
+            </tr>
+            <tr>
+              <td>계층별 응답 모델 차이로 화면 상태가 어긋날 위험</td>
+              <td>
+                FE-BFF-KB Service-Core의 OpenAPI·응답 모델을 대조하고 API 계약과
+                제품의 상태 표시를 맞췄습니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="result">
+          <strong>결과 · PoC 구현과 검증 범위</strong>
+          <p>
+            프로세스 밖에 작업 상태와 반영 이력을 보존하고, 재시도·재개부터
+            사용자 화면의 결과 확인까지 연결했습니다. 프로젝트는 PoC까지만
+            진행됐으며, 중단 지점별 복구 시간과 중복·누락 여부는 추가 실연동
+            검증 항목으로 남겼습니다.
+          </p>
+        </div>
+        <p class="small">
+          <a href="https://jaerrylee.github.io/posts/dainos-agentic-platform/"
+            >설계 기록 · Dainos의 실행 상태와 제품 통합 ↗</a
+          >
+        </p>
+      </main>
+      <footer class="page-footer">
+        <span>LEE JUNGJAE · 포트폴리오</span><span>01 / 04</span>
+      </footer>
+    </section>
+    <!-- PAGE 2: 이 section 안의 제목과 본문을 직접 수정하세요. -->
+    <section class="page">
+      <header class="page-header">
+        <b>이정재 · 포트폴리오</b
+        ><span>카카오페이 / 데이터 엔지니어 - 데이터 플랫폼</span>
+      </header>
+      <main class="page-body">
+        <p class="eyebrow">02 / ASYNC CONSISTENCY</p>
+        <h1>VAETKI Commerce</h1>
+        <p class="lead">
+          생성 작업의 실패를 구분하고,<br />기존 결과와 크레딧 상태를
+          보존했습니다.
+        </p>
+        <p class="meta">
+          NC AI · 2026 이전 수행 / 배너 생성·조회·리사이즈·편집 기능의 백엔드
+          <br /><a href="https://commerce.vaetki.ai/ko"
+            >배키 커머스 서비스 ↗</a
+          >
+        </p>
+        <div class="tags">
+          <span>FastAPI</span><span>Redis · Celery</span><span>MongoDB</span
+          ><span>Socket.IO</span>
+        </div>
+        <h3>처리 대상과 담당 역할</h3>
+        <p>
+          상품 이미지 기반 배너 생성·리사이즈·대화형 편집의 백엔드를
+          담당했습니다. API·AI 연동·Redis/Celery 작업·결과 저장·Socket.IO 알림을
+          연결하고, 오래 걸리는 AI 처리를 HTTP 요청과 분리했습니다. 작업 ID를
+          기준으로 접수·실행·최종 결과를 추적하도록 구성했습니다.
+        </p>
+        <div class="flow">
+          <div>Banner API<small>작업 접수</small></div>
+          <span>→</span>
+          <div>Celery Worker<small>비동기 실행</small></div>
+          <span>→</span>
+          <div>AI · 결과 저장<small>생성·편집</small></div>
+          <span>→</span>
+          <div>상태 · 이벤트<small>결과 전달</small></div>
+        </div>
+        <h3>실패 원인 → 해결 과정 → 결과</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>문제와 원인</th>
+              <th>해결 과정과 구현 결과</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>이미지·썸네일 중 일부만 생성·저장에 성공</td>
+              <td>
+                편집 결과와 썸네일 처리를 구분하고 유효한 새 결과만 참조에
+                반영하도록 개선했습니다. 작업 실패를 남기면서 기존 이미지를 계속
+                사용할 수 있게 했습니다.
+              </td>
+            </tr>
+            <tr>
+              <td>동일 배너의 동시 편집으로 결과 덮어쓰기 위험</td>
+              <td>
+                편집 대상의 AI Chat 작업 잠금으로 동시 실행을 제어하고,
+                성공·예외 종료 경로에서 잠금을 정리하도록 구현했습니다.
+              </td>
+            </tr>
+            <tr>
+              <td>크레딧 확정 중 예외로 실제 반영 여부 불확실</td>
+              <td>
+                트랜잭션 ID와 확정 시작 여부를 기록하고, 확정 시작 전 실패에만
+                예약 취소를 시도했습니다. 이후 예외와 취소 실패를 별도로 남겨
+                후속 확인이 가능하게 했습니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="box">
+          <h3>해결의 핵심</h3>
+          <p>
+            외부 응답을 받지 못한 상태와 실제 처리 실패를 구분했습니다. 결과
+            파일·작업 상태·크레딧 상태를 각각 기록해, 하나의 실패가 기존 결과
+            삭제나 무조건적인 크레딧 취소로 이어지지 않도록 했습니다.
+          </p>
+        </div>
+        <div class="result">
+          <strong>결과 · 부분 실패에서도 기존 결과 보존</strong>
+          <p>
+            생성·편집 요청부터 비동기 실행과 결과 알림까지 연결하고, 실패 시
+            기존 결과와 단계별 처리 이력을 남기도록 개선했습니다. 배너 기능의
+            백엔드와 DEV·RC 배포 자동화를 담당했습니다.
+          </p>
+        </div>
+        <p class="caption">Live 배포는 별도 운영 팀이 담당했습니다.</p>
+        <p class="small">
+          <a href="https://jaerrylee.github.io/posts/vaetki-banner-backend/"
+            >설계 기록 · 비동기 작업과 크레딧 처리 ↗</a
+          >
+        </p>
+      </main>
+      <footer class="page-footer">
+        <span>LEE JUNGJAE · 포트폴리오</span><span>02 / 04</span>
+      </footer>
+    </section>
+    <!-- PAGE 3: 이 section 안의 제목과 본문을 직접 수정하세요. -->
+    <section class="page">
+      <header class="page-header">
+        <b>이정재 · 포트폴리오</b
+        ><span>카카오페이 / 데이터 엔지니어 - 데이터 플랫폼</span>
+      </header>
+      <main class="page-body">
+        <p class="eyebrow">03 / OBSERVABILITY</p>
+        <h1>LLM Ops</h1>
+        <p class="lead">
+          분산된 로그와 호출을<br />하나의 요청 문맥으로 연결했습니다.
+        </p>
+        <p class="meta">
+          NC AI · 현재 업무 / 표준 계측 통합, 문맥 전파, 수집 경로와 배포 설정
+        </p>
+        <div class="tags">
+          <span>OpenTelemetry</span><span>OTLP</span><span>FastAPI · httpx</span
+          ><span>HyperDX · ClickHouse</span>
+        </div>
+        <h3>문제</h3>
+        <p>
+          하나의 요청 안에서 API, 에이전트, 모델과 도구가 여러 번 호출됩니다.
+          전체 응답 시간만으로는 지연·오류가 발생한 위치를 구분하기 어려워
+          서비스 경계를 넘는 실행 연결이 필요했습니다.
+        </p>
+        <div class="flow">
+          <div>API · Agent<small>로그·트레이스·메트릭</small></div>
+          <span>→</span>
+          <div>OTLP Collector<small>수집 경로</small></div>
+          <span>→</span>
+          <div>ClickHouse<small>저장</small></div>
+          <span>→</span>
+          <div>HyperDX<small>실행 조회</small></div>
+        </div>
+        <p class="caption">
+          관측 데이터의 수집·저장·조회 경로를 단순화한 개념도입니다.
+        </p>
+        <h3>직접 구현한 설계</h3>
+        <ul>
+          <li>
+            <b>서비스 간 연결:</b> FastAPI·httpx 계측과 W3C trace
+            context·baggage 전파를 연결했습니다.
+          </li>
+          <li>
+            <b>하위 스팬 문맥:</b> 요청 범위의 속성을 ContextVar에 보관하고, 새
+            스팬에 요청·세션 문맥을 추가했습니다.
+          </li>
+          <li>
+            <b>로그와 트레이스 연계:</b> 표준 LoggingHandler를 연결해 활성
+            스팬의 trace ID·span ID로 오류와 호출을 함께 확인하도록 했습니다.
+          </li>
+          <li>
+            <b>환경별 설정:</b> stdout과 OTLP 경로, 초기화 설정 실패 처리,
+            콘텐츠 수집 옵션과 헬스체크 제외를 관리했습니다.
+          </li>
+        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>관측 신호</th>
+              <th>확인할 수 있는 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Trace</td>
+              <td>서비스·모델·도구의 호출 관계와 구간별 실행 시간</td>
+            </tr>
+            <tr>
+              <td>Log</td>
+              <td>오류 상세와 해당 실행의 요청·세션 문맥</td>
+            </tr>
+            <tr>
+              <td>Metric</td>
+              <td>내장 계측이 제공하는 토큰 사용량·비용·첫 응답 지연</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="result">
+          <strong>구현 결과</strong>
+          <p>
+            오류 로그에서 관련 실행을 찾고, 하위 모델·도구 호출의 문맥을 따라갈
+            수 있는 수집·조회 경로를 구성했습니다. 현재 이 관측 체계를
+            구축·운영하고 있습니다.
+          </p>
+        </div>
+        <p class="caption">
+          ContextVar는 별도 프로세스나 큐 경계를 자동으로 전파하지 않습니다.
+          수집한 지표와 실측 개선 성과는 구분합니다.
+        </p>
+        <p class="small">
+          <a href="https://jaerrylee.github.io/posts/llm-ops-opentelemetry/"
+            >설계 기록 · OpenTelemetry 로깅과 트레이싱 ↗</a
+          >
+        </p>
+      </main>
+      <footer class="page-footer">
+        <span>LEE JUNGJAE · 포트폴리오</span><span>03 / 04</span>
+      </footer>
+    </section>
+    <!-- PAGE 4: 이 section 안의 제목과 본문을 직접 수정하세요. -->
+    <section class="page">
+      <header class="page-header">
+        <b>이정재 · 포트폴리오</b
+        ><span>카카오페이 / 데이터 엔지니어 - 데이터 플랫폼</span>
+      </header>
+      <main class="page-body">
+        <p class="eyebrow">04 / ADDITIONAL EXPERIENCE</p>
+        <h1>데이터 이동에서<br />사용 가능한 도구까지</h1>
+        <h2>AWS DMS 기반 마이그레이션 PoC</h2>
+        <p class="meta">
+          LG CNS · Infra Architecture Team · 클라우드 아키텍트 인턴 / 2023.06 -
+          2023.08
+        </p>
+        <div class="flow">
+          <div>온프레미스 데이터</div>
+          <span>→</span>
+          <div>AWS DMS</div>
+          <span>→</span>
+          <div>Amazon RDS</div>
+        </div>
+        <p>
+          실시간 마이그레이션 PoC를 수행하고, Terraform 기반 멀티 환경 인프라와
+          고가용성·재해복구 구성에 참여했습니다. 데이터 이동과 실행 환경을 함께
+          다룬 경험입니다.
+        </p>
+        <p class="caption">
+          수행 범위는 PoC입니다. 실서비스 처리량이나 운영 성과로 확대해 표현하지
+          않았습니다.
+        </p>
+        <hr class="rule" />
+        <h2>호랑이사진관 · 비동기 이미지 처리</h2>
+        <p class="meta">
+          GDGoC KU · 2024.03 - 2024.09 / Backend &amp; Frontend Developer
+        </p>
+        <p>
+          약 1,000명 사용자의 AI 프로필 이미지 서비스에서 백엔드와 비동기 이미지
+          처리를 개발했습니다. RabbitMQ 기반 처리와 프론트엔드 연동, 인증·배포에
+          참여했습니다.
+        </p>
+        <div class="tags">
+          <span>NestJS</span><span>RabbitMQ</span><span>Next.js</span
+          ><span>Firestore</span>
+        </div>
+        <hr class="rule" />
+        <h2>AGP Note · AI 회의록 사이드 프로젝트</h2>
+        <p class="meta">
+          2026 / 회사에서 발견한 회의 정리 업무의 불편을 개선하기 위한 사이드
+          프로젝트
+        </p>
+        <p>
+          로컬 STT와 로컬 화자 분리 모델로 발언자별 전사를 생성하고,
+          OpenAI·Claude API와 호환되는 LLM 연동으로 회의 내용을 요약하도록
+          구현했습니다.
+        </p>
+        <ul>
+          <li>
+            전사 원문과 교정본을 보존하고, 요약에서 근거가 되는 전사를 확인하는
+            흐름을 구성했습니다.
+          </li>
+          <li>
+            MCP로 녹음 가져오기·전사·요약 저장·게시 기능을 연결하고,
+            Confluence·Jira 게시와 프로젝트별 접근 권한을 구현했습니다.
+          </li>
+          <li>
+            Tauri·Svelte·Rust·SQLite 앱과 Windows 설치·자동 업데이트를
+            구현했습니다.
+          </li>
+        </ul>
+        <p class="small">
+          <a href="https://jaerrylee.github.io/posts/agp-note-workflow/"
+            >설계 기록 · 회의 기록을 후속 업무로 연결하기 ↗</a
+          >
+        </p>
+        <div class="result">
+          <strong>공통으로 지키는 설계 기준</strong>
+          <p>
+            처리 결과와 상태를 구분하고, 실패 후 남은 데이터를 확인할 수 있게
+            만듭니다. 사용자가 결과를 검토하고 다음 업무로 이어갈 수 있는
+            흐름까지 연결합니다.
+          </p>
+        </div>
+      </main>
+      <footer class="page-footer">
+        <span>LEE JUNGJAE · 포트폴리오</span><span>04 / 04</span>
+      </footer>
+    </section>
+  </body>
+</html>
