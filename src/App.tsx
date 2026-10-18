@@ -218,11 +218,27 @@ function App() {
         </section>
 
         <section className="experience-section section" id="experience" aria-labelledby="experience-title">
-          <div className="section-heading"><h2 id="experience-title">{ko ? '경력' : 'Experience'}</h2></div>
+          <div className="section-heading"><h2 id="experience-title">{ko ? '경력 및 학력' : 'Experience & Education'}</h2></div>
           <div className="timeline">
             <article><div className="timeline-company"><h3>NC AI</h3><p>AI / Backend Engineer</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — {ko ? '현재' : 'Present'}</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '현재 업무와 이전 프로젝트' : 'Current work and previous projects'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
             <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
           </div>
+          <section className="education-block" aria-labelledby="education-title">
+            <h3 id="education-title">{ko ? '학력' : 'Education'}</h3>
+            <div className="timeline">
+              <article>
+                <div className="timeline-company">
+                  <h4>{ko ? '고려대학교' : 'Korea University'}</h4>
+                  <p>{ko ? '수학과 · 소프트웨어 벤처 융합전공' : 'Mathematics · Interdisciplinary Major in Software Venture'}</p>
+                  <span className="timeline-date">2019.03 — 2025.08 · {ko ? '학사 졸업' : 'Bachelor’s degree'}</span>
+                </div>
+                <div className="timeline-detail">
+                  <p>{ko ? '총 이수 학점: 146학점 · 전체 평균 평점: 3.33 / 4.50' : 'Total credits: 146 · Overall GPA: 3.33 / 4.50'}</p>
+                  <p>{ko ? '컴퓨터공학 전공과목: 54학점 · 전공 평점: 3.75 / 4.50' : 'Computer Science coursework: 54 credits · Coursework GPA: 3.75 / 4.50'}</p>
+                </div>
+              </article>
+            </div>
+          </section>
         </section>
 
         <section className="projects-section" id="projects" aria-labelledby="projects-title">
