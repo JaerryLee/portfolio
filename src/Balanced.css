@@ -35,8 +35,6 @@
   .project-bottom { margin-top:auto; padding-top:16px; border-top:1px solid #edf0f6; align-items:start; }
   .project-tech { font-size:.7rem; }
   .project-action { color:#3156ac; }
-  .core-toolkit { display:flex; flex-wrap:wrap; gap:8px; margin:20px 0; }
-  .core-toolkit span { border:1px solid var(--line); border-radius:6px; padding:9px 12px; color:#405475; background:#f0f3fa; font-size:.78rem; }
   .activity-layout { gap:32px; align-items:center; padding-block:28px; }
   .seminar-trigger { grid-template-columns:180px 1fr; padding:16px; border:1px solid var(--line); border-radius:10px; background:white; }
   .activity-image { width:180px; border-radius:6px; }
@@ -71,8 +69,6 @@
     .project-label { margin-bottom:10px; }
     .project-tech { max-width:none; flex:1; }
     .project-bottom { gap:12px; }
-    .core-toolkit { gap:6px; }
-    .core-toolkit span { font-size:.72rem; padding:8px 10px; }
     .activity-layout { padding-block:24px; }
     .seminar-trigger { grid-template-columns:100px minmax(0,1fr); padding:12px; gap:14px; }
     .activity-image { width:100px; }
@@ -85,3 +81,17 @@
 }
 
 @media screen and (max-width:700px) { .hero-intro .hero-scope { display:block; } }
+
+.skills-section { padding-block:36px; }
+.skills-overview { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:32px; padding:26px 0; border-top:1px solid var(--line); }
+.skills-overview article { min-width:0; }
+.skills-overview article+article { border-left:1px solid var(--line); padding-left:28px; }
+.skills-overview h3 { margin:0 0 14px; font-size:.95rem; line-height:1.6; color:var(--accent); }
+.skills-overview p { margin:4px 0 0; font-size:.85rem; color:var(--muted); line-height:1.9; }
+.skills-section .toolkit-disclosure { margin-top:0; }
+@media(max-width:700px) {
+  .skills-section { padding-block:30px; }
+  .skills-overview { grid-template-columns:1fr; gap:20px; padding:22px 0; }
+  .skills-overview article+article { border-left:0; padding-left:0; border-top:1px solid var(--line); padding-top:20px; }
+  .skills-overview h3 { margin-bottom:10px; }
+}

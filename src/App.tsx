@@ -224,14 +224,23 @@ function App() {
           <div className="project-stack">{companyProjects.map((project) => <ProjectCard key={project.id} project={project} locale={locale} />)}</div>
         </section>
 
+        <section className="skills-section section" id="skills" aria-labelledby="skills-title">
+          <div className="section-heading"><h2 id="skills-title">{ko ? '기술 역량' : 'Technical expertise'}</h2></div>
+          <div className="skills-overview">
+            <article><h3>Backend</h3><p>Python · FastAPI · TypeScript</p><p>{ko ? 'API 설계 · 비동기 처리' : 'API design · Asynchronous processing'}</p></article>
+            <article><h3>AI &amp; Agents</h3><p>{ko ? 'LLM 연동 · MCP' : 'LLM integration · MCP'}</p><p>{ko ? '검색 · 근거 검증' : 'Retrieval · Evidence verification'}</p></article>
+            <article><h3>Infra &amp; Observability</h3><p>AWS · Kubernetes</p><p>OpenTelemetry</p></article>
+          </div>
+          <details className="toolkit-disclosure"><summary>{ko ? '전체 기술·도구 보기' : 'View all technologies and tools'}</summary><div className="stack-grid">{stackGroups.map((group) => <article key={group.title}><h3>{group.title}</h3><p>{group.items.join(' / ')}</p></article>)}</div></details>
+        </section>
+
         <section className="experience-section section" id="experience" aria-labelledby="experience-title">
           <div className="section-heading"><h2 id="experience-title">{ko ? '경력' : 'Experience'}</h2></div>
           <div className="timeline">
             <article><div className="timeline-company"><h3>NC AI</h3><p>AI / Backend Engineer</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — {ko ? '현재' : 'Present'}</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '현재 업무와 이전 프로젝트' : 'Current work and previous projects'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
             <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
           </div>
-          <div className="core-toolkit" aria-label={ko ? '주요 기술' : 'Core technologies'}>{['Python / FastAPI', 'TypeScript', 'AI Agents / MCP', 'OpenTelemetry', 'AWS / Kubernetes'].map((item) => <span key={item}>{item}</span>)}</div>
-          <details className="toolkit-disclosure"><summary>{ko ? '사용한 기술과 도구 전체 보기' : 'Full technical toolkit'}</summary><div className="stack-grid">{stackGroups.map((group) => <article key={group.title}><h3>{group.title}</h3><p>{group.items.join(' / ')}</p></article>)}</div></details>
+
         </section>
 
         <section className="activities-section section" id="activities" aria-labelledby="activities-title">

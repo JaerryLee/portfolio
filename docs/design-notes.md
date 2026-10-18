@@ -122,3 +122,7 @@ Validation: build, lint and diff whitespace checks passed. Chrome verified Korea
 Replaced the company-specific hero copy with the requested formal AI / Backend introduction in Korean and English. The second sentence remains visible on mobile. Added caseStudies.ts with background/scope, three or four titled implementation paragraphs and project status for seven projects. Sources: company-experience.md, preserved application documents and the existing processing-flow/original-image materials. Seminar source credits remain intact. Removed the print button, print lifecycle listeners, print-only contact text and dedicated print styles from the portfolio UI; standalone application documents retain their own independent controls.
 
 Validation: build/lint, all seven expanded dialogs on mobile, English Note detail, Escape/close, 390px dialog width and zero print buttons. Desktop and mobile detail layouts inspected; local preview remains on port 5173. Main and production remain unchanged.
+
+## Independent technical expertise section — 2026-10-18
+
+Moved the toolkit out of Experience into its own section between Selected work and Experience. Three concise groups (Backend, AI & Agents, Infra & Observability) replace the generic tags below LG CNS, with the complete tool inventory retained in a disclosure. Korean and English labels are provided; the three-column overview becomes a single column on mobile. Build, lint, desktop visual review, 390px width check and disclosure interaction passed. User requested deployment of the balanced revision and this follow-up.
