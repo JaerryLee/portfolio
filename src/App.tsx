@@ -98,7 +98,6 @@ const pageCopy = {
       '학회 핵심 프로젝트 주도 개발 및 기술 리드 참여',
     ],
     activityAlt: 'GDGoC 클라우드 및 AI 세미나 자료',
-    contactTitle: '함께 더 나은\n시스템을 만들어요.',
     currentWork: {
       label: '현재 업무',
       title: 'AGP Wiki · 근거 기반 지식 도구',
@@ -138,7 +137,6 @@ const pageCopy = {
       'Led core community projects and contributed as a technical lead',
     ],
     activityAlt: 'GDGoC cloud and AI seminar materials',
-    contactTitle: 'Let’s build better\nsystems together.',
     currentWork: {
       label: 'Current work',
       title: 'AGP Wiki · Source-grounded Knowledge',
@@ -250,10 +248,6 @@ function App() {
           </div>
           <div className="community-projects"><div className="project-stack">{projects.filter((project) => project.category === 'community' && project.id !== 'gdg-website').map((project) => <ProjectCard key={project.id} project={project} locale={locale} />)}</div></div>
           <aside className="community-appendix"><a className="community-website-link" href="#project/gdg-website" aria-haspopup="dialog">GDG KU Website</a><p>{ko ? '회원 활동·일정·운영자 관리를 위한 풀스택 웹사이트. 기술과 구현 내용 보기.' : 'A full-stack website for activities, schedules and administration. View technologies and implementation.'}</p></aside>
-        </section>
-        <section className="contact-section section" id="contact" aria-labelledby="contact-title">
-          <div><p>{ko ? '함께 일할 기회와 기술 이야기' : 'Opportunities and engineering conversations'}</p><h2 id="contact-title">{ko ? '함께 더 나은 시스템을 만들어요.' : 'Let’s build better systems together.'}</h2></div>
-          <a href="mailto:jerrylee1516@gmail.com">{ko ? '이메일로 연락하기' : 'Get in touch'} <span aria-hidden="true">↗</span></a>
         </section>
       </main>
 
