@@ -1,7 +1,8 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState, type CSSProperties } from 'react'
 import { projectsKo, projectsEn, seminarKo, seminarEn, type Project } from './projects'
 import { blogUrl } from './links'
 import './App.css'
+import './Balanced.css'
 
 const ProjectCaseStudy = lazy(() => import('./ProjectCaseStudy'))
 
@@ -161,7 +162,7 @@ const projectFocus: Record<string, { ko: string[]; en: string[] }> = {
 function ProjectCard({ project, locale }: { project: Project; locale: Locale }) {
   const community = project.category === 'community'
   return (
-    <article className={`project-card${community ? ' community-project' : ''}`}>
+    <article className={`project-card${community ? ' community-project' : ''}`} style={{ '--project-color': project.color, '--project-ink': project.ink } as CSSProperties}>
       <a className="project-cover" href={`#project/${project.id}`} aria-haspopup="dialog" onClick={(event) => {
         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
         event.preventDefault()
@@ -169,6 +170,7 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
         window.dispatchEvent(new HashChangeEvent('hashchange'))
       }}>
         <div className="project-heading">
+          <span className="project-label">{project.label}</span>
           <h3 className="project-title">{project.title}</h3>
           <p className="project-role">{project.role}</p>
           {!community && <p className="project-period">{project.period}</p>}
@@ -213,9 +215,9 @@ function App() {
       </header>
       <main id="top" tabIndex={-1}>
         <section className="hero-section" aria-labelledby="hero-title">
-          <div className="hero-identity"><h1 id="hero-title">{ko ? '이정재' : 'Jungjae Lee'}</h1><p className="hero-role">AI / Backend Engineer</p></div>
+          <div className="hero-identity"><p className="hero-eyebrow">{ko ? '기술을 제품으로, 문제를 시스템으로.' : 'Technology into products.'}</p><h1 id="hero-title">{ko ? '이정재' : 'Jungjae Lee'}</h1><p className="hero-role">AI / Backend Engineer</p></div>
           <p className="print-contact">jerrylee1516@gmail.com / github.com/JaerryLee</p>
-          <div className="hero-intro"><p>{ko ? 'NC AI에서 AI 제품의 백엔드를 개발합니다. 현재 AGP Wiki의 문서 수집·복구와 근거 검증을 담당하고 있습니다.' : 'I develop AI product backends at NC AI. My current work on AGP Wiki covers document ingestion, recovery and source evidence checks.'}</p><p className="hero-scope">{ko ? '에이전트 실행, 비동기 작업, 관측 체계를 실제 업무 흐름에 연결해 왔습니다.' : 'My experience connects agent execution, asynchronous workloads and observability to working products.'}</p><div className="hero-links"><a href="mailto:jerrylee1516@gmail.com">Email</a><a href="https://github.com/JaerryLee" target="_blank" rel="noopener noreferrer">GitHub</a>{profileLinks.map((link) => <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">{link.label === 'Tech Blog' && ko ? '기술 블로그' : link.label}</a>)}</div></div>
+          <div className="hero-intro"><p>{ko ? 'NC AI에서 AI 제품의 백엔드를 개발합니다. 현재 AGP Wiki의 문서 수집·복구와 근거 검증을 담당하고 있습니다.' : 'I develop AI product backends at NC AI. My current work on AGP Wiki covers document ingestion, recovery and source evidence checks.'}</p><p className="hero-scope">{ko ? '에이전트 실행, 비동기 작업, 관측 체계를 실제 업무 흐름에 연결해 왔습니다.' : 'My experience connects agent execution, asynchronous workloads and observability to working products.'}</p><div className="hero-links"><a href="mailto:jerrylee1516@gmail.com">Email</a><a href="https://github.com/JaerryLee" target="_blank" rel="noopener noreferrer">GitHub</a>{profileLinks.map((link) => <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">{link.label === 'Tech Blog' && ko ? '기술 블로그' : link.label}</a>)}</div><a className="hero-work-link" href="#projects">{ko ? '프로젝트 살펴보기' : 'Explore selected work'} <span aria-hidden="true">↓</span></a></div>
         </section>
 
         <section className="projects-section" id="projects" aria-labelledby="projects-title">
@@ -229,6 +231,7 @@ function App() {
             <article><div className="timeline-company"><h3>NC AI</h3><p>AI / Backend Engineer</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — {ko ? '현재' : 'Present'}</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '현재 업무와 이전 프로젝트' : 'Current work and previous projects'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
             <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
           </div>
+          <div className="core-toolkit" aria-label={ko ? '주요 기술' : 'Core technologies'}>{['Python / FastAPI', 'TypeScript', 'AI Agents / MCP', 'OpenTelemetry', 'AWS / Kubernetes'].map((item) => <span key={item}>{item}</span>)}</div>
           <details className="toolkit-disclosure"><summary>{ko ? '사용한 기술과 도구 전체 보기' : 'Full technical toolkit'}</summary><div className="stack-grid">{stackGroups.map((group) => <article key={group.title}><h3>{group.title}</h3><p>{group.items.join(' / ')}</p></article>)}</div></details>
         </section>
 
@@ -240,9 +243,13 @@ function App() {
           <div className="community-projects"><div className="project-stack">{projects.filter((project) => project.category === 'community' && project.id !== 'gdg-website').map((project) => <ProjectCard key={project.id} project={project} locale={locale} />)}</div></div>
           <aside className="community-appendix"><a className="community-website-link" href="#project/gdg-website" aria-haspopup="dialog">GDG KU Website</a><p>{ko ? '회원 활동·일정·운영자 관리를 위한 풀스택 웹사이트. 기술과 구현 내용 보기.' : 'A full-stack website for activities, schedules and administration. View technologies and implementation.'}</p></aside>
         </section>
+        <section className="contact-section section" id="contact" aria-labelledby="contact-title">
+          <div><p>{ko ? '함께 일할 기회와 기술 이야기' : 'Opportunities and engineering conversations'}</p><h2 id="contact-title">{ko ? '함께 더 나은 시스템을 만들어요.' : 'Let’s build better systems together.'}</h2></div>
+          <a href="mailto:jerrylee1516@gmail.com">{ko ? '이메일로 연락하기' : 'Get in touch'} <span aria-hidden="true">↗</span></a>
+        </section>
       </main>
 
-      <footer id="contact"><span>{ko ? '이정재' : 'Jungjae Lee'} / Seoul</span><a href="mailto:jerrylee1516@gmail.com">jerrylee1516@gmail.com</a><a href="#top">{ko ? '맨 위로' : 'Back to top'}</a></footer>
+      <footer><span>{ko ? '이정재' : 'Jungjae Lee'} / Seoul</span><a href="mailto:jerrylee1516@gmail.com">jerrylee1516@gmail.com</a><a href="#top">{ko ? '맨 위로' : 'Back to top'}</a></footer>
       {selectedProject && <Suspense fallback={<div className="case-loading" role="status">{ko ? '상세를 여는 중…' : 'Opening details…'}<button onClick={closeProject}>{ko ? '취소' : 'Cancel'}</button></div>}><ProjectCaseStudy key={selectedProject.id} project={selectedProject} locale={locale} onClose={closeProject} /></Suspense>}
     </>
   )
