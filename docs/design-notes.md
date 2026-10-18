@@ -116,3 +116,9 @@ Visual review also aligned Rendi flow headings with the original FastAPI → Azu
 Branch: feat/portfolio-balanced-design. Restore a compact blue/purple introduction and project-specific color bars while retaining the hiring-focused summaries, native case-study dialogs, source materials and language routes. Company work uses two columns on desktop and one on mobile. Community previews are larger; a concise core toolkit and contact section improve scanning and navigation. Balanced.css contains the screen presentation layer; print retains the existing document layout. No new dependencies or generated assets.
 
 Validation: build, lint and diff whitespace checks passed. Chrome verified Korean desktop and 390px, English 320px and 768px, no page-width overflow, VAETKI dialog open/close, and lazy-loaded community images. No browser console errors observed. Local preview: http://127.0.0.1:5173/. Main and production deployment remain unchanged during comparison.
+
+## Expanded case studies and introduction — 2026-10-18
+
+Replaced the company-specific hero copy with the requested formal AI / Backend introduction in Korean and English. The second sentence remains visible on mobile. Added caseStudies.ts with background/scope, three or four titled implementation paragraphs and project status for seven projects. Sources: company-experience.md, preserved application documents and the existing processing-flow/original-image materials. Seminar source credits remain intact. Removed the print button, print lifecycle listeners, print-only contact text and dedicated print styles from the portfolio UI; standalone application documents retain their own independent controls.
+
+Validation: build/lint, all seven expanded dialogs on mobile, English Note detail, Escape/close, 390px dialog width and zero print buttons. Desktop and mobile detail layouts inspected; local preview remains on port 5173. Main and production remain unchanged.

@@ -83,4 +83,5 @@
     .contact-section>a { width:100%; }
   }
 }
-@media print { .hero-eyebrow,.hero-work-link,.project-label,.core-toolkit,.contact-section { display:none!important; } }
+
+@media screen and (max-width:700px) { .hero-intro .hero-scope { display:block; } }

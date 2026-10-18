@@ -1,6 +1,7 @@
 import { useEffect, useRef, type CSSProperties } from 'react'
 import type { Project } from './projects'
 import { blogPostUrl } from './links'
+import { caseStudies } from './caseStudies'
 
 const flows: Record<string, { ko: string[]; en: string[] }> = {
   'agp-wiki': { ko: ['문서 수집', '분류 검증 · 복구', 'FTS5 / BM25', '근거 확인 · 응답'], en: ['Ingest documents', 'Validate · recover', 'FTS5 / BM25', 'Verify · answer'] },
@@ -42,28 +43,7 @@ export default function ProjectCaseStudy({ project, locale, onClose }: { project
     element?.showModal()
     title.current?.focus({ preventScroll: true })
     document.body.style.overflow = 'hidden'
-    const printMedia = window.matchMedia('print')
-    const preparePrint = () => {
-      if (!element || element.dataset.printing) return
-      element.dataset.printing = 'true'
-      element.close()
-      element.setAttribute('open', '')
-    }
-    const finishPrint = () => {
-      if (!element?.dataset.printing) return
-      delete element.dataset.printing
-      element.removeAttribute('open')
-      element.showModal()
-      title.current?.focus({ preventScroll: true })
-    }
-    const syncPrint = (event: MediaQueryListEvent) => { if (event.matches) preparePrint(); else finishPrint() }
-    window.addEventListener('beforeprint', preparePrint)
-    window.addEventListener('afterprint', finishPrint)
-    printMedia.addEventListener('change', syncPrint)
     return () => {
-      window.removeEventListener('beforeprint', preparePrint)
-      window.removeEventListener('afterprint', finishPrint)
-      printMedia.removeEventListener('change', syncPrint)
       element?.removeEventListener('keydown', trapFocus)
       element?.close()
       document.body.style.overflow = previousOverflow
@@ -71,15 +51,18 @@ export default function ProjectCaseStudy({ project, locale, onClose }: { project
       target?.focus({ preventScroll: true })
     }
   }, [project.id])
+  const detail = caseStudies[project.id]?.[locale]
   const architecture = flowDetails[project.id]
   const steps = flows[project.id]?.[locale] ?? project.tech
   return (
     <dialog ref={dialog} className="case-study" aria-labelledby="case-title" onCancel={(event) => { event.preventDefault(); onClose() }} style={{ '--case-accent': project.color } as CSSProperties}>
-      <div className="case-toolbar"><span>{ko ? '프로젝트 상세' : 'Case study'}</span><button type="button" onClick={() => window.print()}>{ko ? '인쇄' : 'Print'}</button><button type="button" onClick={onClose} aria-label={ko ? '프로젝트 닫기' : 'Close project'}>{ko ? '닫기' : 'Close'} <span aria-hidden="true">×</span></button></div>
+      <div className="case-toolbar"><span>{ko ? '프로젝트 상세' : 'Case study'}</span><button type="button" onClick={onClose} aria-label={ko ? '프로젝트 닫기' : 'Close project'}>{ko ? '닫기' : 'Close'} <span aria-hidden="true">×</span></button></div>
       <div className="case-content">
         <header className="case-header"><p>{project.label}</p><h1 id="case-title" ref={title} tabIndex={-1}>{project.title}</h1><p className="case-summary">{project.summary}</p></header>
         <dl className="case-meta"><div><dt>{ko ? '기간' : 'Period'}</dt><dd>{project.period}</dd></div><div><dt>{ko ? '내 역할' : 'My role'}</dt><dd>{project.role}</dd></div>{(project.award || project.id === 'tiger') && <div><dt>{ko ? '수상 · 이용' : 'Award / usage'}</dt><dd>{project.award ?? project.metric}</dd></div>}</dl>
-        <div className="case-columns"><section aria-labelledby="case-contribution-title"><div className="case-section-heading"><span>02</span><h2 id="case-contribution-title">{isSeminar ? (ko ? '역할과 자료 표기' : 'Role and source credits') : (ko ? '담당한 구현과 기술 판단' : 'My implementation and technical decisions')}</h2></div><ol className="contribution-list">{project.contributions.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol></section><aside aria-labelledby="case-tools-title"><h2 id="case-tools-title">{isSeminar ? (ko ? '다룬 기술과 주제' : 'Technologies and topics') : (ko ? '사용한 기술' : 'Technology')}</h2><div className="tag-list">{project.tech.map((tech) => <span key={tech}>{tech}</span>)}</div><div className="case-resources">{project.blogPost && <a href={blogPostUrl(project.blogPost)} target="_blank" rel="noopener noreferrer">{ko ? '설계 · 구현 기록 읽기' : 'Read engineering notes (Korean)'} <span aria-hidden="true">↗</span></a>}{project.href && <a href={project.href} target="_blank" rel="noopener noreferrer">{isSeminar ? (ko ? '원본 자료 열기' : 'Open source material') : (ko ? '서비스 방문' : 'Visit service')} <span aria-hidden="true">↗</span></a>}</div></aside></div>
+        {detail && <section className="case-context" aria-labelledby="case-context-title"><h2 id="case-context-title">{ko ? '프로젝트 배경과 담당 범위' : 'Context and scope'}</h2><p>{detail.context}</p></section>}
+        <div className="case-columns"><section aria-labelledby="case-contribution-title"><div className="case-section-heading"><span>02</span><h2 id="case-contribution-title">{isSeminar ? (ko ? '역할과 자료 표기' : 'Role and source credits') : (ko ? '담당한 구현과 기술 판단' : 'My implementation and technical decisions')}</h2></div>{detail ? <div className="implementation-details">{detail.sections.map((section) => <article key={section.title}><h3>{section.title}</h3><p>{section.body}</p></article>)}</div> : <ol className="contribution-list">{project.contributions.map((item) => <li key={item}><p>{item}</p></li>)}</ol>}</section><aside aria-labelledby="case-tools-title"><h2 id="case-tools-title">{isSeminar ? (ko ? '다룬 기술과 주제' : 'Technologies and topics') : (ko ? '사용한 기술' : 'Technology')}</h2><div className="tag-list">{project.tech.map((tech) => <span key={tech}>{tech}</span>)}</div><div className="case-resources">{project.blogPost && <a href={blogPostUrl(project.blogPost)} target="_blank" rel="noopener noreferrer">{ko ? '설계 · 구현 기록 읽기' : 'Read engineering notes (Korean)'} <span aria-hidden="true">↗</span></a>}{project.href && <a href={project.href} target="_blank" rel="noopener noreferrer">{isSeminar ? (ko ? '원본 자료 열기' : 'Open source material') : (ko ? '서비스 방문' : 'Visit service')} <span aria-hidden="true">↗</span></a>}</div></aside></div>
+        {detail && <section className="case-outcome" aria-labelledby="case-outcome-title"><h2 id="case-outcome-title">{ko ? '구현 결과와 진행 상태' : 'Implementation and project status'}</h2><p>{detail.outcome}</p></section>}
         {isSeminar ? <section className="seminar-topics" aria-labelledby="seminar-topics-title">
           <h2 id="seminar-topics-title">{ko ? '자료에서 확인되는 세션 주제' : 'Session topics in the source materials'}</h2>
           <article><h3>{ko ? '클라우드 서비스와 인프라 실습' : 'Cloud services and infrastructure'}</h3><p>{ko ? 'AWS·GCP, Terraform을 활용한 멀티클라우드 IaC, CodePipeline·CodeBuild·Cloud Build 기반 CI/CD, IAM, 모니터링·운영, 실전 팁과 트러블슈팅.' : 'AWS / GCP, multicloud IaC with Terraform, CI/CD using CodePipeline, CodeBuild and Cloud Build, IAM, monitoring, operations and troubleshooting.'}</p></article>
