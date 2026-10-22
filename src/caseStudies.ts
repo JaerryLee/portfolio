@@ -6,6 +6,52 @@ type CaseStudy = {
 
 // Expanded from company-experience.md, the preserved application documents and project source materials.
 export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
+  'dainos-finder': {
+  "ko": {
+    "context": "독소조항 탐지 결과만으로는 실제 계약 검토를 마치기 어렵습니다. 여러 계약 문서의 우선순위와 충돌, 적용할 문안, 위험에 대한 대응과 사람의 결정을 함께 추적해야 합니다. 기존 독소조항 탐지 프로젝트에서 출발해 문서 등록부터 대응안 검사·최종 승인까지 하나의 검토 흐름으로 확장하고 있습니다.",
+    "sections": [
+      {
+        "title": "맡은 범위 · 계약 검토 웹과 API",
+        "body": "React·TypeScript 웹과 FastAPI API에서 문서 등록·조항 분할·문서 관계와 충돌 결정·수동 태그 확정·판정 기록·집계·대응 검사·승인과 반려를 연결했습니다. 초안과 승인 당시 문안을 보존하고, 웹의 Agent 실행·SSE 수신·취소·오류 처리, 원문을 유지하는 번역 보기와 세션 로그인도 구현했습니다. 판정 Agent 내부의 그래프·도구·모델 구현은 별도 담당 범위입니다."
+      },
+      {
+        "title": "설계 판단 · 상태 정합성과 오래된 입력 거부",
+        "body": "검토 단계와 상태의 정본을 PostgreSQL과 API에 두고, 변경 시 행 잠금 안에서 단계 조건을 다시 확인합니다. 사람의 편집은 실행 버전, Agent의 기록은 판정 입력 버전을 검사해 오래된 입력이 새 상태를 덮어쓰지 않도록 했습니다. 같은 요청의 재전달도 중복 키와 입력을 대조해 처리합니다."
+      },
+      {
+        "title": "설계 판단 · 근거와 사람의 결정 보존",
+        "body": "판정 근거와 원문 위치를 검증하고, 미결정 충돌·보류와 대응 누락을 단계 진행 조건으로 다룹니다. 반려 시 초안을 유지하고 승인 당시 문안을 남겨 결정의 맥락을 다시 확인하도록 했습니다. 웹·API·Agent는 HTTP/SSE 계약으로 연결하고, 번역 결과는 별도로 저장해 원문과 판정 입력을 바꾸지 않습니다."
+      },
+      {
+        "title": "LLMOps · 팀의 GPU 모델 서빙과 제품 연동",
+        "body": "팀에서 vLLM으로 사내 VAETKI LLM을 서빙하고 LiteLLM으로 모델 호출을 라우팅해 Finder에서 활용했습니다. 저는 웹·API의 모델 호출과 페이지 번역 결과 저장·재사용을 연동했습니다."
+      }
+    ],
+    "outcome": "R0 웹·API 구현과 합성 문서·고정 Agent 응답을 이용한 자동 회귀 검증을 제공했습니다. 실제 판정 Agent 통합과 사용자 수동 인수는 진행 중이며 전체 서비스 완료를 뜻하지 않습니다. 판정 Agent 골격은 팀의 다른 담당자가 구현했습니다. 번역 연결·저장 재사용은 확인했지만 장문 계약의 번역 품질 인수는 남아 있습니다."
+  },
+  "en": {
+    "context": "Detecting risky clauses alone does not complete a contract review. Reviewers also need to resolve precedence and conflicts across documents, decide which wording applies, and track responses and human decisions. Building on an earlier risky-clause detection project, Finder extends the workflow from document registration to response checks and final approval.",
+    "sections": [
+      {
+        "title": "My scope · Contract review web and API",
+        "body": "Implemented the React / TypeScript web and FastAPI workflow for document registration, clause splitting, document relationships and conflict decisions, manual tags, verdict records, aggregation, response checks, approval and rejection. Preserved drafts and approved wording, and added Agent execution / SSE reception, cancellation and error handling, source-preserving translation views and session login. The Agent graph, tools and model implementation belong to a separate contributor."
+      },
+      {
+        "title": "Design · Consistent state and stale-input rejection",
+        "body": "PostgreSQL and the API own review state and stage transitions. Each mutation rechecks stage conditions under a row lock. Human edits validate the run revision; Agent records validate the verdict-input version so stale inputs cannot overwrite newer state. Repeated requests are checked against their idempotency key and payload."
+      },
+      {
+        "title": "Design · Evidence and human decisions",
+        "body": "Validated evidence and source locations, and gated progress on unresolved conflicts, holds and missing responses. Rejection preserves drafts, while approval retains the wording reviewed at that time. HTTP / SSE contracts separate the web, API and Agent. Translation is stored separately and leaves originals and verdict inputs unchanged."
+      },
+      {
+        "title": "LLMOps · Team GPU serving and product integration",
+        "body": "The team served the internal VAETKI LLM with vLLM and routed model calls through LiteLLM for use in Finder. I integrated model calls and the storage and reuse of page translations in the web / API workflow."
+      }
+    ],
+    "outcome": "Implemented the R0 web / API workflow with automated regression coverage using synthetic documents and fixed Agent responses. Live verdict-Agent integration and manual user acceptance are in progress; the full service is not complete. A separate team contributor implemented the Agent scaffold. Translation connectivity and stored-result reuse were verified; acceptance of long-contract translation quality remains."
+  }
+},
   'agp-wiki': {
   "ko": {
     "context": "흩어진 메일·대화·문서에서 업무 상태와 변경 이유를 찾기 어려웠습니다. 기존 Dainos MVP는 이메일 기반 업무 지식화·질의 동작을 확인한 뒤 종료했고 사용자 알파는 진행하지 않았습니다. 후속 Wiki는 PC 문서의 원문 보존, 주제별 지식 정리와 출처 확인에 집중했습니다.",

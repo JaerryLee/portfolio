@@ -22,7 +22,7 @@ const stackGroups = [
   },
   {
     title: 'LLM Ops & Observability',
-    items: ['OpenTelemetry', 'OTLP', 'Distributed Tracing', 'Logs & Metrics', 'HyperDX', 'ClickHouse', 'Logfire', 'Opik'],
+    items: ['vLLM · Team GPU Serving', 'LiteLLM · Model Routing', 'VAETKI · Product Integration', 'OpenTelemetry', 'OTLP', 'Distributed Tracing', 'Logs & Metrics', 'HyperDX', 'ClickHouse', 'Logfire', 'Opik'],
   },
   {
     title: 'Applied AI',
@@ -149,6 +149,7 @@ const pageCopy = {
 } as const
 
 const projectFocus: Record<string, { ko: string[]; en: string[] }> = {
+  'dainos-finder': {"ko": ["계약 검토 웹·API, 근거·단계 검증과 초안·승인 이력 보존", "행 잠금·입력 버전 검사, SSE 취소·오류 처리, 번역·로그인 구현"], "en": ["Contract review web / API, evidence and stage checks, drafts and approval history", "Row locks, input-version checks, SSE cancellation / errors, translation and login"]},
   'agp-wiki': { ko: ['중단 후 복구 가능한 문서 수집과 분류 검증', '파일·인용·날짜 근거 확인 및 Linux·Windows 회귀 검증'], en: ['Recoverable ingestion and classification validation', 'Source, quotation and date checks; Linux / Windows regression validation'] },
   vaetki: { ko: ['배너 생성·편집 API와 AI 서비스 연동', '시안별 잠금·버전 갱신·크레딧 처리와 부분 실패 복구'], en: ['Banner generation / editing APIs and AI integration', 'Variation locks, version updates, credits and partial-failure recovery'] },
   'agp-note': { ko: ['전사 근거·회의 문맥 연결, 게시 전 검토와 로컬 기록 보존', 'MCP 권한, 외부 AI 전송 경계와 설치·업데이트 흐름'], en: ['Source-linked summaries, publishing review and local record preservation', 'MCP permissions, AI transfer boundaries, installation and updates'] },
@@ -203,7 +204,7 @@ function App() {
     else { history.replaceState(null, '', selectedProject?.category === 'community' ? '#activities' : '#projects'); setProjectId('') }
   }
   const languageHref = ko ? asset('en/') : asset('')
-  const companyProjects = ['agp-wiki', 'vaetki', 'agp-note', 'dainos'].map((id) => projects.find((project) => project.id === id)!).filter(Boolean)
+  const companyProjects = ['dainos-finder', 'agp-wiki', 'vaetki', 'agp-note', 'dainos'].map((id) => projects.find((project) => project.id === id)!).filter(Boolean)
   return (
     <>
       <a className="skip-link" href="#top">{ko ? '본문으로 이동' : 'Skip to content'}</a>

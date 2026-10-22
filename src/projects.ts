@@ -24,6 +24,31 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`
 
 export const projectsKo: Project[] = [
   {
+  "id": "dainos-finder",
+  "category": "company",
+  "index": "07",
+  "title": "Dainos Finder",
+  "label": "NC AI · Contract Review Workflow",
+  "period": "2026.10 · 개발 중",
+  "role": "팀 개발 · 계약 검토 웹·API",
+  "summary": "독소조항 탐지에서 출발해 문서 간 충돌 확인부터 대응안 검토·승인까지 연결하는 계약 검토 서비스를 개발하고 있습니다.",
+  "tech": [
+    "React · TypeScript",
+    "FastAPI",
+    "PostgreSQL",
+    "HTTP · SSE",
+    "vLLM · Team GPU Serving",
+    "LiteLLM"
+  ],
+  "contributions": [
+    "계약 검토 웹·API, 근거·단계 검증과 초안·승인 이력 보존",
+    "행 잠금·입력 버전 검사, SSE 취소·오류 처리, 번역·로그인 구현"
+  ],
+  "color": "#f2e9db",
+  "ink": "#493323",
+  "metric": "위험 후보에서 검토·승인 이력까지"
+},
+  {
     id: 'agp-wiki',
     category: 'company',
     index: '00',
@@ -163,6 +188,31 @@ export const projectsKo: Project[] = [
 ]
 
 export const projectsEn: Project[] = [
+  {
+  "id": "dainos-finder",
+  "category": "company",
+  "index": "07",
+  "title": "Dainos Finder",
+  "label": "NC AI · Contract Review Workflow",
+  "period": "2026.10 · In development",
+  "role": "Team contributor · Contract review web and API",
+  "summary": "Developing a contract review service that extends risky-clause detection into document conflict resolution, response review and approval.",
+  "tech": [
+    "React · TypeScript",
+    "FastAPI",
+    "PostgreSQL",
+    "HTTP · SSE",
+    "vLLM · Team GPU Serving",
+    "LiteLLM"
+  ],
+  "contributions": [
+    "Contract review web / API, evidence and stage checks, drafts and approval history",
+    "Row locks, input-version checks, SSE cancellation / errors, translation and login"
+  ],
+  "color": "#f2e9db",
+  "ink": "#493323",
+  "metric": "From risk candidates to review and approval history"
+},
   {
     id: 'agp-wiki',
     category: 'company',
