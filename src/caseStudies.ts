@@ -7,25 +7,35 @@ type CaseStudy = {
 // Expanded from company-experience.md, the preserved application documents and project source materials.
 export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
   'agp-wiki': {
-    ko: {
-      context: '로컬 문서를 정리하고 검색한 원문을 근거로 질문에 답하는 지식 도구입니다. 목표지향 업무 에이전트 PoC를 개발·인계한 뒤 후속 프로젝트로 팀과 개발하고 있으며, 문서 수집의 복구 가능성과 응답에 연결되는 근거의 검증을 담당하고 있습니다.',
-      sections: [
-        { title: '분류 제안 검증과 중단 후 복구', body: 'LLM이 제안한 문서 분류를 검증하고 문서 정리 작업이 중단된 뒤에도 이어갈 수 있는 처리 흐름을 구현했습니다. 작업 상태와 제한된 metadata 로그를 남기고, 오류별로 다음에 수행할 행동을 연결해 처리 과정과 복구 경로를 확인할 수 있도록 했습니다.' },
-        { title: '원문과 인용의 연결 확인', body: '인용 링크가 가리키는 파일의 지문을 확인하고, 인용문과 원문의 날짜·시각 근거를 다시 검사하도록 보완했습니다. 검색 결과가 존재하는 것과 실제 파일에서 답변의 근거를 확인할 수 있는 것을 구분해 다뤘습니다.' },
-        { title: '어휘 검색과 플랫폼별 검증', body: 'SQLite FTS5·BM25로 검색 후보를 조회하고, 후보 원문을 읽은 host LLM이 응답을 작성하는 흐름을 연결했습니다. Windows 파일 처리 경계를 보완하고 Linux·Windows 회귀를 검증했습니다.' },
-      ],
-      outcome: '문서 정리·상태 확인·중단 후 복구와 인용 근거 확인을 연결하고 있습니다. 검색은 어휘 검색 기반이며, 실제 host의 일부 UI 흐름과 플랫폼별 확인은 진행 중입니다.',
-    },
-    en: {
-      context: 'A local knowledge tool that organizes documents and answers questions using retrieved source material. Following the handover of a goal-oriented agent PoC, I contribute to the team’s follow-up project, focusing on recoverable ingestion and evidence verification.',
-      sections: [
-        { title: 'Classification validation and recovery', body: 'Implemented validation of LLM classification proposals and a document-processing workflow that can resume after interruption. Task states, limited metadata logs and error-specific next actions make progress and recovery paths inspectable.' },
-        { title: 'Verifying source references', body: 'Added file-fingerprint checks for citation links and rechecks of quotations and date/time evidence. Retrieval of a candidate and verification of its supporting source are treated as separate steps.' },
-        { title: 'Lexical retrieval and platform validation', body: 'Connected SQLite FTS5/BM25 candidate retrieval to host LLM answers grounded in the source documents. Addressed Windows file-handling boundaries and validated Linux and Windows regressions.' },
-      ],
-      outcome: 'Document organization, status inspection, recovery and citation checks are being integrated. Retrieval is lexical; some host UI flows and platform-specific checks remain in progress.',
-    },
+  "ko": {
+    "context": "흩어진 메일·대화·문서에서 업무 상태와 변경 이유를 찾기 어려웠습니다. 기존 Dainos MVP는 이메일 기반 업무 지식화·질의 동작을 확인한 뒤 종료했고 사용자 알파는 진행하지 않았습니다. 후속 Wiki는 PC 문서의 원문 보존, 주제별 지식 정리와 출처 확인에 집중했습니다.",
+    "sections": [
+      {
+        "title": "설계 선택",
+        "body": "원문과 변경 이력은 CAS·append-only Journal에 보존하고 SQLite는 재생성 가능한 검색 투영으로 둡니다. contentless FTS5·BM25로 후보를 찾은 뒤 특정 버전·구간 원문을 읽고 인용 문자열과 SHA-256을 확인합니다. LLM과 인증은 Codex·Claude 호스트가 맡습니다."
+      },
+      {
+        "title": "본인 기여",
+        "body": "LLM 분류 제안 검증, inbox·손상 큐의 보존과 복구, 원문·사본 SHA-256 및 인용·날짜 검증, 제한 로그, Windows 파일 처리와 Linux·Windows 회귀를 구현·보완했습니다. 검색 엔진과 저장 코어 전체는 팀 구현 범위입니다."
+      }
+    ],
+    "outcome": "팀 개발을 완료했습니다. 자동 회귀와 일부 실제 호스트 실행 기록을 확인했으며 플랫폼·GUI별 수동 확인은 일부 남아 있습니다. 검색 순위는 답의 신뢰도가 아니고 인용 일치는 의미적 정답을 보장하지 않습니다. --as-of는 문서 날짜 필터이며 과거 버전 질의가 아닙니다. 공개 출시·사용자 효과 검증 완료나 생산성 개선 수치는 주장하지 않습니다."
   },
+  "en": {
+    "context": "Scattered mail, conversations and documents made work status and reasons for changes hard to trace. The earlier Dainos MVP ended after verifying email-to-knowledge and question-answering flows, without a user alpha. The follow-up Wiki focuses on preserving local originals, topic-based knowledge and traceable sources.",
+    "sections": [
+      {
+        "title": "Design choices",
+        "body": "CAS and an append-only Journal preserve originals and changes; SQLite is a rebuildable search projection. Contentless FTS5 / BM25 retrieves candidates, followed by reads of exact versions and ranges, quotation checks and SHA-256 verification. Codex / Claude hosts own the LLM and authentication."
+      },
+      {
+        "title": "My contribution",
+        "body": "Implemented and hardened LLM classification validation, inbox and damaged-queue recovery, original / copy SHA-256 checks, citation and date evidence checks, limited logs, Windows file handling and Linux / Windows regressions. The full search and storage core is team work."
+      }
+    ],
+    "outcome": "Team development is complete. Automated regressions and selected live-host runs are documented; some platform and GUI checks remain. Search rank is not answer confidence, and quotation matching does not establish semantic correctness. --as-of filters document dates; it is not a historical-version query. Public launch, user impact and productivity gains have not been established."
+  }
+},
   'agp-note': {
     ko: {
       context: '회의 정리 과정의 불편을 개선하기 위해 단독 개발한 사내 사이드 프로젝트입니다. Tauri·Svelte·Rust·SQLite 기반의 로컬 우선 데스크톱 앱에서 음성 전사, 검토, 요약과 후속 업무 게시를 연결했습니다.',

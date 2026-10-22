@@ -73,12 +73,12 @@ const pageCopy = {
     navLabel: '주요 메뉴',
     heroLead: '기술을 제품으로,',
     heroEmphasis: '문제를 시스템으로.',
-    heroBody: 'AI를 실제 제품과 업무에 적용하는 AI / Backend Engineer 이정재입니다. 현재는 로컬 문서를 정리하고 원문 근거로 답하는 AGP Wiki를 개발하며, 에이전트 실행 기반과 관측 체계의 구현 경험을 제품에 연결합니다.',
+    heroBody: 'AI를 실제 제품과 업무에 적용하는 AI / Backend Engineer 이정재입니다. 로컬 문서 도구 Dainos Wiki의 팀 개발을 완료했으며, 에이전트 실행 기반과 관측 체계의 구현 경험을 제품에 연결합니다.',
     selectedProjects: 'Selected projects',
     profileTitle: 'AI를 제품으로 만들고,\n실행을 관측합니다.',
-    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 정부 과제의 목표지향 업무 에이전트 PoC에 기여했습니다. 해당 PoC를 개발·인계한 뒤 후속 AGP Wiki를 진행하고 있습니다. OpenTelemetry 기반 관측 체계 구현 경험을 바탕으로, AGP Wiki의 문서 수집·복구와 근거 검증을 개발하고 있습니다.',
+    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 정부 과제의 목표지향 업무 에이전트 PoC에 기여했습니다. 해당 PoC 후속으로 Dainos Wiki의 문서 수집·복구와 근거 검증을 구현해 팀 개발을 완료했습니다. 제품 구현과 사용자 효과 검증을 구분합니다.',
     ncDetails: [
-      '현재 · AGP Wiki 팀 개발 — 문서 수집·복구, 상태·로그와 인용·날짜 근거 검증',
+      '완료 · Dainos Wiki 팀 개발 — 문서 수집·복구, 상태·로그와 인용·날짜 근거 검증',
       '수행 경험 · LLM 실행 관측, AGP Note 단독 개발, VAETKI Commerce 배너 백엔드, Agent PoC·LLM Ops 통합'
     ],
     lgRole: '클라우드 아키텍처 인턴',
@@ -88,7 +88,7 @@ const pageCopy = {
       '고가용성·DR 구성 및 보안·관측 시스템 강화',
     ],
     projectsHelp: '프로젝트의 목적과 담당 역할을 소개합니다. 자세한 설계와 구현 경험은 테크 블로그에서 읽을 수 있습니다.',
-    companyDescription: '현재 진행 중인 AGP Wiki와 이전 프로젝트입니다. 팀 개발에서 맡은 구현 범위와 사내 사이드 프로젝트의 단독 개발을 구분했습니다.',
+    companyDescription: '개발을 완료한 Dainos Wiki와 이전 프로젝트입니다. 팀 개발에서 맡은 구현 범위와 사내 사이드 프로젝트의 단독 개발을 구분했습니다.',
     universityDescription:
       '학교와 개발자 커뮤니티에서 실시간 AI, 비동기 처리와 웹 플랫폼 프로젝트를 수행했습니다.',
     gdgRole: 'Backend & AI Core Member · 운영진',
@@ -99,9 +99,9 @@ const pageCopy = {
     ],
     activityAlt: 'GDGoC 클라우드 및 AI 세미나 자료',
     currentWork: {
-      label: '현재 업무',
-      title: 'AGP Wiki · 근거 기반 지식 도구',
-      summary: '정부 과제의 목표지향 업무 에이전트 PoC를 개발·인계한 뒤, 후속으로 LLM Wiki 문서 정리와 검색 근거 기반 RAG 응답을 결합한 도구를 팀과 개발합니다. 분류 제안 검증, 중단 후 복구, 상태·로그와 검증된 파일 링크를 구현하며, FTS5·BM25 어휘 검색과 host LLM 응답을 연결하고 실제 호스트의 미확인 범위를 구분합니다.',
+      label: '최근 프로젝트',
+      title: 'Dainos Wiki · 근거 기반 지식 도구',
+      summary: 'Codex·Claude에서 문서를 정리하고 원문 근거로 답하는 도구의 팀 개발을 완료했습니다. 분류 제안 검증, 수집·복구, 제한 로그와 인용·날짜 검증을 구현했습니다.',
     },
     blogLabel: '설계·구현 기록 읽기',
     contributionLabel: '담당 역할',
@@ -112,12 +112,12 @@ const pageCopy = {
     navLabel: 'Primary navigation',
     heroLead: 'Technology into products,',
     heroEmphasis: 'problems into systems.',
-    heroBody: 'I am Jungjae Lee, an AI / Backend Engineer turning AI into products and workflows. I currently develop AGP Wiki, a local document tool with source-grounded answers, building on experience in agent execution and observability.',
+    heroBody: 'I am Jungjae Lee, an AI / Backend Engineer turning AI into products and workflows. I completed my contribution to Dainos Wiki, a local document tool with source-grounded answers, building on experience in agent execution and observability.',
     selectedProjects: 'Selected projects',
     profileTitle: 'I build AI products\nand make their execution observable.',
-    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to a goal-oriented work agent PoC for a government project. After developing and handing over that PoC, I moved on to AGP Wiki. Drawing on OpenTelemetry integration experience, I now work on document ingestion, recovery, and evidence verification in AGP Wiki.',
+    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to a goal-oriented work agent PoC for a government project. After that PoC, I implemented document ingestion, recovery, and evidence checks for Dainos Wiki. Team development is complete; user impact remains unmeasured.',
     ncDetails: [
-      'Current · AGP Wiki team development: ingestion, recovery, status, logs, and source evidence verification',
+      'Completed · Dainos Wiki team development: ingestion, recovery, status, logs, and source evidence verification',
       'Experience · LLM observability, AGP Note sole development, VAETKI Commerce banner backend, and agent PoCs with LLM Ops integration'
     ],
     lgRole: 'Cloud Architecture Intern',
@@ -127,7 +127,7 @@ const pageCopy = {
       'Strengthened high availability, disaster recovery, security, and observability',
     ],
     projectsHelp: 'Explore each project’s purpose and my role. Detailed design and implementation notes are available on my tech blog.',
-    companyDescription: 'AGP Wiki is in progress alongside previous projects. Each entry distinguishes my team contribution from the internal side project I developed independently.',
+    companyDescription: 'Dainos Wiki development is complete, alongside the previous projects below. Each entry distinguishes my team contribution from the internal side project I developed independently.',
     universityDescription:
       'Developed real-time AI, asynchronous processing, and full-stack web projects at university and in the developer community.',
     gdgRole: 'Backend & AI Core Member · Organizer',
@@ -138,9 +138,9 @@ const pageCopy = {
     ],
     activityAlt: 'GDGoC cloud and AI seminar materials',
     currentWork: {
-      label: 'Current work',
-      title: 'AGP Wiki · Source-grounded Knowledge',
-      summary: 'Following the handover of a goal-oriented work agent PoC for a government project, I contribute to a local LLM Wiki and RAG workflow with FTS5/BM25 lexical retrieval and host LLM answers. My work covers classification validation, recovery, status and logs, and verified file links, with remaining host checks recorded separately.',
+      label: 'Recent project',
+      title: 'Dainos Wiki · Source-grounded Knowledge',
+      summary: 'Completed team development of a Codex / Claude document tool. I implemented classification validation, ingestion recovery, limited logs, and citation and date evidence checks.',
     },
     blogLabel: 'Read the engineering notes (Korean)',
     contributionLabel: 'Role overview',
@@ -174,7 +174,7 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
           {!community && <p className="project-period">{project.period}</p>}
         </div>
         <div className="project-cover-copy">
-          <p className="project-summary">{project.id === 'agp-wiki' ? (locale === 'ko' ? '로컬 문서를 정리하고 검색 근거로 답하는 LLM Wiki 도구를 팀과 개발하고 있습니다.' : 'Working with the team on a local LLM Wiki that organizes documents and answers with retrieved evidence.') : project.summary}</p>
+          <p className="project-summary">{project.id === 'agp-wiki' ? (locale === 'ko' ? '원문을 보존하고 출처 기반 답변을 연결하는 문서 도구의 팀 개발을 완료했습니다.' : 'Completed team development of a document tool preserving originals and linking answers to sources.') : project.summary}</p>
           <ul className="project-focus">{projectFocus[project.id]?.[locale].map((item) => <li key={item}>{item}</li>)}</ul>
           <div className="project-bottom"><span className="project-tech">{project.tech.join(' / ')}</span><span className="project-action">{locale === 'ko' ? '상세 보기' : 'Read more'}</span></div>
         </div>
