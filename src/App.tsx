@@ -256,7 +256,7 @@ function App() {
         </section>
 
         <section className="activities-section section" id="activities" aria-labelledby="activities-title">
-          <div className="section-heading"><h2 id="activities-title">GDGoC Korea University</h2><p>{ko ? '커뮤니티 활동' : 'Community'}</p></div>
+          <div className="section-heading"><h2 id="activities-title">Google Developer Groups on Campus Korea University</h2><p>{ko ? '커뮤니티 활동' : 'Community'}</p></div>
           <div className="activity-layout"><article className="activity-main"><strong>{t.gdgRole}</strong><p className="activity-period">{ko ? '2022년 하반기 — 2025.08' : 'H2 2022 — 2025.08'}</p><ul>{t.gdgActivities.map((activity) => <li key={activity}>{activity}</li>)}</ul></article>
             <button className="seminar-trigger" type="button" data-case-id="seminars" aria-haspopup="dialog" onClick={openSeminars}><img className="activity-image" src={asset('projects/seminar-generated.png')} alt={ko ? '클라우드·AI 학습을 표현한 AI 생성 개념 미리보기' : 'AI-generated concept preview of cloud and AI learning'} loading="lazy" /><span><strong>{ko ? '클라우드 · AI 세미나' : 'Cloud & AI seminars'}</strong><span>{ko ? 'AWS·GCP 인프라 실습, AI Week' : 'AWS / GCP workshops and AI Week'}</span><span className="project-action">{ko ? '주제와 역할 보기' : 'Topics and role'}</span></span></button>
           </div>
