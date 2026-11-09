@@ -41,11 +41,11 @@ const stackGroups = [
   },
   {
     title: 'Backend',
-    items: ['Python', 'TypeScript', 'FastAPI', 'NestJS', 'REST API', 'WebSocket', 'gRPC'],
+    items: ['Python', 'TypeScript', 'FastAPI', 'NestJS', 'REST API', 'WebSocket', 'SSE · Socket.IO'],
   },
   {
     title: 'Cloud & Infra',
-    items: ['Kubernetes', 'Helm', 'ArgoCD', 'AWS', 'GCP', 'Terraform', 'Docker Compose', 'GitLab CI/CD', 'Cloud Functions'],
+    items: ['Kubernetes', 'Helm', 'ArgoCD', 'AWS', 'GCP', 'Terraform', 'Docker Compose', 'Jenkins', 'Cloud Functions'],
   },
   {
     title: 'Data & Messaging',
@@ -57,8 +57,6 @@ const stackGroups = [
       'Firestore',
       'AWS RDS',
       'AWS DMS',
-      'Amazon EMR',
-      'Apache Kafka',
       'Redis',
       'Celery',
       'RabbitMQ',
@@ -73,35 +71,35 @@ const pageCopy = {
     navLabel: '주요 메뉴',
     heroLead: '기술을 제품으로,',
     heroEmphasis: '문제를 시스템으로.',
-    heroBody: 'AI를 실제 제품과 업무에 적용하는 AI / Backend Engineer 이정재입니다. 로컬 문서 도구 Dainos Wiki의 팀 개발을 완료했으며, 에이전트 실행 기반과 관측 체계의 구현 경험을 제품에 연결합니다.',
+    heroBody: 'AI를 실제 제품과 업무에 적용하는 AI / Backend Engineer 이정재입니다. 문서 도구 Dainos Wiki와 에이전트 플랫폼의 담당 기능을 구현했으며, 비동기 처리와 실행 관측 경험을 제품에 연결합니다.',
     selectedProjects: 'Selected projects',
     profileTitle: 'AI를 제품으로 만들고,\n실행을 관측합니다.',
-    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 정부 과제의 목표지향 업무 에이전트 PoC에 기여했습니다. 해당 PoC 후속으로 Dainos Wiki의 문서 수집·복구와 근거 검증을 구현해 팀 개발을 완료했습니다. 제품 구현과 사용자 효과 검증을 구분합니다.',
+    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 정부 과제의 목표지향 업무 에이전트 PoC에 기여했습니다. 후속 Dainos Wiki에서는 문서 수집·복구와 근거 검증을, Finder에서는 계약 검토 웹·API를 구현했습니다. NC AI 계약은 2026년 11월 1일 종료됐으며, 프로젝트 상태는 마지막 확인 시점을 기준으로 설명합니다.',
     ncDetails: [
-      '완료 · Dainos Wiki 팀 개발 — 문서 수집·복구, 상태·로그와 인용·날짜 근거 검증',
+      'Dainos Wiki 문서 수집·복구와 근거 검증, Finder 계약 검토 웹·API 구현',
       '수행 경험 · LLM 실행 관측, AGP Note 단독 개발, VAETKI Commerce 배너 백엔드, Agent PoC·LLM Ops 통합'
     ],
     lgRole: '클라우드 아키텍처 인턴',
     lgDetails: [
-      'Terraform 기반 Dev/Test/Staging/Prod 멀티 환경 IaC 구축',
-      'AWS DMS 기반 온프레미스 → RDS 실시간 마이그레이션 PoC',
-      '고가용성·DR 구성 및 보안·관측 시스템 강화',
+      '클라우드 아키텍처 모의업무에서 Terraform 기반 인프라 자동화 PoC 수행',
+      'AWS DMS·RDS 데이터베이스 마이그레이션 PoC',
+      'PoC의 데이터 복제·정합성과 모니터링 구성 검증',
     ],
     projectsHelp: '프로젝트의 목적과 담당 역할을 소개합니다. 자세한 설계와 구현 경험은 테크 블로그에서 읽을 수 있습니다.',
-    companyDescription: '개발을 완료한 Dainos Wiki와 이전 프로젝트입니다. 팀 개발에서 맡은 구현 범위와 사내 사이드 프로젝트의 단독 개발을 구분했습니다.',
+    companyDescription: 'NC AI 재직 중 참여한 프로젝트입니다. 팀에서 맡은 구현 범위와 사내 사이드 프로젝트의 단독 개발을 구분했습니다.',
     universityDescription:
       '학교와 개발자 커뮤니티에서 실시간 AI, 비동기 처리와 웹 플랫폼 프로젝트를 수행했습니다.',
     gdgRole: 'Backend & AI Core Member · 운영진',
     gdgActivities: [
       'AI 세미나 및 실습 프로젝트 기획·운영',
       'AWS·GCP 기반 클라우드 인프라 실습 워크숍 기획·운영',
-      '학회 핵심 프로젝트 주도 개발 및 기술 리드 참여',
+      'Rendi·호랑이사진관과 커뮤니티 웹사이트 개발 참여',
     ],
     activityAlt: 'GDGoC 클라우드 및 AI 세미나 자료',
     currentWork: {
       label: '최근 프로젝트',
       title: 'Dainos Wiki · 근거 기반 지식 도구',
-      summary: 'Codex·Claude에서 문서를 정리하고 원문 근거로 답하는 도구의 팀 개발을 완료했습니다. 분류 제안 검증, 수집·복구, 제한 로그와 인용·날짜 검증을 구현했습니다.',
+      summary: 'Dainos Wiki는 2026년 10월 기준 코어 개발이 완료됐고, GUI·플랫폼 검증 일부가 남아 있었습니다. 저는 분류 제안 검증, 수집·복구, 제한 로그와 인용·날짜 검증을 구현했습니다.',
     },
     blogLabel: '설계·구현 기록 읽기',
     contributionLabel: '담당 역할',
@@ -112,35 +110,35 @@ const pageCopy = {
     navLabel: 'Primary navigation',
     heroLead: 'Technology into products,',
     heroEmphasis: 'problems into systems.',
-    heroBody: 'I am Jungjae Lee, an AI / Backend Engineer turning AI into products and workflows. I completed my contribution to Dainos Wiki, a local document tool with source-grounded answers, building on experience in agent execution and observability.',
+    heroBody: 'I am Jungjae Lee, an AI / Backend Engineer turning AI into products and workflows. I implemented document ingestion, recovery and evidence checks for Dainos Wiki, alongside work on agent execution and observability.',
     selectedProjects: 'Selected projects',
     profileTitle: 'I build AI products\nand make their execution observable.',
-    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to a goal-oriented work agent PoC for a government project. After that PoC, I implemented document ingestion, recovery, and evidence checks for Dainos Wiki. Team development is complete; user impact remains unmeasured.',
+    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to a goal-oriented work agent PoC for a government project. I later implemented ingestion, recovery and evidence checks for Dainos Wiki, and the contract-review web and API for Finder. My NC AI contract ended on November 1, 2026; project status reflects the last verified records.',
     ncDetails: [
-      'Completed · Dainos Wiki team development: ingestion, recovery, status, logs, and source evidence verification',
+      'Implemented Dainos Wiki ingestion, recovery and evidence checks, and Finder contract-review web / API',
       'Experience · LLM observability, AGP Note sole development, VAETKI Commerce banner backend, and agent PoCs with LLM Ops integration'
     ],
     lgRole: 'Cloud Architecture Intern',
     lgDetails: [
-      'Automated Dev, Test, Staging, and Prod infrastructure with Terraform',
-      'Built an AWS DMS PoC for real-time on-premises to RDS migration',
-      'Strengthened high availability, disaster recovery, security, and observability',
+      'Built a Terraform infrastructure automation PoC during a cloud architecture internship simulation',
+      'Built an AWS DMS / RDS database migration PoC',
+      'Validated data replication, consistency and monitoring in the PoC',
     ],
     projectsHelp: 'Explore each project’s purpose and my role. Detailed design and implementation notes are available on my tech blog.',
-    companyDescription: 'Dainos Wiki development is complete, alongside the previous projects below. Each entry distinguishes my team contribution from the internal side project I developed independently.',
+    companyDescription: 'Projects from my time at NC AI. Each entry distinguishes my team contribution from the internal side project I developed independently.',
     universityDescription:
       'Developed real-time AI, asynchronous processing, and full-stack web projects at university and in the developer community.',
     gdgRole: 'Backend & AI Core Member · Organizer',
     gdgActivities: [
       'Planned and operated AI seminars and hands-on projects',
       'Designed and led AWS and GCP cloud infrastructure workshops',
-      'Led core community projects and contributed as a technical lead',
+      'Contributed to Rendi, Tiger Photo Studio and the community website',
     ],
     activityAlt: 'GDGoC cloud and AI seminar materials',
     currentWork: {
       label: 'Recent project',
       title: 'Dainos Wiki · Source-grounded Knowledge',
-      summary: 'Completed team development of a Codex / Claude document tool. I implemented classification validation, ingestion recovery, limited logs, and citation and date evidence checks.',
+      summary: 'As of October 2026, the Wiki core was complete with some GUI and platform checks remaining. I implemented classification validation, ingestion recovery, limited logs, and citation and date evidence checks.',
     },
     blogLabel: 'Read the engineering notes (Korean)',
     contributionLabel: 'Role overview',
@@ -175,7 +173,7 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
           {!community && <p className="project-period">{project.period}</p>}
         </div>
         <div className="project-cover-copy">
-          <p className="project-summary">{project.id === 'agp-wiki' ? (locale === 'ko' ? '원문을 보존하고 출처 기반 답변을 연결하는 문서 도구의 팀 개발을 완료했습니다.' : 'Completed team development of a document tool preserving originals and linking answers to sources.') : project.summary}</p>
+          <p className="project-summary">{project.summary}</p>
           <ul className="project-focus">{projectFocus[project.id]?.[locale].map((item) => <li key={item}>{item}</li>)}</ul>
           <div className="project-bottom"><span className="project-tech">{project.tech.join(' / ')}</span><span className="project-action">{locale === 'ko' ? '상세 보기' : 'Read more'}</span></div>
         </div>
@@ -221,8 +219,8 @@ function App() {
         <section className="experience-section section" id="experience" aria-labelledby="experience-title">
           <div className="section-heading"><h2 id="experience-title">{ko ? '경력 및 학력' : 'Experience & Education'}</h2></div>
           <div className="timeline">
-            <article><div className="timeline-company"><h3>NC AI</h3><p>AI / Backend Engineer</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — {ko ? '현재' : 'Present'}</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '현재 업무와 이전 프로젝트' : 'Current work and previous projects'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
-            <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
+            <article><div className="timeline-company"><h3>NC AI</h3><p>AI Platform Engineer · {ko ? '계약직' : 'Contract'}</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02.02 — 2026.11.01</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '담당 업무와 프로젝트 확인 범위' : 'Responsibilities and verified project scope'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
+            <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06.19 — 2023.08.18</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
           </div>
           <section className="education-block" aria-labelledby="education-title">
             <h3 id="education-title">{ko ? '학력' : 'Education'}</h3>
@@ -259,7 +257,7 @@ function App() {
 
         <section className="activities-section section" id="activities" aria-labelledby="activities-title">
           <div className="section-heading"><h2 id="activities-title">GDGoC Korea University</h2><p>{ko ? '커뮤니티 활동' : 'Community'}</p></div>
-          <div className="activity-layout"><article className="activity-main"><strong>{t.gdgRole}</strong><p className="activity-period">2022.08 — 2025.08</p><ul>{t.gdgActivities.map((activity) => <li key={activity}>{activity}</li>)}</ul></article>
+          <div className="activity-layout"><article className="activity-main"><strong>{t.gdgRole}</strong><p className="activity-period">{ko ? '2022년 하반기 — 2025.08' : 'H2 2022 — 2025.08'}</p><ul>{t.gdgActivities.map((activity) => <li key={activity}>{activity}</li>)}</ul></article>
             <button className="seminar-trigger" type="button" data-case-id="seminars" aria-haspopup="dialog" onClick={openSeminars}><img className="activity-image" src={asset('projects/seminar-generated.png')} alt={ko ? '클라우드·AI 학습을 표현한 AI 생성 개념 미리보기' : 'AI-generated concept preview of cloud and AI learning'} loading="lazy" /><span><strong>{ko ? '클라우드 · AI 세미나' : 'Cloud & AI seminars'}</strong><span>{ko ? 'AWS·GCP 인프라 실습, AI Week' : 'AWS / GCP workshops and AI Week'}</span><span className="project-action">{ko ? '주제와 역할 보기' : 'Topics and role'}</span></span></button>
           </div>
           <div className="community-projects"><div className="project-stack">{projects.filter((project) => project.category === 'community' && project.id !== 'gdg-website').map((project) => <ProjectCard key={project.id} project={project} locale={locale} />)}</div></div>

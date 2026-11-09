@@ -8,7 +8,7 @@ type CaseStudy = {
 export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
   'dainos-finder': {
   "ko": {
-    "context": "독소조항 탐지 결과만으로는 실제 계약 검토를 마치기 어렵습니다. 여러 계약 문서의 우선순위와 충돌, 적용할 문안, 위험에 대한 대응과 사람의 결정을 함께 추적해야 합니다. 기존 독소조항 탐지 프로젝트에서 출발해 문서 등록부터 대응안 검사·최종 승인까지 하나의 검토 흐름으로 확장하고 있습니다.",
+    "context": "독소조항 탐지 결과만으로는 실제 계약 검토를 마치기 어렵습니다. 여러 계약 문서의 우선순위와 충돌, 적용할 문안, 위험에 대한 대응과 사람의 결정을 함께 추적해야 합니다. 기존 독소조항 탐지 프로젝트에서 출발해 문서 등록부터 대응안 검사·최종 승인까지 연결하는 웹·API를 구현했습니다.",
     "sections": [
       {
         "title": "맡은 범위 · 계약 검토 웹과 API",
@@ -27,7 +27,7 @@ export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
         "body": "팀에서 vLLM으로 사내 VAETKI LLM을 서빙하고 LiteLLM으로 모델 호출을 라우팅해 Finder에서 활용했습니다. 저는 웹·API의 모델 호출과 페이지 번역 결과 저장·재사용을 연동했습니다."
       }
     ],
-    "outcome": "R0 웹·API 구현과 합성 문서·고정 Agent 응답을 이용한 자동 회귀 검증을 제공했습니다. 실제 판정 Agent 통합과 사용자 수동 인수는 진행 중이며 전체 서비스 완료를 뜻하지 않습니다. 판정 Agent 골격은 팀의 다른 담당자가 구현했습니다. 번역 연결·저장 재사용은 확인했지만 장문 계약의 번역 품질 인수는 남아 있습니다."
+    "outcome": "2026년 10월 22일 기준 R0 웹·API 구현과 합성 문서·고정 Agent 응답을 이용한 자동 회귀 검증을 제공했습니다. 당시 실제 판정 Agent 통합과 사용자 수동 인수는 진행 중이었으며, 근무 종료 후 완료 여부는 확인하지 않았습니다. 판정 Agent 골격은 팀의 다른 담당자가 구현했습니다. 번역 연결·저장 재사용은 확인했지만 장문 계약의 번역 품질 인수는 당시 남아 있었습니다."
   },
   "en": {
     "context": "Detecting risky clauses alone does not complete a contract review. Reviewers also need to resolve precedence and conflicts across documents, decide which wording applies, and track responses and human decisions. Building on an earlier risky-clause detection project, Finder extends the workflow from document registration to response checks and final approval.",
@@ -49,7 +49,7 @@ export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
         "body": "The team served the internal VAETKI LLM with vLLM and routed model calls through LiteLLM for use in Finder. I integrated model calls and the storage and reuse of page translations in the web / API workflow."
       }
     ],
-    "outcome": "Implemented the R0 web / API workflow with automated regression coverage using synthetic documents and fixed Agent responses. Live verdict-Agent integration and manual user acceptance are in progress; the full service is not complete. A separate team contributor implemented the Agent scaffold. Translation connectivity and stored-result reuse were verified; acceptance of long-contract translation quality remains."
+    "outcome": "As of October 22, 2026, the R0 web / API workflow and automated regressions using synthetic documents and fixed Agent responses were implemented. Live verdict-Agent integration and manual user acceptance were still in progress; completion after my contract ended has not been verified. A separate team contributor implemented the Agent scaffold. Translation connectivity and stored-result reuse were verified; acceptance of long-contract translation quality was still pending at that time."
   }
 },
   'agp-wiki': {
@@ -65,7 +65,7 @@ export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
         "body": "LLM 분류 제안 검증, inbox·손상 큐의 보존과 복구, 원문·사본 SHA-256 및 인용·날짜 검증, 제한 로그, Windows 파일 처리와 Linux·Windows 회귀를 구현·보완했습니다. 검색 엔진과 저장 코어 전체는 팀 구현 범위입니다."
       }
     ],
-    "outcome": "팀 개발을 완료했습니다. 자동 회귀와 일부 실제 호스트 실행 기록을 확인했으며 플랫폼·GUI별 수동 확인은 일부 남아 있습니다. 검색 순위는 답의 신뢰도가 아니고 인용 일치는 의미적 정답을 보장하지 않습니다. --as-of는 문서 날짜 필터이며 과거 버전 질의가 아닙니다. 공개 출시·사용자 효과 검증 완료나 생산성 개선 수치는 주장하지 않습니다."
+    "outcome": "2026년 10월 기준 코어 개발은 완료됐습니다. 자동 회귀와 일부 실제 호스트 실행 기록을 확인했으며, 플랫폼·GUI별 수동 검증은 일부 남아 있었습니다. 검색 순위는 답의 신뢰도가 아니고 인용 일치는 의미적 정답을 보장하지 않습니다. --as-of는 문서 날짜 필터이며 과거 버전 질의가 아닙니다. 공개 출시·사용자 효과 검증 완료나 생산성 개선 수치는 주장하지 않습니다."
   },
   "en": {
     "context": "Scattered mail, conversations and documents made work status and reasons for changes hard to trace. The earlier Dainos MVP ended after verifying email-to-knowledge and question-answering flows, without a user alpha. The follow-up Wiki focuses on preserving local originals, topic-based knowledge and traceable sources.",
@@ -79,7 +79,7 @@ export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
         "body": "Implemented and hardened LLM classification validation, inbox and damaged-queue recovery, original / copy SHA-256 checks, citation and date evidence checks, limited logs, Windows file handling and Linux / Windows regressions. The full search and storage core is team work."
       }
     ],
-    "outcome": "Team development is complete. Automated regressions and selected live-host runs are documented; some platform and GUI checks remain. Search rank is not answer confidence, and quotation matching does not establish semantic correctness. --as-of filters document dates; it is not a historical-version query. Public launch, user impact and productivity gains have not been established."
+    "outcome": "As of October 2026, core development was complete. Automated regressions and selected live-host runs were documented; some platform and GUI checks were still pending. Search rank is not answer confidence, and quotation matching does not establish semantic correctness. --as-of filters document dates; it is not a historical-version query. Public launch, user impact and productivity gains have not been established."
   }
 },
   'agp-note': {
@@ -168,7 +168,7 @@ export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
   },
   tiger: {
     ko: {
-      context: 'Stable Diffusion으로 사용자 사진을 AI 프로필 이미지로 변환하는 서비스입니다. 약 1,000명의 사용자가 이용했으며, 백엔드와 비동기 이미지 처리를 개발하고 프론트엔드 연동·인증·배포에 참여했습니다.',
+      context: 'Stable Diffusion으로 사용자 사진을 AI 프로필 이미지로 변환하는 서비스입니다. 백엔드와 비동기 이미지 처리를 개발하고 프론트엔드 연동·인증·배포에 참여했습니다.',
       sections: [
         { title: '업로드·인증과 요청 접수', body: '웹 화면에서 업로드한 사진과 Firebase 인증을 서비스 요청에 연결했습니다. Cloud Run의 NestJS Gateway에서 이미지 생성 요청을 접수하고, 오래 걸리는 AI 처리를 별도 작업으로 위임하는 흐름을 개발했습니다.' },
         { title: 'RabbitMQ 기반 비동기 이미지 처리', body: 'RabbitMQ로 작업을 전달하고 외부 AI 엔진의 이미지 생성 처리를 연결했습니다. Gateway의 요청 응답과 AI 실행을 분리하고 생성 결과와 알림이 사용자 흐름으로 이어지도록 구현했습니다.' },
@@ -177,7 +177,7 @@ export const caseStudies: Record<string, { ko: CaseStudy; en: CaseStudy }> = {
       outcome: '사용자 사진 입력부터 비동기 생성 결과 전달까지 이어지는 AI 프로필 서비스 개발에 기여했습니다. 백엔드의 작업 처리와 프론트엔드의 결과 확인을 연결하고 인증·배포에 참여했습니다.',
     },
     en: {
-      context: 'A Stable Diffusion profile-image service used by approximately 1,000 people. I developed the backend and asynchronous image processing and contributed to frontend integration, authentication and deployment.',
+      context: 'A service that turns user photos into AI profile images with Stable Diffusion. I developed the backend and asynchronous image processing and contributed to frontend integration, authentication and deployment.',
       sections: [
         { title: 'Uploads, authentication and request acceptance', body: 'Connected photo uploads and Firebase authentication to service requests. Developed the NestJS Gateway flow on Cloud Run to accept generation requests and delegate long-running AI work.' },
         { title: 'Asynchronous processing with RabbitMQ', body: 'Dispatched jobs through RabbitMQ to external AI engines. Separated the Gateway response from AI execution and connected generation results and notifications to the user flow.' },

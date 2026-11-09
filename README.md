@@ -19,9 +19,19 @@ pnpm preview
 
 ## Deployment
 
-`main` 브랜치에 변경사항이 push되면 GitHub Actions가 사이트를 빌드하고 GitHub Pages에 자동으로 배포합니다.
+실제 공개 주소는 `https://jaerrylee.github.io/portfolio/`입니다. 인접한 블로그 저장소의 `public/portfolio/`에도 빌드 결과를 보관하므로, 포트폴리오 소스만 변경하면 이 스냅샷은 갱신되지 않습니다.
 
-GitHub 저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 설정해야 합니다.
+공개 반영 전 두 저장소를 함께 검증합니다.
+
+```bash
+pnpm lint
+pnpm build
+cd ../jaerrylee.github.io
+pnpm sync:portfolio
+pnpm build
+```
+
+`sync:portfolio`는 `/portfolio/` 경로로 다시 빌드해 블로그의 정적 스냅샷을 갱신합니다. 커밋·push·배포는 로컬 검증과 별개입니다. 두 저장소 모두 `main` push 시 Pages workflow가 실행되므로 게시 시점에는 소스와 스냅샷을 함께 확인해야 합니다. Pages 설정과 공개 범위는 저장소별로 별도 관리합니다.
 
 ## Tech blog
 
