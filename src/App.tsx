@@ -1,6 +1,7 @@
-import { lazy, Suspense, useEffect, useState, type CSSProperties } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from 'react'
 import { projectsKo, projectsEn, seminarKo, seminarEn, type Project } from './projects'
 import { blogUrl } from './links'
+import { ncExperienceContent, educationOverview, projectHighlights } from './profileContent'
 import './App.css'
 import './Balanced.css'
 
@@ -74,7 +75,7 @@ const pageCopy = {
     heroBody: 'AI를 실제 제품과 업무에 적용하는 AI / Backend Engineer 이정재입니다. 문서 도구 Dainos Wiki와 에이전트 플랫폼의 담당 기능을 구현했으며, 비동기 처리와 실행 관측 경험을 제품에 연결합니다.',
     selectedProjects: 'Selected projects',
     profileTitle: 'AI를 제품으로 만들고,\n실행을 관측합니다.',
-    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 정부 과제의 목표지향 업무 에이전트 PoC에 기여했습니다. 후속 Dainos Wiki에서는 문서 수집·복구와 근거 검증을, Finder에서는 계약 검토 웹·API를 구현했습니다. NC AI 계약은 2026년 11월 1일 종료됐으며, 프로젝트 상태는 마지막 확인 시점을 기준으로 설명합니다.',
+    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 정부 과제의 목표지향 업무 에이전트 PoC에 기여했습니다. 후속 Dainos Wiki에서는 문서 수집·복구와 근거 검증을, Finder에서는 계약 검토 웹·API를 구현했습니다. NC AI 계약은 2026년 11월 종료됐으며, 프로젝트 상태는 마지막 확인 시점을 기준으로 설명합니다.',
     ncDetails: [
       'Dainos Wiki 문서 수집·복구와 근거 검증, Finder 계약 검토 웹·API 구현',
       '수행 경험 · LLM 실행 관측, AGP Note 단독 개발, VAETKI Commerce 배너 백엔드, Agent PoC·LLM Ops 통합'
@@ -113,7 +114,7 @@ const pageCopy = {
     heroBody: 'I am Jungjae Lee, an AI / Backend Engineer turning AI into products and workflows. I implemented document ingestion, recovery and evidence checks for Dainos Wiki, alongside work on agent execution and observability.',
     selectedProjects: 'Selected projects',
     profileTitle: 'I build AI products\nand make their execution observable.',
-    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to a goal-oriented work agent PoC for a government project. I later implemented ingestion, recovery and evidence checks for Dainos Wiki, and the contract-review web and API for Finder. My NC AI contract ended on November 1, 2026; project status reflects the last verified records.',
+    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to a goal-oriented work agent PoC for a government project. I later implemented ingestion, recovery and evidence checks for Dainos Wiki, and the contract-review web and API for Finder. My NC AI contract ended in November 2026; project status reflects the last verified records.',
     ncDetails: [
       'Implemented Dainos Wiki ingestion, recovery and evidence checks, and Finder contract-review web / API',
       'Experience · LLM observability, AGP Note sole development, VAETKI Commerce banner backend, and agent PoCs with LLM Ops integration'
@@ -158,11 +159,14 @@ const projectFocus: Record<string, { ko: string[]; en: string[] }> = {
 
 function ProjectCard({ project, locale }: { project: Project; locale: Locale }) {
   const community = project.category === 'community'
+  const detail = projectHighlights[project.id]?.[locale]
+  const highlights = detail ? [detail.implementation, detail.outcome] : projectFocus[project.id]?.[locale]
   return (
     <article className={`project-card${community ? ' community-project' : ''}`} style={{ '--project-color': project.color, '--project-ink': project.ink } as CSSProperties}>
       <a className="project-cover" href={`#project/${project.id}`} aria-haspopup="dialog" onClick={(event) => {
         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
         event.preventDefault()
+        if (window.location.hash === `#project/${project.id}`) return
         history.pushState({ portfolioProject: true }, '', `#project/${project.id}`)
         window.dispatchEvent(new HashChangeEvent('hashchange'))
       }}>
@@ -174,7 +178,7 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
         </div>
         <div className="project-cover-copy">
           <p className="project-summary">{project.summary}</p>
-          <ul className="project-focus">{projectFocus[project.id]?.[locale].map((item) => <li key={item}>{item}</li>)}</ul>
+          <ul className="project-focus">{highlights?.map((item) => <li key={item}>{item}</li>)}</ul>
           <div className="project-bottom"><span className="project-tech">{project.tech.join(' / ')}</span><span className="project-action">{locale === 'ko' ? '상세 보기' : 'Read more'}</span></div>
         </div>
         {community && project.cover && <img className="project-thumbnail" src={project.cardCover ?? project.cover} alt={project.cardCover ? (locale === 'ko' ? `${project.title} AI 생성 개념 미리보기` : `${project.title} AI-generated concept preview`) : ''} loading="lazy" />}
@@ -187,17 +191,24 @@ function App() {
   const locale: Locale = window.location.pathname.split('/').includes('en') ? 'en' : 'ko'
   const ko = locale === 'ko'
   const [projectId, setProjectId] = useState(() => window.location.hash.startsWith('#project/') ? window.location.hash.slice(9) : '')
+  const closingProject = useRef(false)
   useEffect(() => {
-    const sync = () => setProjectId(window.location.hash.startsWith('#project/') ? window.location.hash.slice(9) : '')
+    const sync = () => {
+      closingProject.current = false
+      setProjectId(window.location.hash.startsWith('#project/') ? window.location.hash.slice(9) : '')
+    }
     window.addEventListener('hashchange', sync)
     window.addEventListener('popstate', sync)
     return () => { window.removeEventListener('hashchange', sync); window.removeEventListener('popstate', sync) }
   }, [])
   const t = pageCopy[locale]
+  const ncExperience = ncExperienceContent[locale]
   const projects = ko ? projectsKo : projectsEn
   const selectedProject = projectId === 'seminars' ? (ko ? seminarKo : seminarEn) : projects.find((project) => project.id === projectId)
-  const openSeminars = () => { history.pushState({ portfolioProject: true }, '', '#project/seminars'); window.dispatchEvent(new HashChangeEvent('hashchange')) }
+  const openSeminars = () => { if (window.location.hash === '#project/seminars') return; history.pushState({ portfolioProject: true }, '', '#project/seminars'); window.dispatchEvent(new HashChangeEvent('hashchange')) }
   const closeProject = () => {
+    if (closingProject.current) return
+    closingProject.current = true
     if (history.state?.portfolioProject) history.back()
     else { history.replaceState(null, '', selectedProject?.category === 'community' ? '#activities' : '#projects'); setProjectId('') }
   }
@@ -219,8 +230,8 @@ function App() {
         <section className="experience-section section" id="experience" aria-labelledby="experience-title">
           <div className="section-heading"><h2 id="experience-title">{ko ? '경력 및 학력' : 'Experience & Education'}</h2></div>
           <div className="timeline">
-            <article><div className="timeline-company"><h3>NC AI</h3><p>AI Platform Engineer · {ko ? '계약직' : 'Contract'}</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02.02 — 2026.11.01</span></div><div className="timeline-detail">{t.ncDetails.map((detail) => <p key={detail}>{detail}</p>)}<details className="career-note"><summary>{ko ? '담당 업무와 프로젝트 확인 범위' : 'Responsibilities and verified project scope'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
-            <article><div className="timeline-company"><h3>LG CNS</h3><p>Cloud Architect Intern</p><span className="timeline-date">2023.06.19 — 2023.08.18</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
+            <article><div className="timeline-company"><h3>NC AI</h3><p>AI Platform Engineer · {ko ? '계약직' : 'Contract'}</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — 2026.11</span></div><div className="timeline-detail"><p>{ncExperience.overview}</p><ul className="timeline-detail">{ncExperience.highlights.map((detail) => <li key={detail}>{detail}</li>)}</ul><p>{ncExperience.note}</p><details className="career-note"><summary>{ko ? '담당 업무와 프로젝트 확인 범위' : 'Responsibilities and verified project scope'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
+            <article><div className="timeline-company"><h3>LG CNS</h3><p>{t.lgRole}</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
           </div>
           <section className="education-block" aria-labelledby="education-title">
             <h3 id="education-title">{ko ? '학력' : 'Education'}</h3>
@@ -232,8 +243,9 @@ function App() {
                   <span className="timeline-date">2019.03 — 2025.08 · {ko ? '학사 졸업' : 'Bachelor’s degree'}</span>
                 </div>
                 <div className="timeline-detail">
+                  <p>{educationOverview[locale]}</p>
                   <p>{ko ? '총 이수 학점: 146학점 · 전체 평균 평점: 3.33 / 4.50' : 'Total credits: 146 · Overall GPA: 3.33 / 4.50'}</p>
-                  <p>{ko ? '컴퓨터공학 전공과목: 54학점 · 전공 평점: 3.75 / 4.50' : 'Computer Science coursework: 54 credits · Coursework GPA: 3.75 / 4.50'}</p>
+                  <p>{ko ? '컴퓨터공학 관련 과목: 54학점 · 해당 과목 평점: 3.75 / 4.50' : 'Computer Science coursework: 54 credits · Coursework GPA: 3.75 / 4.50'}</p>
                 </div>
               </article>
             </div>
@@ -261,7 +273,7 @@ function App() {
             <button className="seminar-trigger" type="button" data-case-id="seminars" aria-haspopup="dialog" onClick={openSeminars}><img className="activity-image" src={asset('projects/seminar-generated.png')} alt={ko ? '클라우드·AI 학습을 표현한 AI 생성 개념 미리보기' : 'AI-generated concept preview of cloud and AI learning'} loading="lazy" /><span><strong>{ko ? '클라우드 · AI 세미나' : 'Cloud & AI seminars'}</strong><span>{ko ? 'AWS·GCP 인프라 실습, AI Week' : 'AWS / GCP workshops and AI Week'}</span><span className="project-action">{ko ? '주제와 역할 보기' : 'Topics and role'}</span></span></button>
           </div>
           <div className="community-projects"><div className="project-stack">{projects.filter((project) => project.category === 'community' && project.id !== 'gdg-website').map((project) => <ProjectCard key={project.id} project={project} locale={locale} />)}</div></div>
-          <aside className="community-appendix"><a className="community-website-link" href="#project/gdg-website" aria-haspopup="dialog">GDG KU Website</a><p>{ko ? '회원 활동·일정·운영자 관리를 위한 풀스택 웹사이트. 기술과 구현 내용 보기.' : 'A full-stack website for activities, schedules and administration. View technologies and implementation.'}</p></aside>
+          <aside className="community-appendix"><a className="community-website-link" href="#project/gdg-website" aria-haspopup="dialog">GDG KU Website</a><p>{ko ? projectHighlights['gdg-website'].ko.implementation : projectHighlights['gdg-website'].en.implementation}</p></aside>
         </section>
       </main>
 

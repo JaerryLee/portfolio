@@ -195,3 +195,8 @@ footer a { min-height:44px; display:inline-flex; align-items:center; text-underl
   .case-context p,.case-outcome p,.implementation-details p { font-size:.88rem; }
   .implementation-details h3 { font-size:.95rem; }
 }
+
+/* Keep career copy readable within the existing timeline layout. */
+.timeline-detail { word-break:keep-all; overflow-wrap:break-word; }
+.timeline-detail li+li { margin-top:4px; }
+.timeline-detail ul+p { margin-top:8px; }
