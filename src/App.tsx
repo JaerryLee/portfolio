@@ -75,11 +75,6 @@ const pageCopy = {
     heroBody: 'AI를 실제 제품과 업무에 적용하는 AI / Backend Engineer 이정재입니다. 문서 도구 Dainos Wiki와 에이전트 플랫폼의 담당 기능을 구현했으며, 비동기 처리와 실행 관측 경험을 제품에 연결합니다.',
     selectedProjects: 'Selected projects',
     profileTitle: 'AI를 제품으로 만들고,\n실행을 관측합니다.',
-    profileBody: 'AGP Note를 사내 사이드 프로젝트로 단독 개발하고, VAETKI Commerce의 배너 백엔드와 정부 과제의 목표지향 업무 에이전트 PoC에 기여했습니다. 후속 Dainos Wiki에서는 문서 수집·복구와 근거 검증을, Finder에서는 계약 검토 웹·API를 구현했습니다. NC AI 계약은 2026년 11월 종료됐으며, 프로젝트 상태는 마지막 확인 시점을 기준으로 설명합니다.',
-    ncDetails: [
-      'Dainos Wiki 문서 수집·복구와 근거 검증, Finder 계약 검토 웹·API 구현',
-      '수행 경험 · LLM 실행 관측, AGP Note 단독 개발, VAETKI Commerce 배너 백엔드, Agent PoC·LLM Ops 통합'
-    ],
     lgRole: '클라우드 아키텍처 인턴',
     lgDetails: [
       '클라우드 아키텍처 모의업무에서 Terraform 기반 인프라 자동화 PoC 수행',
@@ -97,11 +92,6 @@ const pageCopy = {
       'Rendi·호랑이사진관과 커뮤니티 웹사이트 개발 참여',
     ],
     activityAlt: 'GDGoC 클라우드 및 AI 세미나 자료',
-    currentWork: {
-      label: '최근 프로젝트',
-      title: 'Dainos Wiki · 근거 기반 지식 도구',
-      summary: 'Dainos Wiki는 2026년 10월 기준 코어 개발이 완료됐고, GUI·플랫폼 검증 일부가 남아 있었습니다. 저는 분류 제안 검증, 수집·복구, 제한 로그와 인용·날짜 검증을 구현했습니다.',
-    },
     blogLabel: '설계·구현 기록 읽기',
     contributionLabel: '담당 역할',
     backToTop: 'Back to top ↑',
@@ -114,11 +104,6 @@ const pageCopy = {
     heroBody: 'I am Jungjae Lee, an AI / Backend Engineer turning AI into products and workflows. I implemented document ingestion, recovery and evidence checks for Dainos Wiki, alongside work on agent execution and observability.',
     selectedProjects: 'Selected projects',
     profileTitle: 'I build AI products\nand make their execution observable.',
-    profileBody: 'I independently built AGP Note as an internal side project, developed the VAETKI Commerce banner backend, and contributed to a goal-oriented work agent PoC for a government project. I later implemented ingestion, recovery and evidence checks for Dainos Wiki, and the contract-review web and API for Finder. My NC AI contract ended in November 2026; project status reflects the last verified records.',
-    ncDetails: [
-      'Implemented Dainos Wiki ingestion, recovery and evidence checks, and Finder contract-review web / API',
-      'Experience · LLM observability, AGP Note sole development, VAETKI Commerce banner backend, and agent PoCs with LLM Ops integration'
-    ],
     lgRole: 'Cloud Architecture Intern',
     lgDetails: [
       'Built a Terraform infrastructure automation PoC during a cloud architecture internship simulation',
@@ -136,11 +121,6 @@ const pageCopy = {
       'Contributed to Rendi, Tiger Photo Studio and the community website',
     ],
     activityAlt: 'GDGoC cloud and AI seminar materials',
-    currentWork: {
-      label: 'Recent project',
-      title: 'Dainos Wiki · Source-grounded Knowledge',
-      summary: 'As of October 2026, the Wiki core was complete with some GUI and platform checks remaining. I implemented classification validation, ingestion recovery, limited logs, and citation and date evidence checks.',
-    },
     blogLabel: 'Read the engineering notes (Korean)',
     contributionLabel: 'Role overview',
     backToTop: 'Back to top ↑',
@@ -230,7 +210,7 @@ function App() {
         <section className="experience-section section" id="experience" aria-labelledby="experience-title">
           <div className="section-heading"><h2 id="experience-title">{ko ? '경력 및 학력' : 'Experience & Education'}</h2></div>
           <div className="timeline">
-            <article><div className="timeline-company"><h3>NC AI</h3><p>AI Platform Engineer · {ko ? '계약직' : 'Contract'}</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — 2026.11</span></div><div className="timeline-detail"><p>{ncExperience.overview}</p><ul className="timeline-detail">{ncExperience.highlights.map((detail) => <li key={detail}>{detail}</li>)}</ul><p>{ncExperience.note}</p><details className="career-note"><summary>{ko ? '담당 업무와 프로젝트 확인 범위' : 'Responsibilities and verified project scope'}</summary><p>{t.profileBody}</p><p>{t.currentWork.summary}</p></details></div></article>
+            <article><div className="timeline-company"><h3>NC AI</h3><p>AI Platform Engineer · {ko ? '계약직' : 'Contract'}</p><p>Agent Tech Center / Agent Platform Team</p><span className="timeline-date">2026.02 — 2026.11</span></div><div className="timeline-detail"><p>{ncExperience.overview}</p><ul className="timeline-detail">{ncExperience.highlights.map((detail) => <li key={detail}>{detail}</li>)}</ul></div></article>
             <article><div className="timeline-company"><h3>LG CNS</h3><p>{t.lgRole}</p><span className="timeline-date">2023.06 — 2023.08</span></div><ul className="timeline-detail">{t.lgDetails.map((detail) => <li key={detail}>{detail}</li>)}</ul></article>
           </div>
           <section className="education-block" aria-labelledby="education-title">

@@ -1,25 +1,21 @@
 type Locale = 'ko' | 'en'
 
-export const ncExperienceContent: Record<Locale, { overview: string; highlights: string[]; note: string }> = {
+export const ncExperienceContent: Record<Locale, { overview: string; highlights: string[] }> = {
   "ko": {
-    "overview": "AI 이미지 생성 서비스와 업무 에이전트 팀에서 백엔드·플랫폼 기능을 개발했습니다. 긴 AI 작업의 상태 관리와 복구, 사용자 승인, 근거 검증을 제품 흐름에 연결했습니다.",
+    "overview": "AI 이미지 생성 서비스와 온톨로지 기반 업무 자동화 에이전트의 백엔드·플랫폼 기능을 개발했습니다. 긴 AI 작업의 상태 관리와 복구, 사용자 승인, 근거 검증을 제품 흐름에 연결했습니다.",
     "highlights": [
-      "Commerce 배너 API·AI 연동과 Celery 비동기 처리, 시안 잠금·버전 검사·부분 실패 복구 구현",
-      "Agent PoC의 실행·승인·DBOS 세션·사용자별 접근 격리 구현 및 개발·인계 참여",
-      "Finder 계약 검토 웹·API와 Wiki 문서 수집·큐 복구·인용 검증 구현",
-      "OpenTelemetry 관측 경로와 Commerce Dev/RC 배포 자동화 구현"
-    ],
-    "note": "2026.11 계약 기간 종료"
+      "AI 이미지 생성 서비스의 백엔드 API·비동기 처리 개발 및 동시 요청·부분 실패에 대응하는 상태 관리·복구 구현",
+      "온톨로지 기반 업무 자동화 에이전트의 실행·사용자 승인·작업 재개·접근 제어 구현 및 PoC 개발·인계 참여",
+      "OpenTelemetry 기반 로깅·트레이싱과 개발·릴리스 후보 환경의 배포 자동화 구현"
+    ]
   },
   "en": {
-    "overview": "Developed backend and platform features within teams building AI image generation and work agents. Connected long-running job recovery, user approval and evidence validation to product workflows.",
+    "overview": "Developed backend and platform features for AI image generation and ontology-based work-automation agents. Connected long-running job recovery, user approval and evidence validation to product workflows.",
     "highlights": [
-      "Built Commerce banner APIs, AI integrations and Celery jobs with locks, version checks and partial-failure recovery",
-      "Implemented Agent PoC execution, approvals, DBOS sessions and user-scoped access; contributed to development and handover",
-      "Built Finder review web/API features and Wiki ingestion, queue recovery and citation checks",
-      "Implemented OpenTelemetry observability and Commerce Dev/RC deployment automation"
-    ],
-    "note": "Contract ended in 2026.11"
+      "Built backend APIs and asynchronous processing for AI image generation, with state management and recovery for concurrent requests and partial failures",
+      "Implemented execution, user approvals, resumable jobs and access controls for an ontology-based work-automation agent; contributed to PoC development and handover",
+      "Implemented OpenTelemetry-based logging and tracing, and automated deployments to development and release-candidate environments"
+    ]
   }
 }
 
